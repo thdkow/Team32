@@ -21,6 +21,14 @@ div {
 <div id = "my" >
 이덕현
 </div>
+<%
+for(int i=0;i<10;i++){
+	System.out.println(i+"단 입니다");
+	for(int j=0;j<10;j++){
+		System.out.println(i+"X"+j+"="+(i*j)+"입니다");
+	}
+}
+%>
 <div>
 이완건
 </div>
