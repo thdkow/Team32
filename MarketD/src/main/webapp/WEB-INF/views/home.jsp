@@ -12,7 +12,7 @@ div {
 </head>
 <body>
 <h1>
-	JaeHan Song
+	Hyun Jun Kang
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
