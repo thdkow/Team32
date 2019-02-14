@@ -3,6 +3,12 @@
 <html>
 <head>
 	<title>Home</title>
+<style type="text/css">
+#my {
+	color: blue; 
+}
+</style>
+
 </head>
 <body>
 <h1>
@@ -12,8 +18,12 @@
 <P>  The time on the server is ${serverTime}. </P>
 
 
-<div id = "my">
+<div id = "my" >
 이덕현
 </div>
+<div>
+이완건
+</div>
+
 </body>
 </html>
