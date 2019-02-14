@@ -4,7 +4,7 @@
 <head>
 	<title>Home</title>
 <style type="text/css">
-#my {
+div {
 	color: blue; 
 }
 </style>
