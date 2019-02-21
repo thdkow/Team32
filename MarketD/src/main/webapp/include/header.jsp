@@ -8,7 +8,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 	<title>DobbyMarket</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type="text/javascript" src=".\resources\js\header.js"></script> 
+	<script type="text/javascript" src=".\resources\js\heade"></script> 
 	<link rel="stylesheet"  type="text/css" href=".\resources\css\header.css"/>
 	<link rel="stylesheet"  type="text/css" href=".\resources\css\header_top.css"/>
 	<!-- type="text/css" 추가 후 CSS링크 인식함 -->
