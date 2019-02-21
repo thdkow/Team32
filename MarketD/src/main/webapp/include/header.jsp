@@ -1,16 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 	<title>DobbyMarket</title>
-	<link rel="stylesheet" href="..\resources\css\header.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript" src=".\resources\js\header.js"></script> 
+	<link rel="stylesheet"  type="text/css" href=".\resources\css\header.css"/>
+	<link rel="stylesheet"  type="text/css" href=".\resources\css\header_top.css"/>
+	<!-- type="text/css" 추가 후 CSS링크 인식함 -->
 </head>
 <body>
 <form action="">
-	<div id="page-wrap">	   	   
+	<div id="page-wrap">
+		<a href="/"><img src="\resources\img\logodobby.jpg" alt="도비마켓"/></a>   	   
         <ul class="dropdown">
         	<li><a href="#">상세검색</a>
         		<ul class="sub_menu">
@@ -19,7 +25,7 @@
         			 	<ul><!--컴퓨터 - 소분류 시작 -->
         			 		<li><a href="#">조립 PC</a></li>
         			 		<li><a href="https://www.naver.com/">브랜드 데스크탑</a></li>
-        			 		<li><a href="index.dobby">노트북</a></li>
+        			 		<li><a href="index">노트북</a></li>
         			 		<li><a href="#">노트북 거치대</a></li>
         			 		<li><a href="#">노트북 주변기기</a></li>
         			 		<li><a href="#">PC 주변기기</a></li>
@@ -76,12 +82,14 @@
         					<li><a href="#">소분류 샘플 1</a></li>
         					<li><a href="#">소분류 샘플 2</a></li>
         				</ul><!--디지털 - 소분류 끝 -->
-        			 </li><!-디지털 -대분류 끝 -->
+        			 </li><!--디지털 -대분류 끝 -->
         			 <li><a href="#"> - VIEW ALL - </a></li>
         		</ul>
         	</li>
         </ul>		
 	</div>
 </form>
+<a href="#myAnchor" class="go-top">▲</a>
+
 </body>
 </html>
