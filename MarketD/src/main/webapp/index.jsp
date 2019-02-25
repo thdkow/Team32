@@ -6,7 +6,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
+			<!-- Bootstrap CSS 풀스크린 관련-->
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <link href="/SRC2/fadeslide/assets/css/main.css" rel="stylesheet" media="screen"/>
+
+<!-- 스크린  -->
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	
 <title>Insert title here</title>
+	<!-- jQuery 풀 스크린 슬라이드 쇼-->
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <!-- Client JavaScript -->
+    <script src="/SRC2/fadeslide/assets/js/jquery.reslider.js"></script>
 </head>
 <body>
 메인 화면
@@ -14,39 +27,82 @@
 리소스 : resources (js,css)
 뷰단 : include(head,foot)는 이 위치
 회원 관련 : member
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 <div class="wrapper" id="myAnchor" >
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor leo id libero venenatis, a lobortis turpis tristique. Ut condimentum nunc ut erat ornare molestie. Sed ut viverra lorem, a scelerisque felis. Duis eu tristique leo. Aenean aliquam enim at pharetra gravida. Duis sagittis ut tortor quis condimentum. In at urna malesuada, egestas neque eget, tristique lectus. Sed id mi tempor, luctus eros a, consequat justo. Nam ultrices neque quis vestibulum blandit. Aenean pulvinar augue leo, sed rutrum ligula lacinia in. Sed commodo, ante eu lobortis dignissim, tellus ante volutpat felis, nec porta velit ipsum nec metus. Cras quis tellus quis sapien volutpat pellentesque. Donec sed est iaculis, blandit elit ut, tempus arcu.</p>
+</div><!-- TOP버튼  -->
+<div class="wrap wrap-index">
+            <!-- slider-->
+            <div class="slider">
+                <div class="jquery-reslider">
+                    <div class="slider-block" data-url="\resources\img\logodobby.png"> Slide 1</div>
+                    <div class="slider-block" data-url="\resources\img\logodobby.png"></div>
+                    <div class="slider-block" data-url="\resources\img\logodobby.png"></div>
+                    <div class="slider-block" data-url="http://www.blueb.co.kr/SRC2/_image/05.jpg"></div>
 
-<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer mollis nec odio a malesuada. Vestibulum ornare ultricies risus gravida mattis. Praesent a massa a ex dictum lacinia in at elit. Ut ut erat rhoncus, scelerisque nunc in, lobortis ligula. Duis a augue vel mi eleifend bibendum. Nunc quis urna vel velit rutrum iaculis. Duis quis odio nisl. Morbi vel finibus dolor, vel feugiat neque. Pellentesque in tempor dolor, at feugiat tortor. Pellentesque et hendrerit nulla, ullamcorper egestas est. Vivamus mollis augue id sodales dignissim.</p>
+                    <div class="slider-direction slider-direction-next"></div>
+                    <div class="slider-direction slider-direction-prev"></div>
 
-<p>Suspendisse potenti. Proin vestibulum ipsum a lectus sollicitudin aliquet. In accumsan tortor quis tempus commodo. Aliquam tempus imperdiet posuere. Sed ac congue massa. Vivamus dapibus ex id porta iaculis. Praesent ultrices, nisl ut faucibus imperdiet, leo sem scelerisque lorem, scelerisque imperdiet lacus elit vel risus. Nulla sed sem sapien. Fusce eget tempor orci. Donec eget scelerisque libero, nec rhoncus turpis. In felis ex, maximus vel elit sed, volutpat placerat erat. Nam consectetur sed nulla vel aliquet.</p>
+                    <div class="slider-dots">
+                      <ul>
 
-<p>Maecenas euismod quam at nisi tincidunt fringilla. Aliquam vehicula, purus sit amet placerat euismod, odio mi vestibulum mi, a sagittis diam purus at nisl. Pellentesque semper sollicitudin dictum. Mauris eleifend augue augue, in eleifend augue efficitur eu. Quisque vestibulum placerat nunc ut scelerisque. Nulla a justo odio. Donec ullamcorper dolor vitae elit hendrerit tempus. Integer orci nulla, cursus quis blandit non, mollis eu purus. Vestibulum blandit mi vitae libero convallis, eget placerat tortor tincidunt.</p>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- end build-->
+        </div>
+        
+        <div id="myCarousel" class="carousel slide" data-ride="carousel"> 
+	
+	<!--페이지-->
+	<ol class="carousel-indicators">
+		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		<li data-target="#myCarousel" data-slide-to="1"></li>
+		<li data-target="#myCarousel" data-slide-to="2"></li>
+	</ol>
+	<!--페이지-->
 
-<p>Proin ac dapibus est. Suspendisse in quam egestas, posuere dolor sed, mollis lectus. Aenean risus lectus, placerat quis urna vel, vehicula vulputate nibh. Curabitur venenatis dapibus metus, non efficitur arcu aliquet vel. Nam rhoncus felis ac quam pellentesque, eu eleifend nisl tempor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus ac turpis ut justo volutpat sodales. Integer venenatis dolor non quam ultricies dapibus. Duis pharetra sapien mi, quis finibus lorem mollis sit amet. Proin et sapien vel est auctor varius vel sit amet leo. Aenean cursus lacus quis varius maximus. Sed quis nunc sit amet eros tincidunt varius sed id neque. Duis risus dolor, ultricies ac sodales vitae, egestas gravida quam. Donec quis sollicitudin ante.</p>
+	<div class="carousel-inner">
+		<!--슬라이드1-->
+		<div class="item active"> 
+			<img src="http://www.blueb.co.kr/SRC2/_image/w01.jpg" style="width:100%" alt="First slide">
+			<div class="container">
+				<div class="carousel-caption">
+					<h1>Slide 1</h1>
+					<p>텍스트 1</p>
+				</div>
+			</div>
+		</div>
+		<!--슬라이드1-->
 
-<p>Nam ac dignissim velit. Aliquam a tortor tristique, vulputate nisi ac, sollicitudin massa. Vestibulum vitae nisl odio. Sed non magna ut arcu efficitur facilisis. Sed nec orci blandit, tincidunt sapien at, posuere nulla. Etiam ut elit nisl. Duis eu viverra eros. Curabitur vestibulum dapibus leo a euismod. Fusce sollicitudin blandit massa a posuere. Aenean convallis efficitur diam, ac sodales neque consectetur quis. Nulla efficitur sem quis massa porta porttitor. Pellentesque et luctus nibh. </p>
-
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor leo id libero venenatis, a lobortis turpis tristique. Ut condimentum nunc ut erat ornare molestie. Sed ut viverra lorem, a scelerisque felis. Duis eu tristique leo. Aenean aliquam enim at pharetra gravida. Duis sagittis ut tortor quis condimentum. In at urna malesuada, egestas neque eget, tristique lectus. Sed id mi tempor, luctus eros a, consequat justo. Nam ultrices neque quis vestibulum blandit. Aenean pulvinar augue leo, sed rutrum ligula lacinia in. Sed commodo, ante eu lobortis dignissim, tellus ante volutpat felis, nec porta velit ipsum nec metus. Cras quis tellus quis sapien volutpat pellentesque. Donec sed est iaculis, blandit elit ut, tempus arcu.</p>
-
-<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer mollis nec odio a malesuada. Vestibulum ornare ultricies risus gravida mattis. Praesent a massa a ex dictum lacinia in at elit. Ut ut erat rhoncus, scelerisque nunc in, lobortis ligula. Duis a augue vel mi eleifend bibendum. Nunc quis urna vel velit rutrum iaculis. Duis quis odio nisl. Morbi vel finibus dolor, vel feugiat neque. Pellentesque in tempor dolor, at feugiat tortor. Pellentesque et hendrerit nulla, ullamcorper egestas est. Vivamus mollis augue id sodales dignissim.</p>
-
-<p>Suspendisse potenti. Proin vestibulum ipsum a lectus sollicitudin aliquet. In accumsan tortor quis tempus commodo. Aliquam tempus imperdiet posuere. Sed ac congue massa. Vivamus dapibus ex id porta iaculis. Praesent ultrices, nisl ut faucibus imperdiet, leo sem scelerisque lorem, scelerisque imperdiet lacus elit vel risus. Nulla sed sem sapien. Fusce eget tempor orci. Donec eget scelerisque libero, nec rhoncus turpis. In felis ex, maximus vel elit sed, volutpat placerat erat. Nam consectetur sed nulla vel aliquet.</p>
-
-<p>Maecenas euismod quam at nisi tincidunt fringilla. Aliquam vehicula, purus sit amet placerat euismod, odio mi vestibulum mi, a sagittis diam purus at nisl. Pellentesque semper sollicitudin dictum. Mauris eleifend augue augue, in eleifend augue efficitur eu. Quisque vestibulum placerat nunc ut scelerisque. Nulla a justo odio. Donec ullamcorper dolor vitae elit hendrerit tempus. Integer orci nulla, cursus quis blandit non, mollis eu purus. Vestibulum blandit mi vitae libero convallis, eget placerat tortor tincidunt.</p>
-
-<p>Proin ac dapibus est. Suspendisse in quam egestas, posuere dolor sed, mollis lectus. Aenean risus lectus, placerat quis urna vel, vehicula vulputate nibh. Curabitur venenatis dapibus metus, non efficitur arcu aliquet vel. Nam rhoncus felis ac quam pellentesque, eu eleifend nisl tempor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus ac turpis ut justo volutpat sodales. Integer venenatis dolor non quam ultricies dapibus. Duis pharetra sapien mi, quis finibus lorem mollis sit amet. Proin et sapien vel est auctor varius vel sit amet leo. Aenean cursus lacus quis varius maximus. Sed quis nunc sit amet eros tincidunt varius sed id neque. Duis risus dolor, ultricies ac sodales vitae, egestas gravida quam. Donec quis sollicitudin ante.</p>
-
-<p>Nam ac dignissim velit. Aliquam a tortor tristique, vulputate nisi ac, sollicitudin massa. Vestibulum vitae nisl odio. Sed non magna ut arcu efficitur facilisis. Sed nec orci blandit, tincidunt sapien at, posuere nulla. Etiam ut elit nisl. Duis eu viverra eros. Curabitur vestibulum dapibus leo a euismod. Fusce sollicitudin blandit massa a posuere. Aenean convallis efficitur diam, ac sodales neque consectetur quis. Nulla efficitur sem quis massa porta porttitor. Pellentesque et luctus nibh. </p>
+		<!--슬라이드2-->
+		<div class="item"> 
+			<img src="http://www.blueb.co.kr/SRC2/_image/w02.jpg" style="width:100%" data-src="" alt="Second slide">
+			<div class="container">
+				<div class="carousel-caption">
+					<h1>Slide 2</h1>
+					<p>텍스트 2</p>
+				</div>
+			</div>
+		</div>
+		<!--슬라이드2-->
+		
+		<!--슬라이드3-->
+		<div class="item"> 
+			<img src="http://www.blueb.co.kr/SRC2/_image/w03.jpg" style="width:100%" data-src="" alt="Third slide">
+			<div class="container">
+				<div class="carousel-caption">
+					<h1>Slide 3</h1>
+					<p>텍스트 3</p>
+				</div>
+			</div>
+		</div>
+		<!--슬라이드3-->
+	</div>
+	
+	<!--이전, 다음 버튼-->
+	<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> 
+	<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a> 
 </div>
 </body>
 </html>

@@ -1,117 +1,132 @@
-@charset "UTF-8"; 
-
 <style>
- * {
-    margin: 0;
-    padding: 0;
+ @import url(http://fonts.googleapis.com/earlyaccess/jejuhallasan.css);
+
+#search{
+	position:absolute;
+	top:20px;
+    right: 60px;
+	z-index:1;
+	width:500px;
+	}
+#search .green_window{
+	display:-moz-inline-block;
+	display:-moz-inline-box;
+	display:inline-block;
+	width:358px;
+	height:30px;
+	border:5px solid #8181F7;
+	/*background-color:#fff*/
+	}
+#search .input_text{
+	width:323px;
+	height:17px;
+	margin:5px 0 0 6px;
+	border:0 none;
+	font-weight:bold;
+	font-size:14px;
+	color:#000;*ime-mode:active;
+	outline:none
 }
+
+#search .btn {
+margin-left:1px;
+position:relative;
+vertical-align:top;
+ z-index:10;
+
+}
+.button-3d {
+  position:relative;
+  width: 70px;/* 70이하면 회원가입 글자가 깨지고 auto는 두 버튼 크기가 달라진다*/
+  display:inline-block;
+  color:#ecf0f1;
+  text-decoration:none;
+  background:#8181F7;
+  text-align:center;
+  padding:16px 18px 14px;
+  left:90%;
+  
+  -webkit-transition: all 0.1s;
+	-moz-transition: all 0.1s;
+	transition: all 0.1s;
+	
+  -webkit-box-shadow: 0px 6px 0px #8181F7;
+  -moz-box-shadow: 0px 6px 0px #8181F7;
+  box-shadow: 0px 6px 0px rgb(150,110,250);/*버튼 아래 부분 음염 부분*/
+}
+
+.button-3d:active{
+    -webkit-box-shadow: 0px 2px 0px #d35400;
+    -moz-box-shadow: 0px 2px 0px #d35400;
+    box-shadow: 0px 2px 0px #d35400;
+    position:relative;
+    top:4px;
+}
+
+nav { box-sizing: border-box;}/*테두리를 기준으로 박스 크기를 경정*/
+
+*, *:before, *:after { box-sizing: inherit; }
 
 body {
-    font-family: Verdana,Geneva,sans-serif;
-    font-size: 12px;
-} 
-#page-wrap {
-    width: 800px;
-    margin: 25px auto;
+  font-family: 'Jeju Hallasan', serif;
+  font-size: 16px;
+  margin: 0;
 }
 
-a {
-    text-decoration: none;
+a { text-decoration: none; } /*a링크 아래 밑줄 제거 */
+
+.container {
+  width: 1000px;
+  margin: auto;
+  margin-top: 50px;
+  
 }
 
-ul {
-    list-style: none;
+/* Navigation Styles */
+nav { background: #8181F7; }
+
+nav ul {
+  font-size: 0;
+  margin: 0;
+  padding: 0;
 }
 
-p {
-    margin: 15px 0;
+nav ul li {
+  display: inline-block;
+  position: relative;
 }
 
-/*
- LEVEL ONE
- */
-ul.dropdown {
-    position: relative;
-    font-size: 24px;
+nav ul li a {
+  color: #fff;
+  display: block;
+  font-size: 14px;
+  padding: 15px 14px;
+  transition: 0.3s linear;
 }
 
-ul.dropdown li {
-    font-weight: bold;
-    float: left;
-    zoom: 1;
-    background: #000 url(../images/overlay2.png) repeat-x top left;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;   
-    margin:1px;
-    text-shadow: 0 2px 1px rgba(0,0,0,0.2);
+nav ul li:hover { background: #ACFA58; }
+
+nav ul li ul {
+  border-bottom: 5px solid #2ba0db;
+  display: none;
+  position: absolute;
+  width: 250px;
 }
 
-ul.dropdown a:hover {
-    color: #000;
+nav ul li ul li {
+  border-top: 1px solid #444;
+  display: block;
 }
 
-ul.dropdown a:active {
-    color: #ffa500;
+nav ul li ul li:first-child { border-top: none; }
+
+nav ul li ul li a {
+  background: #373737;
+  display: block;
+  padding: 10px 14px;
 }
 
-ul.dropdown li a {
-    display: block;
-    padding: 4px 8px;
-    color: #fff;
-    text-shadow: 0 2px 1px rgba(0,0,0,0.2);
-}
+nav ul li ul li a:hover { background: #126d9b; }
 
-ul.dropdown li:last-child a {
-    border-right: none;
-}
- /* Doesn't work in IE */
-ul.dropdown li.hover, ul.dropdown li:hover {
-    background: #0070C0;
-    color: black;
-    position: relative;
-    color:#fff;
-}
-
-ul.dropdown li.hover a {
-    color: #fff;
-    font-weight:bold;
-}
-
-/*
- LEVEL TWO
- */
-ul.dropdown ul {
-    width: 220px;
-    visibility: hidden;
-    position: absolute;
-    top: 100%;
-    left: 0;
-}
-
-ul.dropdown ul li {
-    font-weight: normal;
-    background: #909090 url(../images/overlay2.png) repeat-x top left;
-    color: #000;
-    float: none;
-}
-
-/* IE 6 & 7 Needs Inline Block */
-ul.dropdown ul li a {
-    border-right: none;
-    width: 100%;
-    display: inline-block;
-}
-
-/*
- LEVEL THREE
- */
-ul.dropdown ul ul {
-    left: 100%;
-    top: 0;
-}
-
-ul.dropdown li:hover > ul {
-    visibility: visible;
-}
-
+nav .fa.fa-angle-down { margin-left: 6px; }
 </style>

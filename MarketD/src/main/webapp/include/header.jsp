@@ -8,86 +8,52 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 	<title>DobbyMarket</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type="text/javascript" src=".\resources\js\heade"></script> 
+	<script type="text/javascript" src=".\resources\js\header.js"></script>
 	<link rel="stylesheet"  type="text/css" href=".\resources\css\header.css"/>
 	<link rel="stylesheet"  type="text/css" href=".\resources\css\header_top.css"/>
-	<!-- type="text/css" 추가 후 CSS링크 인식함 -->
+		<!-- type="text/css" 추가 후 CSS링크 인식함 -->
+
 </head>
 <body>
+<a href="/"><img src="\resources\img\logodobby.png" alt="도비마켓"/></a> 
+<div id="search">
+	<span class="green_window">
+	<input id="query" name="query" type="text" title="검색어 입력" class="input_text" tabindex="1" accesskey="s" onclick="document.getElementById('fbm').value=1;" />
+	</span>
+	<input type="image" alt="검색" src="http://wstatic.naver.com/w9/btn_sch.gif" class="btn"/>
+</div>
+  <!--로그인/회원가입 -->
+  <a href="#" class="button-3d">로그인</a>
+  <a href="#" class="button-3d">회원가입</a>
+  
 <form action="">
-	<div id="page-wrap">
-		<a href="/"><img src="\resources\img\logodobby.jpg" alt="도비마켓"/></a>   	   
-        <ul class="dropdown">
-        	<li><a href="#">상세검색</a>
-        		<ul class="sub_menu">
-        			 <li><!--컴퓨터 - 대분류 시작 -->
-        			 	<a href="#">컴퓨터</a>
-        			 	<ul><!--컴퓨터 - 소분류 시작 -->
-        			 		<li><a href="#">조립 PC</a></li>
-        			 		<li><a href="https://www.naver.com/">브랜드 데스크탑</a></li>
-        			 		<li><a href="index">노트북</a></li>
-        			 		<li><a href="#">노트북 거치대</a></li>
-        			 		<li><a href="#">노트북 주변기기</a></li>
-        			 		<li><a href="#">PC 주변기기</a></li>
-        			 		<li><a href="#">노트북 가방</a></li>
-        			 		<li><a href="#">노트북 배터리</a></li>
-        			 		<li><a href="#">모니터</a></li>
-        			 	</ul><!--컴퓨터 - 소분류 끝  -->
-        			 </li><!--컴퓨터 - 대분류 끝 -->
-        			 <li><!--가구 - 대분류 시작  -->
-        				<a href="#">가구</a>
-        				<ul><!--가구 - 소분류 시작 -->
-        					<li><a href="#">Indoor</a></li>
-        					<li><a href="#">Outdoor</a></li>
-        				</ul><!--가구 - 소분류 끝 -->
-        			 </li><!--가구 -대분류 끝 -->
-        			 <li><!--패션의류 - 대분류 시작  -->
-        				 <a href="#">패션의류</a>
-        				 <ul><!--패션의류 - 소분류 시작 -->
-        					<li><a href="#">소분류 샘플 1</a></li>
-        					<li><a href="#">소분류 샘플 2</a></li>
-        				</ul><!--패션의류 - 소분류 끝 -->
-        			 </li><!--패션의류 -대분류 끝 -->
-        			 <li><!--생활가전 - 대분류 시작  -->
-        			 	<a href="#">생활가전</a>
-        			 	<ul><!--생활가전 - 소분류 시작 -->
-        					<li><a href="#">소분류 샘플 1</a></li>
-        					<li><a href="#">소분류 샘플 2</a></li>
-        				</ul><!--생활가전 - 소분류 끝 -->
-        			 </li><!--생활가전 -대분류 끝 -->
-        			 <li><!--도서 - 대분류 시작  -->
-        			 	<a href="#">도서</a>
-        			 	<ul><!--도서 - 소분류 시작 -->
-        					<li><a href="#">소분류 샘플 1</a></li>
-        					<li><a href="#">소분류 샘플 2</a></li>
-        				</ul><!--도서 - 소분류 끝 -->
-        			 </li><!--도서 -대분류 끝 -->
-        			 <li><!--취미 - 대분류 시작  -->
-        			 	<a href="#">취미</a>
-        			 	<ul><!--취미 - 소분류 시작 -->
-        					<li><a href="#">소분류 샘플 1</a></li>
-        					<li><a href="#">소분류 샘플 2</a></li>
-        				</ul><!--취미 - 소분류 끝 -->
-        			 </li><!--취미 -대분류 끝 -->
-        			 <li><!--뷰티 - 대분류 시작  -->
-        			 	<a href="#">뷰티</a>
-        			 	<ul><!--뷰티 - 소분류 시작 -->
-        					<li><a href="#">소분류 샘플 1</a></li>
-        					<li><a href="#">소분류 샘플 2</a></li>
-        				</ul><!--뷰티 - 소분류 끝 -->
-        			 </li><!--뷰티 -대분류 끝 -->
-        			 <li><!--디지털 - 대분류 시작  -->
-        			 	<a href="#">디지털</a>
-        			 	<ul><!--디지털 - 소분류 시작 -->
-        					<li><a href="#">소분류 샘플 1</a></li>
-        					<li><a href="#">소분류 샘플 2</a></li>
-        				</ul><!--디지털 - 소분류 끝 -->
-        			 </li><!--디지털 -대분류 끝 -->
-        			 <li><a href="#"> - VIEW ALL - </a></li>
-        		</ul>
-        	</li>
-        </ul>		
-	</div>
+	<nav>
+		<div class="container">
+	    	<ul>
+		      <li><a href="#">내정보</a></li>
+		      <li><a href="#">장바구니</a></li>
+		     <li><a href="#">구매내역<i class='fa fa-angle-down'></i></a>
+	       		 <ul>
+			          <li><a href="https://www.hellomarket.com/">판매내역</a></li>
+			          <li><a href="https://www.hellomarket.com/">구매요청</a></li>
+			          <!-- <li><a href="#">Category Three</a></li> -->
+	        	</ul>
+	      	</li>
+	      <li class='sub-menu'> <a href="#">판매내역<i class='fa fa-angle-down'></i></a>
+	        <ul>
+	          <li><a href="https://www.hellomarket.com/">판매내역</a></li>
+	          <li><a href="https://www.hellomarket.com/">구매요청</a></li>
+	<!--           <li><a href="#">Service Three</a></li>
+	          <li><a href="#">Service Four</a></li>
+	          <li><a href="#">Service Five</a></li>
+	          <li><a href="#">Service Six</a></li> -->
+	        </ul>
+	      </li>
+	      <li><a href="https://www.hellomarket.com/">공지사항</a></li>
+	      <li><a href="https://www.hellomarket.com/">고객센터</a></li>
+	    </ul>
+	  </div>
+	</nav>
 </form>
 <a href="#myAnchor" class="go-top">▲</a>
 

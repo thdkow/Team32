@@ -40,3 +40,16 @@
 	        scrollTop: $( $(this).attr('href') ).offset().top
 	    }, 1000);
 	});
+	
+/*
+ * 풀 스크린 슬라이드 쇼
+ */
+        $(function(){
+            $('.jquery-reslider').reSlider({
+                speed:1000,  //페이드속도
+                delay:5000,  //자동전환 속도
+                imgCount:4,  //이미지갯수
+                dots:true,   //하단 페이지 버튼
+                autoPlay:true//자동재생
+            })
+        })
