@@ -1,5 +1,5 @@
 package com.team.marketd.domain;
 
-public class TalkVo {
+public class ShoppingCartVo {
 
 }
