@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,19 +11,24 @@
 $(document).ready(function(){
 	$("#save").click(function(){
 //		alert("버튼클릭");
-		if ($(".id").val() == ""){
+		if ($("#subject").val() == ""){
 			$("#sid").html("아이디을 입력하세요");
 			$("#sid").css("color","red");
 			return;
-		}else if ($(".pwd").val() == ""){
-			$("#cid").html("비밀번호을 입력하세요");
+		}else if ($("#content").val() == ""){
+			$("#cid").html("이름을 입력하세요");
 			$("#sid").html("");
 			$("#cid").css("color","red");
 			return;
-		}						
+		}else if ($("#writer").val() == ""){
+			$("#wid").html("인증질문를 입력하세요!");
+			$("#cid").html("");
+			$("#wid").css("color","red");
+			return;
+		}							
 		
 		var frm = document.form1;
-		frm.action ="${contextPath}/Board/boardWriteAction.dobby";
+		frm.action ="${contextPath}/Board/boardWriteAction.do";
 		frm.method ="post";
 		frm.submit();		
 		
@@ -65,32 +69,31 @@ boby {
 .btn:hover{
   filter: brightness(50%)
 }
-a {
-	text-decoration:none;
-}
 </style>
 </head>
+
 <body>
+
 <div class="loginbox">
+   
+  <div class="under">
+    <a href="lookingid.dobby" class="link">아이디 찾기</a>
+    <a href="lookingpwd.dobby" class="link">비밀번호 찾기</a>
+  </div>
   
   <form action="">
   <div class="under">
-    <div class="id box">
-	  아이디 <input class="">
+    <div class="">
+	  새 비밀번호<input class="box">
 	</div>
-	<div class="pwd box">
-	  비밀번호<input class="">
+	<div class="">
+	  새 비밀번호<input class="box">
     </div>
-  </div>
-  
-  <div >
-    <a href="lookingid.dobby">아이디</a>
-    <a href="lookingpwd.dobby">/ 비밀번호 찾기</a>
-    <input type="checkbox" id="autologin">자동로그인
+   
   </div>
   
   <div class="under">
-  <input class="btn" type="button"  id = "save" onclick="save();" value="로그인">
+  <input class="btn" type="button" id="save"onclick="save();" value="확인">
   <input class="btn" type="button" value="취소">
   </div>
   </form>
