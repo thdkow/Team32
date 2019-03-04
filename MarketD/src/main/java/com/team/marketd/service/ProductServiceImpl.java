@@ -1,44 +1,101 @@
 package com.team.marketd.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("BoardServiceImpl")
+import com.team.marketd.domain.ProductVo;
+import com.team.marketd.persistence.ProductService_Mapper;
+
+@Service("ProductServiceImpl")
 public class ProductServiceImpl implements ProductService {
 
+	private ProductService_Mapper psm;
+	
+	@Autowired
+	private ProductServiceImpl(SqlSession session){
+		
+		this.psm = session.getMapper(ProductService_Mapper.class);
+		
+	}
+	
+	
+
+
 	@Override
-	public String selectNewProductList() { // 최신 상품 리스트 셀렉트
-		// TODO Auto-generated method stub
-		return null;
+	public int selectProductListTotal(String Keyword) { // 상품 리스트 총합계(페이징)
+		
+		int tcount = psm.selectProductListTotal(Keyword);
+		
+		System.out.println("쿼리 토탈"+tcount);
+		
+		return tcount;
+	}
+	
+	@Override
+	public ArrayList<ProductVo> selectNewProductList(int page) { // 최신 상품 리스트 셀렉트
+		
+		ArrayList<ProductVo> alist = psm.selectNewProductList(page);
+		
+		System.out.println("임플리 먼트"+page);
+		
+		return alist;
 	}
 
 	@Override
-	public String selectProductList() { //상품 리스트 셀렉트
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ProductVo> selectProductList(int page,int caidx,int minPrice,int maxPrice,String Keyword) { //상품 리스트 셀렉트
+		HashMap<String,Object> hm = new HashMap<String,Object>();
+		hm.put("page", page);
+		hm.put("caidx", caidx);
+		hm.put("minPrice", minPrice);
+		hm.put("maxPrice", maxPrice);
+		hm.put("Keyword", Keyword);
+		
+		
+		ArrayList<ProductVo> alist = psm.selectProductSerchList(hm);
+		return alist;
 	}
 
 	@Override
-	public String selectProductOne() { // 상품 콘텐츠 셀렉트
-		// TODO Auto-generated method stub
-		return null;
+	public ProductVo selectProductOne(int pidx) { // 상품 콘텐츠 셀렉트
+		
+		ProductVo pv = psm.selectProductOne(pidx);
+		
+		return pv;
 	}
 
 	@Override
-	public String insertSaleProduct() { // 상품 판매글 작성
-		// TODO Auto-generated method stub
-		return null;
+	public int insertSaleProduct(int midx,int caidx,String psubject,String pcontent,int pvol,int pmoney,int pfee,String pip) { // 상품 판매글 작성
+		HashMap<String,Object> hm = new HashMap<String,Object>();
+		
+		hm.put("midx", midx);
+		hm.put("caidx", caidx);
+		hm.put("psubject", psubject);
+		hm.put("pcontent", pcontent);
+		hm.put("pvol", pvol);
+		hm.put("pmoney", pmoney);
+		hm.put("pfee", pfee);
+		hm.put("pip", pip);
+		
+		int exec = psm.insertSaleProduct(hm);
+		
+		return exec;
 	}
 
 	@Override
-	public String selectProductListTotal() { // 상품 리스트 총합계(페이징)
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String insertShoppingCart() { // 장바구니에 추가
-		// TODO Auto-generated method stub
-		return null;
+	public int insertShoppingCart(int pidx,int pvol,int midx) { // 장바구니에 추가
+		
+		int exe = psm.checkShoppingCart(pidx, midx);
+		
+		if(exe==0) {
+		int exec = psm.insertShoppingCart(pidx,pvol,midx);
+		
+		return exec;
+		}
+		return 0;
 	}
 
 	@Override

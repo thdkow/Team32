@@ -28,6 +28,18 @@
 뷰단 : include(head,foot)는 이 위치
 회원 관련 : member
 
+	<A HREF="<%=request.getContextPath()%>/Product/ProductNewList.dobby">상품
+		리스트 가기</A>
+		
+			<A HREF="<%=request.getContextPath()%>/Product/ProductContent.dobby">상품 콘텐츠 가기</A>
+		
+			<A HREF="<%=request.getContextPath()%>/Product/ProductSaleWriteComplete.dobby">작성완료
+		 가기</A>
+		
+			<A HREF="<%=request.getContextPath()%>/Product/ProductPaymentComplete.dobby">구매완료
+	 가기</A>
+	 
+	 
 <div class="wrapper" id="myAnchor" >
 </div><!-- TOP버튼  -->
 <div class="wrap wrap-index">

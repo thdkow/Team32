@@ -5,21 +5,20 @@ import lombok.Data;
 @Data
 public class ProductVo {
 	
-	private int bidx;
-	private String subject;
-	private String content;
-	private String writer;
-	private String ip;
-	private int recommend;
-	private int hits;
-	private String writedate;
-	private String updatedate;
-	private String delYn;
-	private String flag;
-	private int hate;
-	private int originbidx;
-	private int leftright;
-	private int updown;
- 	
-
+	private int pidx;
+	private int caidx;
+	private int midx;
+	private String psubject;
+	private String mname;
+	private int phit;
+	private String pwridate;
+	private String pcontent;
+	private String pimage;
+	private int pvol;
+	private int pmoney;
+	private int pfee;
+	private String pip;
+	private String psaleYn;
+	private String pdelYn;
+	
 }

@@ -14,14 +14,16 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@ComponentScan( basePackages= {"com.myin.noxml"})
+@ComponentScan(basePackages = {"com.team.marketd"}, 
+excludeFilters = @ComponentScan.Filter(Controller.class))
 @EnableTransactionManagement
 @Configuration
 public class RootConfig {
 	String driver = "net.sf.log4jdbc.sql.jdbcapi.DriverSpy";
-	String url = "jdbc:log4jdbc:oracle:thin://@127.0.0.1:1521:XE";
+	String url = "jdbc:log4jdbc:oracle:thin://@192.168.0.59:1521:XE";
 	String username = "system";
 	String password ="1111";
 	

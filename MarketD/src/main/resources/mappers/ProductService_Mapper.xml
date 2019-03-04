@@ -1,7 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.myin.noxml.persistence.BoardService_Mapper">
+<mapper namespace="com.team.marketd.persistence.ProductService_Mapper">
 
+<select id="selectProductListTotal" parameterType="String" resultType="Integer">
+select count(*)as tcount from product32 where pdelYn='N' and  psubject like '%'||#{Keyword}||'%'
+</select>
 
+<select id="selectNewProductList" parameterType="Integer" resultType="pv" >
+
+select  rownum,pidx,psubject,mname,pmoney,pwridate from
+ product32 a left outer join member32 b on a.midx = b.midx where pdelYn='N'
+ <![CDATA[ and rownum<=(#{page}*12)]]>
+order by pidx desc
+
+ </select>
+ 
+ <select id="selectProductSerchList" parameterType="HashMap" resultType="pv" >
+
+select  rownum,pidx,psubject,mname,pmoney,pwridate from
+ product32 a left outer join member32 b on a.midx = b.midx where pdelYn='N'
+  <if test='caidx!="1000"'>and a.caidx = #{caidx} </if>
+
+<if test='psubject!=null'> and psubject like '%'||#{Keyword}||'%' </if>
+<if test='minPrice lte maxPrice and maxPrice!=null'> and pmoney  <![CDATA[>= #{minPrice} and  pmoney <= #{maxPrice}]]> </if>
+
+<![CDATA[ and rownum<=(#{page]*12) order by pidx desc ]]>
+
+ </select>
+ 
+ <select id="selectProductOne" parameterType="Integer" resultType="pv" >
+select * from product32 where pdelYn='N' and pidx = #{pidx}
+</select>
+
+<insert id="insertSaleProduct" parameterType="HashMap">
+
+insert into product32(pidx,caidx,midx,psubject,pcontent,pvol,pmoney,pfee,pip)
+values(product_seq.nextval,#{caidx},#{midx},#{psubject},#{pcontent},#{pvol},#{pmoney},#{pfee},#{pip})
+
+</insert>
+
+<insert id="insertShoppingCart" parameterType="Integer">
+
+insert into shoppingcart32(sidx,pidx,svol,midx) values(shoppingcart_seq.nextval,#{0},#{1},#{2})
+
+</insert>
+ 
+  <select id="checkShoppingCart" parameterType="Integer" resultType="Integer" >
+  
+select count(sidx) from shoppingcart32 where pidx = #{0} and midx=#{1}
+
+</select>
+ 
+
+ 
+ 
 </mapper>

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 
 @EnableWebMvc
-@ComponentScan(basePackages= {"com.myin.noxml.controller"})//스캔범위
+@ComponentScan(basePackages= {"com.team.marketd.controller"})//스캔범위
 public class ServletConfig implements WebMvcConfigurer { //구현받아서
 	//완성된거라서 빨간줄이 안 떳다 구현하라고, 재정의 가능함
 	@Override//오버라이딩을 안 했다 타이핑 ㄴㄴ 직접 인터페이스 들어가서 복사 붙여넣기 하자
