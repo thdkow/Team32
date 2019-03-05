@@ -2,6 +2,7 @@ package com.team.marketd.service;
 
 import java.util.ArrayList;
 
+import com.team.marketd.domain.PaymentSaleDTO;
 import com.team.marketd.domain.ProductVo;
 
 public interface ProductService {
@@ -17,13 +18,13 @@ public interface ProductService {
 	public String updatePayment();
 	public String deletePayment();
 	public String selectSalesHistoryList();
-	public String selectPaymentHistoryList();
+	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(int midx);
 	public String selectOrderOne();
 	public String selectProductSimilarList();
 	public String updatePaymentConfirmation();
 	public String updatePaymentCancle();
-	public String deleteSalesHistory();
-	public String updateDelivery();
+	public String deleteSalesHistory(int pidx);
+	public int updateDelivery(String ddeliver, int dwaybill, int oidx);
 	public String selectPriceSort();
 	
 	

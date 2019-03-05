@@ -3,6 +3,7 @@ package com.team.marketd.persistence;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.team.marketd.domain.PaymentSaleDTO;
 import com.team.marketd.domain.ProductVo;
 
 public interface ProductService_Mapper {
@@ -19,13 +20,13 @@ public interface ProductService_Mapper {
 	public String updatePayment();
 	public String deletePayment();
 	public String selectSalesHistoryList();
-	public String selectPaymentHistoryList();
+	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(HashMap<String, Object> hm);
 	public String selectOrderOne();
 	public String selectProductSimilarList();
 	public String updateProductconfirmation();
 	public String updateProductCancle();
-	public String deleteSalesHistory();
-	public String updateDelivery();
+	public String deleteSalesHistory(int pidx);
+	public int updateDelivery(HashMap<String, Object> hm);
 	public String selectPriceSort();
 	public int insertSaleProduct(HashMap<String, Object> hm);
 

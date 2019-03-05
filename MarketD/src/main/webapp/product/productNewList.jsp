@@ -165,7 +165,7 @@ $( document ).ready( function() {
 <input id='moreTotalCount' type='text' value='' />
 <input id='page' type='text' value='1' />
 </div>
-
+<input type="button" onclick="location='/Product/productPaymentHistory.dobby'" value="구매내역이동">
 
 </body>
 </html>

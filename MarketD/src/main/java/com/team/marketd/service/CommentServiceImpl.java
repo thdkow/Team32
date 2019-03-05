@@ -71,6 +71,14 @@ public class CommentServiceImpl implements CommentService {
 						return cv;
 	}
 
+	@Override
+	public int SelectBoardTotal() {
+		
+				resultint = csm.selectCommentTotal();
+		
+					return resultint;
+	}
+
 
 
 	

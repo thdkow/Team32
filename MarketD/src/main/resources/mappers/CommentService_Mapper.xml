@@ -8,7 +8,7 @@
 		select ROWNUM,cidx,midx,pidx,cwriter,ccontent,cwridate,corigincidx,cleftright,cupdown,cip,cdelip,cdelyn from
         (select* from comment32 where cdelyn='N' and pidx= #{pidx} order by corigincidx desc ) 
 			<if test="page!=0">
-			<![CDATA[ where ROWNUM<=(#{page}*5) ]]>
+			<![CDATA[ where ROWNUM<=(#{page}*10) ]]>
 			</if>
 	</select>
 
@@ -40,11 +40,18 @@
 	
 	</insert>
 	
-	<select id="selectCommentOne" parameterType="Integer" resultType="cv"><!--댓글 리스트 SQL 실행 3은 보여줄 코멘트 수-->
+	<select id="selectCommentOne" parameterType="Integer" resultType="cv"><!--댓글 리스트 SQL -->
 	
 		select cidx,midx,pidx,cwridate,corigincidx,cleftright,cupdown,cip,cdelip,cdelyn from comment32 
 		where cdelyn='N' and cidx=#{cidx}  
 			
+	</select>
+	
+	<select id="selectCommentTotal" parameterType="HashMap" resultType="Integer"><!--코멘트 : 검색 및 페이징 처리-->
+	
+		 select count(*) as cnt from member32 A inner join comment32 B on A.midx = B.midx 
+				  where cdelyn='N' order by corigincidx, cupdown
+				  
 	</select>
 	
 </mapper>

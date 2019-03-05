@@ -52,7 +52,25 @@ select count(sidx) from shoppingcart32 where pidx = #{0} and midx=#{1}
 
 </select>
  
+<update id="deleteSalesHistory" parameterType="Integer">
 
+update product32 set pdelyn='Y' where pidx = #{pidx}
+
+</update>
+
+<update id="updateDelivery" parameterType="Integer">
+
+update delivery32 set ddeliver=#{ddeliver}, dwaybill = #{dwaybill} where oidx = #{oidx}
+
+</update>
+
+
+<select id="selectPaymentHistoryList" parameterType="Integer" resultType="psdto" >
+  
+select * from product32 a full outer join order32 b on a.pidx = b.pidx full outer join delivery32 c on b.OIDx = c.oidx
+ where odelyn='N' and b.midx=#{midx} order by a.pidx desc
  
+</select>
+<!-- A.pidx,A.caidx,A.midx,A.psubject,A.pwridate,A.pcontent,A.pvol,A.pmoney,A.pfee,A.pip  -->
  
 </mapper>

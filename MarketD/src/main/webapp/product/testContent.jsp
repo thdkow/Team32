@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<%@ page import="java.util.ArrayList"%>
+<c:set var="myContextPath" value="${pageContext.request.contextPath}"/>
+<c:set var="pm" value="${requestScope.pm}"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="${myContextPath}/include/member.css" />
+	
 <script type="text/javascript">
 
 $( document ).ready( function() {
@@ -245,6 +251,38 @@ function commentList(data){
 		  -->
 		<input id='totalCount' type='text' value='0' /><!--totalCount에 해당값을  -->
 		</div> 
+		
+		<!-- 페이징 처리에 사용되는 인터페이스이다 < 1 2 3 4 5 6 7 8 9 10 > -->
+	 <div style="text-align: center;">
+	 <div class="jb-center">
+		 <ul class="pagination">
+		 	<li>
+		 	<c:if test="${pm.prev eq true }">
+	 			<a href="${myContextPath}/Board/boardList.do${pm.makePrev()}"> 			
+		 			<span class="glyphicon glyphicon-chevron-left"></span>
+	 			</a> 		
+ 			</c:if>			
+			</li>
+			
+ 	 	<c:forEach var="pmbt" begin="${pm.startPage}" end="${pm.endPage}">
+           <li
+           <c:if test="${pm.scri.page eq pmbt}">class="active"</c:if>>
+           
+           		<a href="${myContextPath}/Board/boardList.do${pm.makeSearch(pmbt)}">${pmbt}</a>
+           		<!-- 메소드를 이용해서 깔끔하게 처리하였다. -->
+           </li>
+        </c:forEach>
+  
+		 	<li>
+		  	<c:if test="${pm.next eq true && pm.endPage gt 0}">
+ 			 <a href="${myContextPath}/Board/boardList.do${pm.makeNext()}">
+	 			<span class="glyphicon glyphicon-chevron-right"></span>
+ 			</a> 
+ 		 	</c:if> 
+			</li>
+		 </ul>
+	 </div>
+ </div>
 	<div>
 		<button onclick="location.href='${contextPath}/index.jsp'">메인가기</button>
 	</div>
