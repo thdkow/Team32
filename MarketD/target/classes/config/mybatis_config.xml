@@ -4,8 +4,7 @@
   <configuration>   
     <typeAliases> 
 		<typeAlias alias="mv" type="com.team.marketd.domain.MemberVo"/>
+		<typeAlias alias="cv" type="com.team.marketd.domain.CommentVo"/>
 		<typeAlias alias="pv" type="com.team.marketd.domain.ProductVo"/>
-		<typeAlias alias="nv" type="com.team.marketd.domain.NoticeVo"/>
-		<typeAlias alias="qv" type="com.team.marketd.domain.QuestionVo"/>
  	 </typeAliases> 
  </configuration>

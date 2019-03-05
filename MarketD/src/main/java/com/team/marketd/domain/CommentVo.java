@@ -6,17 +6,15 @@ import lombok.Data;
 public class CommentVo {
 
 	int cidx;
-	String ccontent;
-	String cwriter;
-	String delyn;
-	int good;
-	int bad;
-	int bidx;
 	int midx;
-	String flag;
-	int cridx;
-	String ip;
-	String deleteip;
-	String updatedate;
-	
+	int pidx;
+	String cwriter;
+	String ccontent;
+	String cwridate;
+	int corigincidx;
+	int cleftright;
+	int cupdown;
+	String cip;
+	String cdelip;
+	String cdelyn;
 }
