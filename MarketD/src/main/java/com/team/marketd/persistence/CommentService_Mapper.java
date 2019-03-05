@@ -18,7 +18,5 @@ public interface CommentService_Mapper {
 
 	public CommentVo selectCommentOne(int cidx); // cidx에 맞는 하나의 댓글 호출
 	
-	public int selectCommentTotal();
-	
 
 }

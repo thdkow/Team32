@@ -7,7 +7,7 @@ public class Criteria {
 	
 	public Criteria(){
 		this.page = 1;
-		this.perPageNum = 10; //목록갯수
+		this.perPageNum = 15; //목록갯수
 		//몆개의 값들을 보여주겠다.
 	}
 	
@@ -26,7 +26,7 @@ public class Criteria {
 	}
 	public void setPerPageNum(int perPageNum) {
 		if(perPageNum <=0 || perPageNum > 100){ 		
-			this.perPageNum = 10;
+			this.perPageNum = 15;
 			return;
 		}
 		this.perPageNum = perPageNum;

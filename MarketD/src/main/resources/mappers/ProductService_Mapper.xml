@@ -3,8 +3,13 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.marketd.persistence.ProductService_Mapper">
 
-<select id="selectProductListTotal" parameterType="String" resultType="Integer">
-select count(*)as tcount from product32 where pdelYn='N' and  psubject like '%'||#{Keyword}||'%'
+<select id="selectProductListTotal" parameterType="HashMap" resultType="Integer">
+select count(*)as tcount from product32 where pdelYn='N'   
+<if test='caidx!="1000"'>and caidx = #{caidx} </if>
+
+<if test='keyword!=""'> and psubject like '%'||#{keyword}||'%' </if>
+<if test='minPrice lte maxPrice and maxPrice!=null and maxPrice!="0" '> and pmoney  
+<![CDATA[>= #{minPrice} and  pmoney <= #{maxPrice}]]> </if>
 </select>
 
 <select id="selectNewProductList" parameterType="Integer" resultType="pv" >
@@ -22,10 +27,11 @@ select  rownum,pidx,psubject,mname,pmoney,pwridate from
  product32 a left outer join member32 b on a.midx = b.midx where pdelYn='N'
   <if test='caidx!="1000"'>and a.caidx = #{caidx} </if>
 
-<if test='psubject!=null'> and psubject like '%'||#{Keyword}||'%' </if>
-<if test='minPrice lte maxPrice and maxPrice!=null'> and pmoney  <![CDATA[>= #{minPrice} and  pmoney <= #{maxPrice}]]> </if>
+<if test='keyword!=""'> and psubject like '%'||#{keyword}||'%' </if>
+<if test='minPrice lte maxPrice and maxPrice!=null and maxPrice!="0" '> and pmoney 
+ <![CDATA[>= #{minPrice} and  pmoney <= #{maxPrice}]]> </if>
 
-<![CDATA[ and rownum<=(#{page]*12) order by pidx desc ]]>
+<![CDATA[ and rownum<=(#{page}*12) order by pidx desc ]]>
 
  </select>
  
@@ -60,17 +66,23 @@ update product32 set pdelyn='Y' where pidx = #{pidx}
 
 <update id="updateDelivery" parameterType="Integer">
 
-update delivery32 set ddeliver=#{ddeliver}, dwaybill = #{dwaybill} where oidx = #{oidx}
+update delivery32 set caidx=#{caidx}, dwaybill = #{dwaybill} where oidx = #{oidx}
 
 </update>
 
+ <select id="selectSalesHistoryList" parameterType="Integer" resultType="psdto" >
 
-<select id="selectPaymentHistoryList" parameterType="Integer" resultType="psdto" >
-  
-select * from product32 a full outer join order32 b on a.pidx = b.pidx full outer join delivery32 c on b.OIDx = c.oidx
- where odelyn='N' and b.midx=#{midx} order by a.pidx desc
- 
+select * from(select rownum as rnum,AA.* from(select * from product32 a full outer join order32 b on a.pidx = b.pidx full outer join delivery32 c on b.OIDx = c.oidx 
+where pdelYn='N' and a.midx=#{0}  order by a.pidx desc
+ <![CDATA[)AA where rownum <=(#{1}-1)*15+15) where rnum >=(#{1}-1)*15+1]]>
+
 </select>
-<!-- A.pidx,A.caidx,A.midx,A.psubject,A.pwridate,A.pcontent,A.pvol,A.pmoney,A.pfee,A.pip  -->
+
+ <select id="selectHistoryTotal" parameterType="Integer" resultType="Integer" >
+select count(*) from product32 a full outer join order32 b on a.pidx = b.pidx full outer join delivery32 c on b.OIDx = c.oidx 
+where pdelYn='N' and a.midx=#{midx} 
+</select>
+
+ 
  
 </mapper>

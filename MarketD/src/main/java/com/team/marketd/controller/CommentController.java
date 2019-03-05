@@ -5,8 +5,6 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.team.marketd.domain.PageMaker;
-import com.team.marketd.domain.SearchCriteria;
 import com.team.marketd.domain.CommentVo;
 import com.team.marketd.service.CommentService;
 
@@ -31,18 +27,17 @@ public class CommentController {
 	
 	@Autowired
 	CommentService cs;
-	
 	String reuslt = null;
 	
 	@GetMapping(value="/product/{pidx}/{page}/commentlist.dobby"//댓글 리스트 이동(Ajax)
 			,produces={	MediaType.APPLICATION_JSON_UTF8_VALUE,
 						MediaType.APPLICATION_XML_VALUE})
-	public ArrayList<CommentVo> commentList(HttpServletRequest request,@PathVariable("pidx")int pidx
-			,@PathVariable("page")int page){
+	public ArrayList<CommentVo> commentList(@PathVariable("pidx")int pidx
+			,@PathVariable("page")int page) { 
 
 			ArrayList<CommentVo> commentlist = cs.selectCommentList(pidx,page);
-			
-				return commentlist;//페이지 완성후 페이지 주소로 바꾸기 지금은 데이터 확인용
+		
+					return commentlist;//페이지 완성후 페이지 주소로 바꾸기 지금은 데이터 확인용
 	}
 	
 	@PostMapping(value="/product/commentWriteAction.dobby"

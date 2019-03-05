@@ -19,7 +19,5 @@ public interface CommentService {
 
 	public CommentVo selectCommentOne(int cidx);
 
-	public int SelectBoardTotal();
-
 
 }

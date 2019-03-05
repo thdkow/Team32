@@ -4,7 +4,7 @@ public class SearchCriteria extends Criteria {
 	//Criteria를 상속받아 사용하는 검색의 기능이있는 클레스
 	private String searchType; //검색유형(제목,이름 등)
 	private String keyword;    //검색 키워드
-	private String ppagenum;  
+	private int ppagenum=15;  
 	private String category;   //
 	private String minPrice ;
 	private String maxPrice ;
@@ -41,10 +41,10 @@ public class SearchCriteria extends Criteria {
 		
 		this.keyword = keyword;
 	}
-	public String getPpagenum() {
+	public int getPpagenum() {
 		return ppagenum;
 	}
-	public void setPpagenum(String ppagenum) {
+	public void setPpagenum(int ppagenum) {
 		this.ppagenum = ppagenum;
 	}
 	

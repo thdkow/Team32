@@ -21,28 +21,28 @@ public class PaymentSaleDTO {
 	private String psaleYn;
 	private String pdelYn;
 		// Delivery
-	private int didx;
-//	private int oidx;
-	private String drecipt;
-	private String dtell;
-	private String dzip;
-	private String daddr;
-	private String ddetails;
-	private String dmemo;
-	private int dwaybill;
-	private String dsenddate;
-	private String dcancle;
+	int didx;
+//	int oidx;
+	String drecipt;
+	String dtell;
+	String dzip;
+	String daddr;
+	String ddetails;
+	String dmemo;
+	int dwaybill;
+	String dsenddate;
+	String dcancle;
 		// Order
-	private int oidx;
-//	private int pidx;
-//	private int midx;
-	private String oid;
+	int oidx;
+//	int pidx;
+//	int midx;
+	String oid;
 	String obuydate;
-	private int ovol;
-	private int omoney;
-	private String oip;
-	private String ofinal;
-	private String ocancle;
-	private String odelyn;
+	int ovol;
+	int omoney;
+	String oip;
+	String ofinal;
+	String ocancle;
+	String odelyn;
 	
 }
