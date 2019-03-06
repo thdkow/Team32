@@ -51,6 +51,7 @@ public class CommentController {
 
 			ArrayList<CommentVo> commentlist = cs.selectCommentList(pidx,page);
 			
+			
 				return commentlist;//페이지 완성후 페이지 주소로 바꾸기 지금은 데이터 확인용
 	}
 	
