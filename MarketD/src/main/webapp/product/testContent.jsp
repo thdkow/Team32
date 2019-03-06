@@ -241,9 +241,9 @@ function commentList(data){
 		<div id="tblreply"></div><!-- 코멘트답글 -->
 		&nbsp;
 		<div class="form-group">
-				<input type="hidden" name="corigincidx" id="corigincidx"  value="${cv.corigincidx}" />
-				<input type="hidden" name="cleftright" id="cleftright"  value="${cv.cleftright}" />
-				<input type="hidden" name="cupdown" id="cupdown"  value="${cv.cupdown}" />
+				<input type="text" name="corigincidx" id="corigincidx"  value="${cv.corigincidx}" />
+				<input type="text" name="cleftright" id="cleftright"  value="${cv.cleftright}" />
+				<input type="text" name="cupdown" id="cupdown"  value="${cv.cupdown}" />
 		<input id='nextPage' type="hidden" value='2' /><!--page에 해당값을
 		2로 준 이유는 첫 리스트화 했을 시 더보기 누르면 두번째가 작동 단 문제가 2로 주면 리스트가 2에 해당값을 뽑아서
 		첫 리스트는 page값을 고정값 1로 줬다<-해결법 page를 변수 처리해서 이 부분처럼 input에 hidden으로 담아서

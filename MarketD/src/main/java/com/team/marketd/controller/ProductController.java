@@ -162,8 +162,8 @@ System.out.println("������"+page);
 	ArrayList<PaymentSaleDTO> alist = ps.selectPaymentHistoryList(2);//midx
 					
 				model.addAttribute("alist",alist);
-	
-		return "/product/productPaymentHistory";
+//	System.out.println(alist+"프덕컨트롤ㄹ러");
+		return "product/buyList";
 	}
 
 	public String productPaymentCancle() { // ���� ���

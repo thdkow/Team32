@@ -41,14 +41,6 @@ public class CommentController {
 	public ArrayList<CommentVo> commentList(Model model,@PathVariable("pidx")int pidx
 			,@PathVariable("page")int page){
 		
-		SearchCriteria scri = new SearchCriteria();
-		scri.setPage(page); 
-		int cnt = cs.SelectCommentTotal();
-		PageMaker pm = new PageMaker(); 
-		pm.setTotalCount(cnt); //총 게시글 t_str2.size를 넣는 이유//여기에 맞게 함수 하나 더 필요한 이유? t_str2.size?
-		pm.setScri(scri); // 사용하기위해서
-		pm.calcData();//privatd을 public  으로 바꿈
-
 			ArrayList<CommentVo> commentlist = cs.selectCommentList(pidx,page);
 			
 				return commentlist;//페이지 완성후 페이지 주소로 바꾸기 지금은 데이터 확인용
@@ -59,7 +51,10 @@ public class CommentController {
 							MediaType.APPLICATION_XML_VALUE})//댓글  입력
 	public HashMap<String, Object> commentWriteAction(@RequestBody CommentVo cv)
 			throws Exception{
-		
+		System.out.println(cv.getPidx()+"pidx \n"
+				+cv.getMidx()+"midx \n "
+				+cv.getCcontent()+"콘텐츠 \n"
+				+cv.getCwriter()+"작성자 \n");
 									String cip = null;
 								try{
 									cip = InetAddress.getLocalHost().getHostAddress();

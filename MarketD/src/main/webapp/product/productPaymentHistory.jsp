@@ -6,6 +6,7 @@
 <c:set var="myContextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="alist" value="${requestScope.alist}"/>
 <c:set var="pm" value="${requestScope.pm}"/>
+<c:out value="${alist}+옴마나"></c:out>
 
 <title>SalesList</title>
 
