@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,8 +38,16 @@ public class CommentController {
 	@GetMapping(value="/product/{pidx}/{page}/commentlist.dobby"//댓글 리스트 이동(Ajax)
 			,produces={	MediaType.APPLICATION_JSON_UTF8_VALUE,
 						MediaType.APPLICATION_XML_VALUE})
-	public ArrayList<CommentVo> commentList(HttpServletRequest request,@PathVariable("pidx")int pidx
+	public ArrayList<CommentVo> commentList(Model model,@PathVariable("pidx")int pidx
 			,@PathVariable("page")int page){
+		
+		SearchCriteria scri = new SearchCriteria();
+		scri.setPage(page); 
+		int cnt = cs.SelectCommentTotal();
+		PageMaker pm = new PageMaker(); 
+		pm.setTotalCount(cnt); //총 게시글 t_str2.size를 넣는 이유//여기에 맞게 함수 하나 더 필요한 이유? t_str2.size?
+		pm.setScri(scri); // 사용하기위해서
+		pm.calcData();//privatd을 public  으로 바꿈
 
 			ArrayList<CommentVo> commentlist = cs.selectCommentList(pidx,page);
 			
