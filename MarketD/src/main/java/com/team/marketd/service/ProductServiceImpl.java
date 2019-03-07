@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.team.marketd.domain.PaymentSaleDTO;
 import com.team.marketd.domain.ProductVo;
@@ -27,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
 
 
 	@Override
-	public int selectProductListTotal(int page,int caidx,int minPrice,int maxPrice,String keyword) { // »óÇ° ¸®½ºÆ® ÃÑÇÕ°è(ÆäÀÌÂ¡)
+	public int selectProductListTotal(int page,int caidx,int minPrice,int maxPrice,String keyword) { // ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½Õ°ï¿½(ï¿½ï¿½ï¿½ï¿½Â¡)
 		HashMap<String,Object> hm = new HashMap<String,Object>();
 		hm.put("page", page);
 		hm.put("caidx", caidx);
@@ -42,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public ArrayList<ProductVo> selectNewProductList(int page) { // ÃÖ½Å »óÇ° ¸®½ºÆ® ¼¿·ºÆ®
+	public ArrayList<ProductVo> selectNewProductList(int page) { // ï¿½Ö½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ®
 		
 		ArrayList<ProductVo> alist = psm.selectNewProductList(page);
 		
@@ -52,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ArrayList<ProductVo> selectProductList(int page, int caidx, int minPrice, int maxPrice,
-			String keyword) { //»óÇ° ¸®½ºÆ® ¼¿·ºÆ®
+			String keyword) { //ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ®
 		HashMap<String,Object> hm = new HashMap<String,Object>();
 		hm.put("page", page);
 		hm.put("caidx", caidx);
@@ -66,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ProductVo selectProductOne(int pidx) { // »óÇ° ÄÜÅÙÃ÷ ¼¿·ºÆ®
+	public ProductVo selectProductOne(int pidx) { // ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 		
 		ProductVo pv = psm.selectProductOne(pidx);
 		
@@ -74,8 +75,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int insertSaleProduct(int midx,int caidx,String psubject,String pcontent,int pvol,int pmoney,int pfee,String pip) { // »óÇ° ÆÇ¸Å±Û ÀÛ¼º
+	public int insertSaleProduct(int midx,int caidx,String psubject,String pcontent,int pvol,int pmoney,int pfee,String pip) { // ï¿½ï¿½Ç° ï¿½Ç¸Å±ï¿½ ï¿½Û¼ï¿½
 		HashMap<String,Object> hm = new HashMap<String,Object>();
+		
 		
 		hm.put("midx", midx);
 		hm.put("caidx", caidx);
@@ -92,7 +94,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int insertShoppingCart(int pidx,int pvol,int midx) { // Àå¹Ù±¸´Ï¿¡ Ãß°¡
+	public int insertShoppingCart(int pidx,int pvol,int midx) { // ï¿½ï¿½Ù±ï¿½ï¿½Ï¿ï¿½ ï¿½ß°ï¿½
 		
 		int exe = psm.checkShoppingCart(pidx, midx);
 		
@@ -104,26 +106,16 @@ public class ProductServiceImpl implements ProductService {
 		return 0;
 	}
 
+
+
 	@Override
-	public String insertOrder() { // ÁÖ¹®³»¿ª »ı¼º
+	public String updatePayment() { // ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String insertPayment() { // ÁöºÒ Á¤º¸ »ı¼º
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String updatePayment() { // °áÁ¦¿Ï·á ¾÷µ¥ÀÌÆ®
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String deletePayment() { // ±â°£ 2ÀÏ ÀÌÈÄ µ¿¾È ¹Ì°áÁ¦½Ã ÁöºÒÁ¤º¸ »èÁ¦
+	public String deletePayment() { // ï¿½â°£ 2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -132,67 +124,65 @@ public class ProductServiceImpl implements ProductService {
 	public ArrayList<PaymentSaleDTO> selectSalesHistoryList(int midx,int page) {
 		
 		ArrayList<PaymentSaleDTO> alist=psm.selectSalesHistoryList(midx,page);
-		System.out.println("ÀÓÇÃ¸®¸ÕÆ® ¼¼ÀÏÁî :"+alist);
+		System.out.println("ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ :"+alist);
 		
-		return alist; // ÆÇ¸Å³»¿ª ¸®½ºÆ®
-		
-	}
-
-	@Override
-	public String selectPaymentHistoryList() { // ±¸¸Å³»¿ª ¸®½ºÆ®
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String selectOrderOne() { // ÁÖ¹® ÄÜÅÙÃ÷
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String selectProductSimilarList() { // ºñ½ÁÇÑ »óÇ° ¸®½ºÆ®
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String updatePaymentConfirmation() { // ±¸¸ÅÈ®Á¤ ¾÷µ¥ÀÌÆ®
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String updatePaymentCancle() { // ±¸¸ÅÃë¼Ò
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteSalesHistory(int pidx) { // ÆÇ¸Å °Ô½Ã±Û »èÁ¦
-
-		psm.deleteSalesHistory(pidx);
-		
+		return alist; // ï¿½Ç¸Å³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 		
 	}
 
 	@Override
-	public int updateDelivery(int caidx,int dwaybill,int oidx) { // ¿î¼ÛÀå ¹øÈ£ ÀúÀå
+	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(int midx,int page) { // å ì™ì˜™å ì‹ ë†‚ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™íŠ¸
 		
-		System.out.println("¿î¼Û¹øÈ£ ÀúÀå ÀÓÇÃ¸®¸ÕÆ® ÀÔ´Ï´Ù.");
-		HashMap<String, Object> hm =new HashMap<String, Object>();
-				hm.put("caidx", caidx);
-				hm.put("dwaybill", dwaybill);
-				hm.put("oidx", oidx);
-				System.out.println("¿î¼Û¹øÈ£ ÀúÀå ÀÓÇÃ¸®¸ÕÆ® ÇØ½¬¸Ê ÀúÀåÀÔ´Ï´Ù.");
-				int exec = psm.updateDelivery(hm);
-				System.out.println("¿î¼Û¹øÈ£ ÀúÀå ÀÓÇÃ¸®¸ÕÆ® exec ÀÛµ¿ÇÕ´Ï´Ù.");
+		ArrayList<PaymentSaleDTO> exec = psm.selectPaymentHistoryList(midx,page);
 		
 		return exec;
 	}
 
 	@Override
-	public String selectPriceSort() { // °¡°İ Á¤·Ä
+	public String selectOrderOne() { // ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public void updatePaymentConfirmation(int oidx) { // ï¿½ï¿½ï¿½ï¿½È®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+		
+		psm.updateProductconfirmation(oidx);
+
+	}
+
+	@Override
+	public String updatePaymentCancle() { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteSalesHistory(int pidx) { // ï¿½Ç¸ï¿½ ï¿½Ô½Ã±ï¿½ ï¿½ï¿½ï¿½ï¿½
+		System.out.println("ì„í”Œë¦¬ ì‚­ì œì…ì¥");
+		psm.deleteSalesHistory(pidx);
+		System.out.println("ì„í”Œë¦¬ ì‚­ì œí‡´ì¥");
+		
+	}
+
+	@Override
+	public int updateDelivery(int caidx,int dwaybill,int oidx) { // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½
+		
+		System.out.println("ï¿½ï¿½Û¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½Æ® ï¿½Ô´Ï´ï¿½.");
+		HashMap<String, Object> hm =new HashMap<String, Object>();
+				hm.put("caidx", caidx);
+				hm.put("dwaybill", dwaybill);
+				hm.put("oidx", oidx);
+				System.out.println("ï¿½ï¿½Û¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½Æ® ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.");
+				int exec = psm.updateDelivery(hm);
+				System.out.println("ï¿½ï¿½Û¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½Æ® exec ï¿½Ûµï¿½ï¿½Õ´Ï´ï¿½.");
+		
+		return exec;
+	}
+
+	@Override
+	public String selectPriceSort() { // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -205,7 +195,24 @@ public class ProductServiceImpl implements ProductService {
 		int tcount = psm.selectHistoryTotal(midx);
 		return tcount;
 	}
+
+
+
+	@Transactional
+	@Override
+	public String insertPay() {
+		
+			/*psm.insertOrder();
+			psm.insertPayment();
+			psm.insertDelivery();*/
+		
+		
+			return null;
+		}
+	
+	
+	}
 	
 	
 	
-}
+

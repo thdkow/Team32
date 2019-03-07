@@ -27,6 +27,7 @@ $( document ).ready( function() {
 			$.ajax({
 				type : "GET",
 				url  : "/Product/"+npage+"/ProductNewList.dobby",
+				
 				datatype : "json",
 				cache : false,
 				error : function(){
@@ -52,11 +53,10 @@ $( document ).ready( function() {
 	
  $.moerCount = function(){ //전체리스트와 로드된 리스트를 비교하는 함수
 
-		var Keyword = $('#Keyword').val();
  
 	$.ajax({
 		type : "GET",
-		url  : "/Product/"+Keyword+"/ProductListTotal.dobby",
+		url  : "/Product/1/1000/0/0/empty/ProductListTotal.dobby",
 		//위의 url에 0을 사용함으로 전체를 로드한다.(쿼리문에서 if문을 사용하여 where조건을 걸렀다.)
 		datatype : "json",
 		cache : false,   
@@ -75,7 +75,7 @@ $( document ).ready( function() {
 			})			
 	};		//moercount 
 
-	 $.productNewList = function(){	//input에 저장해놓은 페이지로 select(criteria와 같은 기능,default값은 1이다.)
+	 $.productNewList = function(){	
 
 		var page = $('#page').val();
 	
@@ -85,7 +85,7 @@ $( document ).ready( function() {
 			datatype : "json",
 			cache : false,   
 			error : function(){
-				alert("리스트 error");
+				alert("리스트1 error");
 			},
 			success : function(data){	
 			
@@ -95,7 +95,7 @@ $( document ).ready( function() {
 				$.moerCount();
 				}			
 		});	 	
-	}; 		//$.boardCommentList
+	}; 
 	 
 	 $.newList = function(data){
 		var str = '';	
@@ -141,15 +141,17 @@ $( document ).ready( function() {
 <link rel="stylesheet" type="text/css"
 	href="${myContextPath}/include/member.css" />
 
-	<form action="/Product/ProductSerchList.dobby" method="post">
+	<form action="/Product/ProductList.dobby" method="post">
 	<select name="category">
-			 <option value="301">남성의류</option>
+			 <option value="1">남성의류</option>
 			 <option value="302">여성의류</option>
 			 <option value="303">아우터</option>
 	</select>
+	<input name='minPrice' type='text' value='0' />
+	<input name='maxPrice' type='text' value='0' />
 	
-	<input id='Keyword' type='text' value='empty' />
-	<input id='serch' type='button' value='검색' />
+	<input name='keyword' type='text' value='empty' />
+	<input name='serch' type='submit' value='검색' />
 	</form>
 
 

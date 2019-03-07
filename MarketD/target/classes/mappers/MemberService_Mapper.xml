@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.myin.noxml.persistence.MemberService_Mapper">
+<mapper namespace="com.team.marketd.persistence.MemberService_Mapper">
+<!-- 회원가입 -->
+<insert id="insertProfile" parameterType = "HashMap">
+insert into member32(midx, mid, mpwd, mname, msex, mbirth, mtell, mkakao, mmail, mquestion, caidx, maccount, mip)
+values(member_seq.nextval, #{id}, #{pwd}, #{name}, #{sex}, #{birth}, #{phone}, #{kakao}, #{mail}, #{mquestion}, #{caidx}, #{maccount}, #{ip})
+</insert>
+<!-- 로그인 -->
+<select id="login" parameterType = "HashMap" resultType="mv">
+select * from member32 where mid=#{id} and mpwd=#{pwd} and mdelyn='N'
+</select>
+
+<!--selectDoubleIdCheck / 아이디 중복 확인-->
+<select id="selectDoubleIdCheck" parameterType = "HashMap" resultType="Integer">
+select count(*) from member32 where mid=#{id}
+</select>
+
+<!--selectIdFind / 아이디 찾기-->
+<select id="selectIdFind" parameterType = "HashMap" resultType="mv">
+select mid from member32 where mname = #{name} and mbirth=#{birth} and mquestion=#{question}
+</select>
+
+<!--selectPwdFind / 비밀번호 찾기-->
+<select id="selectPwdFind" parameterType = "HashMap" resultType="mv">
+select midx,mpwd from member32 where mid=#{id} and mname = #{name} and mquestion=#{question}
+</select>
+
+<!--checkPwd / 회원정보 비밀번호 체크-->
+<select id="checkPwd" parameterType = "HashMap" resultType="mv">
+select * from member32 where midx = #{midx} and mpwd=#{pwd}
+</select>
+
+<!--updeteProfile / 회원정보 수정-->
+<update id="updateProfile" parameterType = "HashMap">
+update member32 set mpwd = #{pwd}, mtell =#{phone},mmail=#{email}, caidx= #{caidx}, maccount= #{account}, mkakao= #{mkakao}, mquestion= #{mquestion} where midx = #{midx}
+</update>
+
+<!--selectProfile / 회원정보 가져오기-->
+<select id="selectProfile" parameterType = "HashMap" resultType="mv">
+select * from member32 where midx=#{midx}
+</select>
+<!-- 비밀번호 변경 -->
+<update id="updatePwd" parameterType= "HashMap">
+update member32 set mpwd = #{npwd} where midx = #{midx}
+</update>
+
+<!--deleteProfile / 회원 탈퇴 작동-->
+<update id="deleteProfile" parameterType = "Integer">
+update member32 set mdelyn = 'Y', mdeldate = sysdate where midx = #{midx}
+</update>
+
+<!-- updateUpgrade / 멤버 등급상승 작동 -->
+<update id="updateUpgrade" parameterType = "HashMap">
+update member32 set mgrade = #{mgrade}, mgradedate = sysdate where midx=#{midx}
+</update>
+
+
+<!--checkGB1 / 중복 추천 확인1-->
+<select id="checkGB1" parameterType = "HashMap" resultType="mv">
+select midx from order32 where pidx = #{pidx} and ofinal='N'
+</select>
+
+<!--checkGB2 / 중복 추천 확인2-->
+<select id="checkGB2" parameterType = "Integer" resultType="Integer">
+select count(*) from reco32 where  midx= #{0} and chidx= #{1}
+</select>
+
+<!--insertGB/ 중복확인테이블에 추가-->
+<insert id="insertGB" parameterType = "HashMap">
+insert into reco32(ridx, midx, chidx, rflug) values(reco_seq.nextval, #{midx}, #{chidx}, #{rflag})
+</insert>
+
+<!--updateGB / 멤버 추천수 업데이트-->
+<update id="updateGB" parameterType = "HashMap">
+update member32 set <if test='rflag.equals("Y")'> mgood = mgood + 1 </if> <if test='rflag.equals("N")'> mbad = mbad + 1</if> where mdelYn = 'N' and midx = #{midx}
+</update>
 
 </mapper>

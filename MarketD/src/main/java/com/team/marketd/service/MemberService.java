@@ -1,41 +1,45 @@
 package com.team.marketd.service;
 
+import java.sql.Date;
+import java.util.ArrayList;
 
+import org.springframework.transaction.annotation.Transactional;
+
+import com.team.marketd.domain.MemberVo;
 
 public interface MemberService {
 
 
-	public String selectDoubleIdCheck();
+	public int selectDoubleIdCheck(String id); // ���̵� �ߺ�Ȯ��
 	
-	public String insertProfile();
-	
-	public String login();
+	public MemberVo login(String id,String pwd); //�α���
 	
 	public String checkAutoLogin();
 	
 	public String keepLogin();
 	
-	public String selectIdFind();
+	public MemberVo selectIdFind(String name,int birth,String question); //���̵�ã��
 	
-	public String selectPwdFind();
+	public MemberVo selectPwdFind(String id,String name,String question); //��й�ȣã��
 	
-	public String updatePwd();
+	public int updatePwd(String npwd,int midx); //��й�ȣ ����
 	
-	public String selectProfile();
+	public MemberVo selectProfile(int midx); //ȸ������ ����
 	
-	public String checkPwd();
+	public MemberVo checkPwd(int midx,String pwd); // ȸ������ �������� �̵��ϱ��� ��й�ȣ üũ
 	
-	public String updateProfile();
+	public void updateProfile(int midx, String pwd,String phone, String email,int caidx,long account,String mkakao, String mquestion); //ȸ����������
 	
-	public String updateUpgrade();
+	public void updateUpgrade(String mgrade,int midx); //������
 	
-	public String deleteProfile();
+	public void deleteProfile(int midx); //ȸ������
 	
-	public String checkGB1();
-	
-	public String checkGB2();
-	
-	public String updateGB();
-	
+	public int insertProfile(String id, String pwd, String name, int birth, String sex, String mail, String phone,
+			int caidx, long maccount, String kakao, String mqeustion,String ip); //ȸ������
+
+	public void updateGB(int midx, int chidx, String rflag);
+
+	public MemberVo checkGB1(int pidx);
+
 
 }

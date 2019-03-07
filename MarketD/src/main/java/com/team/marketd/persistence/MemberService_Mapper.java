@@ -1,41 +1,45 @@
 package com.team.marketd.persistence;
 
+import java.util.HashMap;
+
+import com.team.marketd.domain.MemberVo;
+
 public interface MemberService_Mapper {
 	
 
-	public String selectDoubleIdCheck();
+	public int selectDoubleIdCheck(HashMap<String,Object>hm); //���̵� �ߺ�Ȯ��
 	
-	public String insertProfile();
+	public int insertProfile(HashMap<String,Object>hm); //ȸ������
 	
-	public String login();
+	public MemberVo login(HashMap<String,Object>hm); //�α���
 	
-	public String checkAutoLogin();
+	public String checkAutoLogin(); //�ڵ��α��� 
 	
-	public String keepLogin();
+	public String keepLogin(); //�ڵ��α��� 
 	
-	public String selectIdFind();
+	public MemberVo selectIdFind(HashMap<String, Object>hm); //���̵�ã��
 	
-	public String selectPwdFind();
+	public MemberVo selectPwdFind(HashMap<String,Object>hm); //��й�ȣ ã��
 	
-	public String updatePwd();
+	public int updatePwd(HashMap<String,Object>hm); //��й�ȣ ����
 	
-	public String selectProfile();
+	public MemberVo selectProfile(HashMap<String,Object>hm); //ȸ������ ����
 	
-	public String checkPwd();
+	public MemberVo checkPwd(HashMap<String,Object>hm); //������ ��й�ȣ üũ
 	
-	public String updateProfile();
+	public void updateProfile(HashMap<String,Object>hm); //ȸ������ ����
 	
-	public String updateUpgrade();
+	public void updateUpgrade(HashMap<String,Object>hm); //��� ��޾�
 	
-	public String deleteProfile();
+	public void deleteProfile(HashMap<String,Object>hm); //ȸ��Ż��
+
+	public MemberVo checkGB1(HashMap<String, Object>hm); //�ߺ� ��õ Ȯ��1
 	
-	public String checkGB1();
+	public void insertGB(HashMap<String, Object>hm); // �ߺ�Ȯ�� ���̺� �߰�
 	
-	public String checkGB2();
-	
-	public String insertGB();
-	
-	public String updateGB();
+	public void updateGB(HashMap<String, Object>hm); // ��� ��ó�� �����̵�
+
+	public int checkGB2(int midx, int chidx);
 	
 
 	

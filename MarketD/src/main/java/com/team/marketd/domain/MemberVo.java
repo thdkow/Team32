@@ -1,20 +1,43 @@
 package com.team.marketd.domain;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
 public class MemberVo {
 	
 	private int midx;
-	private String id;	
-	private String pwd;
-	private String name;
-	private String sex;
-	private String jumin;
-	private String juso;
-	private String userip;
-	private String fav;
-	private String writeday;
-	private String delYn;
+	private String mid;
+	private String mpwd;
+	private String mname;
+	private String msex;
+	private int mbirth;
+	private String mtell;
+	private String mkakao;
+	private String mmail;
+	private String mquestion;
+	private String mgrade;
+	private Date mgradedate;
+	private int caidx;
+	private long maccount;
+	private String mkey;
+	private Date mlimit;
+	private int mgood;
+	private int mbad;
+	private String mip;
+	private String mupdateip;
+	private Date menter;
+	private Date mupdate;
+	private String mdelyn;
+	private Date mdeldate;
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

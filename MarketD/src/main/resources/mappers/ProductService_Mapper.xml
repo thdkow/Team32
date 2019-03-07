@@ -35,9 +35,13 @@ select  rownum,pidx,psubject,mname,pmoney,pwridate from
 
  </select>
  
- <select id="selectProductOne" parameterType="Integer" resultType="pv" >
-select * from product32 where pdelYn='N' and pidx = #{pidx}
+ 
+<!--  selectProductOne / 상품 콘텐츠 셀렉트 -->
+<select id="selectProductOne" parameterType="Integer" resultType="pv">
+select * from product32 A inner join member32 B on A.midx = B.midx where A.pdelYn='N' and pidx=#{pidx}
 </select>
+
+
 
 <insert id="insertSaleProduct" parameterType="HashMap">
 
@@ -82,6 +86,27 @@ where pdelYn='N' and a.midx=#{0}  order by a.pidx desc
 select count(*) from product32 a full outer join order32 b on a.pidx = b.pidx full outer join delivery32 c on b.OIDx = c.oidx 
 where pdelYn='N' and a.midx=#{midx} 
 </select>
+
+
+<update id="updateProductconfirmation" parameterType="Integer">
+
+update order32 set ofinal = 'Y' where oidx=#{oidx}
+
+</update>
+
+
+<select id="selectPaymentHistoryList" parameterType="Integer" resultType="psdto" >
+  
+select * from(select rownum as rnum,AA.* from(select * from product32 A full outer join order32 B on A.pidx = B.pidx full outer join delivery32 C on b.OIDX = c.OIDX 
+where odelyn='N' and B.midx=#{0}  order by A.pidx desc
+ <![CDATA[)AA where rownum <=(#{1}-1)*15+15) where rnum >=(#{1}-1)*15+1]]>
+ 
+</select>
+
+
+
+
+
 
  
  

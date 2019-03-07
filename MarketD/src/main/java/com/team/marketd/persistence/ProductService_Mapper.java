@@ -17,13 +17,14 @@ public interface ProductService_Mapper {
 	public int checkShoppingCart(int pidx,int midx);
 	public String insertOrder();
 	public String insertPayment();
+	public String insertDelivery();
 	public String updatePayment();
 	public String deletePayment();
 	public ArrayList<PaymentSaleDTO> selectSalesHistoryList(int midx,int page);
-	public String selectPaymentHistoryList();
+	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(int midx,int page);
 	public String selectOrderOne();
 	public String selectProductSimilarList();
-	public String updateProductconfirmation();
+	public void updateProductconfirmation(int oidx);
 	public String updateProductCancle();
 	public void deleteSalesHistory(int pidx);
 	public int updateDelivery(HashMap<String, Object> hm);

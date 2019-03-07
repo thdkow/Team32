@@ -29,7 +29,7 @@ public class ProductController {
 	@RequestMapping(value = "/Product/{page}/ProductNewList.dobby", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public ArrayList<ProductVo> productNewList(SearchCriteria scri, Model model, PageMaker pm,
-			@PathVariable("page") int page) { // ÃÖ½Å »óÇ° ¸®½ºÆ®
+			@PathVariable("page") int page) { // ìµœì‹ ìƒí’ˆë¦¬ìŠ¤íŠ¸
 		
 		scri.setPage(page);
 
@@ -42,7 +42,7 @@ public class ProductController {
 	@RequestMapping(value = "/Product/{page}/{category}/{minPrice}/{maxPrice}/{keyword}/ProductListTotal.dobby", 
 			produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	public int productListTotal(@PathVariable("page") int page,
+	public int productListTotal(@PathVariable("page") int page,			//ìƒí’ˆë¦¬ìŠ¤íŠ¸ ì´ê°¯ìˆ˜
 								@PathVariable("category") int caidx,
 								@PathVariable("minPrice") int minPrice,
 								@PathVariable("maxPrice") int maxPrice,
@@ -54,11 +54,11 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/Product/ProductList.dobby")
-	public String productList(@ModelAttribute("category")int category,
+	public String productList(@ModelAttribute("category")int category,		//ìƒí’ˆ ê²€ìƒ‰ ë¦¬ìŠ¤íŠ¸ ì´ë™
 							@ModelAttribute("minPrice")int minPrice,
 							@ModelAttribute("maxPrice")int maxPrice,
 							@ModelAttribute("keyword")String keyword)
-							{ // ÆÇ¸Å±Û ÀÛ¼º ÆäÀÌÁö ÀÌµ¿
+							{ 
 		
 		
 
@@ -67,15 +67,17 @@ public class ProductController {
 
 	@RequestMapping(value = "/Product/{page}/{category}/{minPrice}/{maxPrice}/{keyword}/ProductSerchList.dobby", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
-	public ArrayList<ProductVo> productSerchList(SearchCriteria scri,
+	public ArrayList<ProductVo> productSerchList(SearchCriteria scri,		//ìƒí’ˆ ê²€ìƒ‰ ë¦¬ìŠ¤íŠ¸
 							@PathVariable("page") int page,
 							@PathVariable("category") int caidx,
 							@PathVariable("minPrice") int minPrice,
 							@PathVariable("maxPrice") int maxPrice,
-							@PathVariable("keyword") String keyword) { // »óÇ° ¸®½ºÆ® ÆäÀÌÁö ÀÌµ¿
+							@PathVariable(value = "keyword", required=false) String keyword) { 
 		
+		
+		if(keyword==null)keyword="";
 		if(keyword.equals("empty"))keyword="";
-		System.out.println("Å°¿öµå"+keyword+"¼º°ø");
+		System.out.println("ê²€ìƒ‰"+keyword+"ì„±ê³µ");
 				scri.setPage(page);
 				scri.setKeyword(keyword);
 				ArrayList<ProductVo> alist = ps.selectProductList(page,caidx,minPrice,maxPrice,keyword);
@@ -85,9 +87,10 @@ public class ProductController {
 
 	@RequestMapping(value = "/Product/ProductContent.dobby")
 	public String productContent(@RequestParam("pidx") int pidx,
-								Model model) { // »óÇ° ÆäÀÌÁö
+								Model model) { //ìƒí’ˆ ì½˜í…ì¸ 
 
-		ProductVo pv = ps.selectProductOne(pidx); // Á¶È¸¼ö´Â ³ªÁß¿¡ Ãß°¡ pidx ÀÓ½Ã·Î ÇÏµåÄÚµù
+		
+		ProductVo pv = ps.selectProductOne(pidx);
 
 		model.addAttribute("pv", pv);
 
@@ -95,17 +98,15 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/Product/ProductWrite.dobby")
-	public String productSaleWrite() { // ÆÇ¸Å±Û ÀÛ¼º ÆäÀÌÁö ÀÌµ¿
+	public String productSaleWrite() { // íŒë§¤ê¸€ì“°ê¸° ì´ë™
 
 		return "product/productWrite";
 	}
 
 	@RequestMapping(value = "/Product/ProductSaleWriteAction.dobby")
-	public String productSaleWriteAction(@RequestParam("psubject") String psubject,
+	public String productSaleWriteAction(@RequestParam("psubject") String psubject,		//íŒë§¤ê¸€ ì €ì¥
 			@RequestParam("pcontent") String pcontent, @RequestParam("caidx") int caidx, @RequestParam("pvol") int pvol,
-			@RequestParam("pmoney") int pmoney, @RequestParam("pfee") int pfee, @RequestParam("midx") int midx) { // ÆÇ¸Å±Û
-																													// ÀÛ¼º
-																													// ÀúÀå
+			@RequestParam("pmoney") int pmoney, @RequestParam("pfee") int pfee, @RequestParam("midx") int midx) { 
 
 		String pip = null;
 
@@ -115,41 +116,48 @@ public class ProductController {
 			e.printStackTrace();
 		}
 
+		
 		ps.insertSaleProduct(midx, caidx, psubject, pcontent, pvol, pmoney, pfee, pip);
 
-		return "index";
+		return "productSaleWriteComplete";
 	}
 
 	@RequestMapping(value = "/Product/ProductSaleWriteComplete.dobby")
-	public String productSaleWriteComplete() { // ÆÇ¸Å±Û ÀÛ¼º ¿Ï·á ÆäÀÌÁö ÀÌµ¿
+	public String productSaleWriteComplete() { // íŒë§¤ê¸€ ì‘ì„± ì™„ë£Œ í˜ì´ì§€ ì´ë™
 
 		return "product/productSaleWriteComplete";
 	}
 	
-	public String productImageUpload() { // ÀÌ¹ÌÁö ¾÷·Îµå
+	public String productImageUpload() { // ì´ë¯¸ì§€ ì—…ë¡œë“œ
 
 		return null;
 	}
 
-	public String productPayment() { // ±¸¸ÅÇÏ±â, ÁÖ¹® °áÁ¦
-
-		return null;
+	@RequestMapping("product/productPayment.dobby")
+	public String productPayment(Model model) { // ê²°ì œí˜ì´ì§€ ì´ë™
+		int a = 2;
+		ProductVo pv = ps.selectProductOne(a);
+		model.addAttribute("pv",pv);
+		return "product/orderContent";
 	}
-
-	public String productPaymentAction() { // ±¸¸ÅÇÏ±â, ÁÖ¹®°áÁ¦ ÀÛµ¿
-
-		return null;
+	@RequestMapping("product/productPaymentAction.dobby")
+	public String productPaymentAction(@RequestParam("Recipient")String Recipient,@RequestParam("mkakao")String mkakao
+			,@RequestParam("phone")String phone,@RequestParam("address")String address,@RequestParam("address2")String address2,
+			@RequestParam("delivery")String delivery,@RequestParam("deposit")String deposit) { // ê²°ì œì •ë³´ ì €ì¥
+		
+		
+		return "product/orderComplete";
 	}
 
 	@RequestMapping(value = "/Product/ProductPaymentComplete.dobby")
-	public String productPaymentComplete() { // ±¸¸Å¿Ï·á ÆäÀÌÁö ÀÌµ¿
+	public String productPaymentComplete() { // ê²°ì œì™„ë£Œ í˜ì´ì§€ë¡œ ì´ë™
 
 		return "product/productPaymentComplete";
 	}
 
 	@RequestMapping(value = "/Product/ProductSalesHistory.dobby")
 	public String productSalesHistory(@RequestParam(value="midx")int midx,Model model, SearchCriteria scri,PageMaker pm,
-									@RequestParam(value="page")int page) { // ÆÇ¸Å³»¿ª ÆäÀÌÁö ÀÌµ¿
+									@RequestParam(value="page",defaultValue="1")int page) { // íŒë§¤ë¦¬ìŠ¤íŠ¸ í˜ì´ì§€ ì´ë™
 		
 		
 		scri.setPage(page);
@@ -166,74 +174,79 @@ public class ProductController {
 		
 		
 		
-		return "product/productSaleHistory";
+		return "product/productSalesHistory";
 	}
 	
-	@RequestMapping(value = "/Product/{pidx}/productDeleteSalesHistory.dobby")
-	public String productDeleteSalesHistory(@PathVariable("pidx") int pidx) { // ÆÇ¸Å³»¿ª °Ô½Ã±Û »èÁ¦
+	@RequestMapping(value = "/Product/productDeleteSalesHistory.dobby")
+	public String productDeleteSalesHistory(@RequestParam("pidx") int pidx) { // íŒë§¤ë‚´ì—­ ì‚­ì œ
 		
 		ps.deleteSalesHistory(pidx);
 		
 		return "redirect:/Product/ProductList.dobby";
 	}
 
-	public String productPaymentHistory() { // ±¸¸Å³»¿ª ÆäÀÌÁö ÀÌµ¿
+	@RequestMapping(value = "/Product/productPaymentHistory.dobby")
+	public String productPaymentHistory(Model model,@RequestParam(value="midx",defaultValue="2")int midx,
+			SearchCriteria scri,PageMaker pm,@RequestParam(value="page",defaultValue="1")int page) {
+	ArrayList<PaymentSaleDTO> alist = ps.selectPaymentHistoryList(midx,page);//midx
+	
+				model.addAttribute("alist",alist);
+
+		return "product/productPayment";
+	}
+
+	public String productPaymentCancle() { // êµ¬ë§¤ì·¨ì†Œ
+
+		return null;
+	}
+	@RequestMapping(value = "/Product/ProductPaymentConfirmation.dobby")
+	public String productPaymentConfirmation(int oidx) { // êµ¬ë§¤í™•ì •
+		
+		ps.updatePaymentConfirmation(oidx);
+		
+		return "product/productPaymentHistory";
+	}
+
+	public String productOrderList() { // ì£¼ë¬¸ìš”ì²­ ë¦¬ìŠ¤íŠ¸ í˜ì´ì§€ ì´ë™
 
 		return null;
 	}
 
-	public String productPaymentCancle() { // ±¸¸Å Ãë¼Ò
-
-		return null;
-	}
-
-	public String productPaymentConfirmation() { // ±¸¸ÅÈ®Á¤
-
-		return null;
-	}
-
-	public String productOrderList() { // ÁÖ¹® ¸®½ºÆ® ÆäÀÌÁö ÀÌµ¿
-
-		return null;
-	}
-
-	public String productOrderContent() { // ÁÖ¹® ÆäÀÌÁö ÀÌµ¿
+	public String productOrderContent() { // ì£¼ë¬¸ì •ë³´ ì½˜í…ì¸ 
 
 		return null;
 	}
 
 	@RequestMapping(value = "/Product/ProductStartDelivery.dobby")
-	public String productStartDelivery() { // ¹è¼Û½ÃÀÛ ÆäÀÌÁö ÀÌµ¿
+	public String productStartDelivery() { // ë°°ì†¡ì‹œì‘ í˜ì´ì§€ ì´ë™
 
 		return "product/startDelivery";
 	}
 
 	@RequestMapping(value = "/Product/ProductStartDeliveryAction.dobby")
 	public String productStartDeliveryAction(@RequestParam("caidx")int caidx,
-			@RequestParam("dwaybill")int dwaybill, @RequestParam("oidx")int oidx) { // ¿î¼ÛÀå¹øÈ£ ÀúÀå
+			@RequestParam("dwaybill")int dwaybill, @RequestParam("oidx")int oidx) { // ë°°ì†¡ì •ë³´ ì €ì¥
 		
-		System.out.println("¿î¼Û¹øÈ£ ÀúÀå ÆäÀÌÁö ½ÃÀÛ ÇÕ´Ï´Ù.");
 		ps.updateDelivery(caidx,dwaybill,oidx);
-		System.out.println("¿î¼Û¹øÈ£ ÀúÀå ÆäÀÌÁö ³¡³µ½À´Ï´Ù ¸®ÅÏ°ªÀ¸·Î ÀÌµ¿ÇÕ´Ï´Ù.");
 		
-		return "redirect:/Product/ProductContent.dobby?pidx=28";//ÆÇ¸Å³»¿ªÀ¸·Î ÀÌµ¿
+		return "redirect:/Product/ProductContent.dobby?pidx=28";//pidxí•˜ë“œì½”ë”© ë°”ê¿€ê²ƒ
 	}
 
-	public String productDateSerchList() { // ³¯ÀÚº°·Î °Ë»ö
+	public String productDateSerchList() { // ë‚ ìê²€ìƒ‰
 
 		return null;
 	}
 
-	public String productPriceSort() { // °¡°İ Á¤·Ä
+	public String productPriceSort() { // ê°€ê²©ì •ë ¬(?)
 
 		return null;
 	}
 	
 	@RequestMapping(value = "/Product/ProductPlusShoppingCart.dobby")
-	public String productPlusShoppingCart(@RequestParam("pvol") int pvol) { // Àå¹Ù±¸´Ï Ãß°¡
+	public String productPlusShoppingCart(@RequestParam("pvol") int pvol) { // ì‡¼í•‘ì¹´íŠ¸ì— ìƒí’ˆ ì¶”ê°€
 		
-		int midx = 2;//»ç¿ëÀÚ midx
-		int pidx = 2;//°Ô½Ã±ÛÀÇ pidx
+		int midx = 2;// midxë°”ê¿€ê²ƒ
+		int pidx = 2;// pidxë°”ê¿€ê²ƒ
 		
 		int exec = ps.insertShoppingCart(pidx,pvol,midx);
 		if(exec==0) {
