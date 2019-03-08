@@ -18,7 +18,7 @@ public interface ProductService {
 	public String updatePayment();
 	public String deletePayment();
 	public String selectSalesHistoryList();
-	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(int midx);
+	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(int midx,int page);
 	public String selectOrderOne();
 	public String selectProductSimilarList();
 	public String updatePaymentConfirmation();

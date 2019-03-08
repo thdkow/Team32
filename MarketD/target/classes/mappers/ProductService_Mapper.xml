@@ -67,10 +67,12 @@ update delivery32 set ddeliver=#{ddeliver}, dwaybill = #{dwaybill} where oidx = 
 
 <select id="selectPaymentHistoryList" parameterType="Integer" resultType="psdto" >
   
-select * from product32 a full outer join order32 b on a.pidx = b.pidx full outer join delivery32 c on b.OIDx = c.oidx
- where odelyn='N' and b.midx=#{midx} order by a.pidx desc
+select * from(select rownum as rnum,AA.* from(select * from product32 A full outer join order32 B on A.pidx = B.pidx full outer join delivery32 C on b.OIDX = c.OIDX 
+where odelyn='N' and B.midx=#{0}  order by A.pidx desc
+ <![CDATA[)AA where rownum <=(#{1}-1)*15+15) where rnum >=(#{1}-1)*15+1]]>
  
 </select>
+
 <!-- A.pidx,A.caidx,A.midx,A.psubject,A.pwridate,A.pcontent,A.pvol,A.pmoney,A.pfee,A.pip  -->
  
 </mapper>

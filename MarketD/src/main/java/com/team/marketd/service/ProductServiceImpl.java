@@ -130,13 +130,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(int midx) { // ���ų��� ����Ʈ
-		HashMap<String,Object> hm = new HashMap<String,Object>();
+	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(int midx,int page) { // ���ų��� ����Ʈ
 		
-		hm.put("midx", midx);
+		ArrayList<PaymentSaleDTO> exec = psm.selectPaymentHistoryList(midx,page);
 		
-		
-		ArrayList<PaymentSaleDTO> exec = psm.selectPaymentHistoryList(hm);
 		return exec;
 	}
 

@@ -140,9 +140,9 @@ function commentList(data){
 		$('#tblreply').html("<div id='commenttbl' class='box-body'>"
 								+"<div class='form-group'>"
 									+"<label for='examInputEmail1'>작성자</label>"
-	+"<input type='text'class='form-control' name='cwriterre' id='cwriterre' placeholder='이름입력하세요' />"
+	+"<input type='text'class='form-control' name='cwriterre' id='cwriterre' placeholder='이름입력하세요' maxlength='7'/>"
 									+"<label for='examInputContent'>댓글내용</label>"
-	+"<textarea class='form-control' name='ccontentre' id='ccontentre' rows='3' width='120px' placeholder='대댓글내용'></textarea>"
+	+"<textarea class='form-control' name='ccontentre' id='ccontentre' rows='3' width='120px' placeholder='대댓글내용' maxlength='150'></textarea>"
 								+"</div>"
 								+"<div class='form-group'>"+replygo+"</div>"
 							+"</div>" );
@@ -403,13 +403,13 @@ function commentList(data){
 								<div class="form-group">
 									<label for="examInputEmail1">작성자</label> <input type="text"
 										class="form-control" name="cwriter" id="cwriter"
-										placeholder="이름입력하세요" /> <label for="examInputEmail1">내용</label>
+										placeholder="이름입력하세요" maxlength="7"/> <label for="examInputEmail1">내용</label>
 										
 		<input type="hidden" name="pidx" id="pidx"  value="2" /><!-- 게시판 글의 bidx 번호 -->
 		<input type="hidden" name="midx" id="midx"  value="2" />
 		
 									<textarea class="form-control" name="ccontent" id="ccontent"
-										rows="3" placeholder="내용입력하세요"></textarea>
+										rows="3" placeholder="내용입력하세요" maxlength="150"></textarea>
 								</div>
 
 								<div class="form-group">

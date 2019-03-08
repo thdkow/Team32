@@ -108,4 +108,36 @@
 
 </div>
 
+
+<!-- 페이징 처리에 사용되는 인터페이스이다 < 1 2 3 4 5 6 7 8 9 10 > -->
+	 <div style="text-align: center;">
+	 <div class="jb-center">
+		 <ul class="pagination">
+		 	<li>
+		 	<c:if test="${pm.prev eq true }">
+	 			<a href="${myContextPath}/Product/productPaymentHistory.dobby?${pm.makePrev()}"> 			
+		 			<span class="glyphicon glyphicon-chevron-left"></span>
+	 			</a> 		
+ 			</c:if>			
+			</li>
+			
+ 	 	<c:forEach var="pmbt" begin="${pm.startPage}" end="${pm.endPage}">
+           <li
+           <c:if test="${pm.scri.page eq pmbt}">class="active"</c:if>>
+           
+           		<a href="${myContextPath}/Product/productPaymentHistory.dobby?${pm.makeSearch(pmbt)}">${pmbt}</a>
+           		<!-- 메소드를 이용해서 깔끔하게 처리하였다. -->
+           </li>
+        </c:forEach>
+  
+		 	<li>
+		  	<c:if test="${pm.next eq true && pm.endPage gt 0}">
+ 			 <a href="${myContextPath}/Product/productPaymentHistory.dobby?${pm.makeNext()}">
+	 			<span class="glyphicon glyphicon-chevron-right"></span>
+ 			</a> 
+ 		 	</c:if> 
+			</li>
+		 </ul>
+	 </div>
+ </div>
 <%@include file="../include/footer.jsp"%>

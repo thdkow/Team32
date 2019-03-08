@@ -20,7 +20,7 @@ public interface ProductService_Mapper {
 	public String updatePayment();
 	public String deletePayment();
 	public String selectSalesHistoryList();
-	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(HashMap<String, Object> hm);
+	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(int midx,int page);
 	public String selectOrderOne();
 	public String selectProductSimilarList();
 	public String updateProductconfirmation();
