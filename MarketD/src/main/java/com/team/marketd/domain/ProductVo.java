@@ -1,5 +1,7 @@
 package com.team.marketd.domain;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -20,5 +22,7 @@ public class ProductVo {
 	private String pip;
 	private String psaleYn;
 	private String pdelYn;
+	
+	private List<BoardAttachVo> attachList;//BoardAttachVo 추가 product 등록시 같이 처리할 수 있도록
 	
 }

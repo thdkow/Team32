@@ -8,6 +8,6 @@
 		<typeAlias alias="pv" type="com.team.marketd.domain.ProductVo"/>
 		<typeAlias alias="dv" type="com.team.marketd.domain.DeliveryVo"/>
 		<typeAlias alias="psdto" type="com.team.marketd.domain.PaymentSaleDTO"/>
-		
+		<typeAlias alias="bav" type="com.team.marketd.domain.BoardAttachVo"/>
  	 </typeAliases> 
  </configuration>

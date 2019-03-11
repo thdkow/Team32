@@ -124,11 +124,8 @@ background: rgb(230,230,230);
 					data: formData,
 					type: 'POST',
 					dataType:'json',
-					success: function(result){ alert("uploaded");
+					success: function(result){ 
 					
-						console.log(result);
-						showUploadedFile(result);
-						$(".uploadDiv").html(cloneObj.html());
 					}
 				}); // $.ajax 
 				 alert("uploadBtn 끝");
@@ -138,17 +135,17 @@ background: rgb(230,230,230);
 			 alert("uploadResult렛츠 기릿");
 				function showUploadedFile(uploadResultArr){
 					
-			var str = "";
-					aler("이미지 ㄱㄱㄱ");
+			var str="";
+					console.log("이미지 ㄱㄱㄱ");
 						$(uploadResultArr).each(function(i, obj) {
 							
 							if(!obj.image){
 								
 			var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
-			
-			var fileLink = fileCallPath.replace(new RegExp(/\\/g,"/"));
+			alert(obj.uploadPath);
+			var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
 					
-							str += "<li><div><a href='/download?fileName="+fileCallPath+"'>"
+							str +="<li><div><a href='/download.dobby?fileName="+fileCallPath+"'>"
 								+"<img src='/resources/img/iconfile.png'>" 
 								+ obj.fileName + "</a>"
 								+"<span data-file=\'"+fileCallPath+"\' data-type='file'> x </span>"
@@ -160,39 +157,65 @@ background: rgb(230,230,230);
 			var originPath = obj.uploadPath+"\\"+obj.uuid +"_"+obj.fileName;
 			
 			originPath = originPath.replace(new RegExp(/\\/g),"/");
-							
+			alert(fileCallPath+"파일콜패스경로");			
 			str += "<li><a href=\"javascript:showImage(\'"
-				+originPath+"\')\"><img src='/display.dooby?fileName="
+				+originPath+"\')\"><img src='/display.dobby?fileName="
 				+fileCallPath+"'></a><span data-file=\'"+fileCallPath+"\' data-type='image'> x </span>"
 				+"<li>";
 							
 							}
 						});
-					uploadResult.append(str);
+				$(".uploadResult").html(str);//아래 append 작동안 해서 변경
+//					uploadResult.append(str);
 				}//showUploadedFile 끝
 			
 		});//도큐먼트레디
 		
 		function showImage(fileCallPath) {
-			alert("showImage작동");alert(fileCallPath);
+			///alert("showImage작동");alert(fileCallPath);
+			
+			console.log("showImage작동");
+			console.log(fileCallPath);
+			
+			
 				$(".bigPictureWrapper").css("display","flex").show();
 				$(".bigPicture")
-				.html("<img src='/display?fileName="+encodeURI(fileCallPath)+"'>")//encodeURI 책과 다름
+				.html("<img src='/display.dobby?fileName="+encodeURI(fileCallPath)+"'>")//encodeURI 책과 다름
 				.animate({width:'100%',height:'100%'},1000);
+			
+			console.log("showImage....end");
 			
 		}//bigPictureWrapper 이미지 끝
 		$(".bigPictureWrapper").on("click",function(e){
+			
+			console.log(".bigPictureWrapper open");
+			
+			e.stopPropagation();
+			
 			$(".bigPicture").animate({width:'0%',height:'0%'},1000);
 			setTimeout(function(){
-				$('bigPictureWrapper').hide();
+				console.log(".bigPictureWrapper timeout");
+				$('.bigPictureWrapper').hide();
 			},1000);
+			
 		});//bigPictureWrapper click 끝
 		
 		$(".uploadresult").on("click","span",function(e){
 			
 			var targerFile = $(this).data("file");
 			var type = $(this).data("type");
-		})
+			console.log(targetFile);
+			
+			$.ajax({
+				url:'/deleteFile.dobby',
+				data:{fileName: targetFile, type:type},
+				dataType:'text',
+				type:'POST',
+				success:function(result){
+					alert(result);
+				}
+			}); //ajax
+		});
 		
 	</script>
 </body>

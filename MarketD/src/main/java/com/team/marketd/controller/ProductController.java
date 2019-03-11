@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
+import org.eclipse.core.internal.runtime.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -37,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team.marketd.util.MediaUtils;
 import com.team.marketd.util.UploadFileUtiles;
@@ -317,7 +319,7 @@ System.out.println("페이지"+page);
 					multipartFile.transferTo(saveFile);
 					
 					attachDTO.setUuid(uuid.toString());
-					attachDTO.setIploadPath(uploadFolderPath);
+					attachDTO.setUploadPath(uploadFolderPath);
 					
 			// check image type file
 			if(checkImageType(saveFile)) {
@@ -422,6 +424,7 @@ System.out.println("페이지"+page);
 			 
 			 try {
 				HttpHeaders header = new HttpHeaders();
+				
 			 	header.add("Content-Type", Files.probeContentType(file.toPath()));
 			 	result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file),header,HttpStatus.OK);
 			 	} catch (IOException e) {
@@ -436,7 +439,7 @@ System.out.println("페이지"+page);
 				 String fileName){
 	log.info("download file"+fileName);
 			 
-			 Resource resource = new FileSystemResource("c:\\upload\\"+fileName);log.info("resource:" + resource);
+			 Resource resource = new FileSystemResource("C:\\upload\\"+fileName);log.info("resource:" + resource);
 			 
 	if(resource.exists() == false) {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -470,5 +473,21 @@ System.out.println("페이지"+page);
 			}
 			return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 		 }
+////////////////////////////////////////컨트롤러 처리
+@PostMapping("/register.dobby")
+public String register(ProductVo pv, RedirectAttributes rttr) {
+	log.info("===========");
+	log.info("register:" + pv);
+	if(pv.getAttachList() != null) {
+		pv.getAttachList().forEach(attach -> log.info(attach));
+	}
+	
+	log.info("===========");
+	// service.register(pv);
+	// rttr.addFlashAttribute("result", pv.getPidx());
+	return "redirect:/Product/1/1000/0/0/empty/ProductSerchList.dobby";
+}		 
 		 
 }
+
+
