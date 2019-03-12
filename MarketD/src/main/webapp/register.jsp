@@ -121,7 +121,7 @@ background: rgb(230,230,230);
 <script src="https://code.jquery.com/jquery-3.3.1.js"
 		 integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
 		 crossorigin="anonymous">
-		</script>
+</script>
 		
 <script src="/resources/js/jquery.min.js"></script>
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
@@ -171,12 +171,12 @@ $( document ).ready( function(e) {
 
 
 $("input[type='file']").change(function(e){
-	
+	console.log("변화감지");
 	var formData = new FormData();
 	
 	var inputfile = $("input[name='uploadFile']");
 	
-	var files = inputFile[0].files;
+	var files =	inputFile[0].files;
 console.log("files : "+files);
 	for(var i=0;i<files.length;i++){
 		if(!checkExtension(files[i].name,files[i].size)){

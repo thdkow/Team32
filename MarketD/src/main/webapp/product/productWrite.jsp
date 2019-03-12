@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/include/header.jsp"%>
-
+<script
+		 src="https://code.jquery.com/jquery-3.3.1.js"
+		 integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+		 crossorigin="anonymous">
+</script>
 <script src="/resources/js/jquery.min.js"></script>
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 
 <script type="text/javascript">
-
-	function fnCngList(sVal) {
-
-		
+    function fnCngList(sVal) {
 
 		var f = document.getElementById("SDIV");
 
@@ -95,160 +96,198 @@
 	
 	
 	$(document).ready(function() {
-		alert("uuus");
+//		alert("uuus");
 		$("#psubject").val("")
 		
-		$("#save1").click(function(){//#으로 id를 호출하여 jquery를 사용하였다.
-			
-		 	if($("#psubject").val() == ""){//이처럼 텍스트에 들어온 값을 비교하려면 .val을 사용하여야 한다. #subject만 했을시 x
-			
-			$("#sid1").html("<b>제목을 입력해주세요</b>");
-			$("#sid1").show();
-			$("#sid1").hide(5000);//하이드를사용하여서 출력한 문구를 지웠는데 다시눌렀을때 출력이되지않아 show를 이용하였다.
-			} 
-		 	else if($("#SDIV").val() == ""){
-				$("#sid2").html("<b>종류를 정해주세요</b>");
-				$("#sid2").show();
-				$("#sid2").hide(5000);
-				}
-		 	else if($("#pmoney").val() == ""){
-			
-			$("#sid3").html("<b>금액을 입력해주세요</b>");
-			$("#sid3").show();
-			$("#sid3").hide(5000);
-			}
-			else if($("#pfee").val() == ""){
-				$("#sid3").html("<b>배송비를 입력해주세요</b>");
-				$("#sid3").show();
-				$("#sid3").hide(5000);
-				}
-			else if($("#pvol").val() == ""){
-				$("#sid3").html("<b>수량을 입력해주세요</b>");
-				$("#sid3").show();
-				$("#sid3").hide(5000);
-				}
-			else if($("#pcontent").val() == ""){
-			$("#sid4").html("<b>내용을 입력해주세요</b>");
-			$("#sid4").show();
-			$("#sid4").hide(5000);
-			}else if($("#pcontent").val() != ""){// else if를 한 이유는 textarea를 이용했을때 비교가 안되고 값이 null로 들어가
-				//db에 입력이 되어버려서 조건을 추가해서 막아놓았다.
-				
-					document.getElementById('frm55').submit();;
-					
-					return;
-			}
-				});	
+		
 		
 	}); // document redy
 	
 	
-	alert(" 시작 확인");
 	
-	function addFilePath(msg){
-		alert(msg);	
-	}
-
-	function checkImageType(fileName){
-		
-		var pattern = /jpg$|gif$|png$|jpeg$/i;
-		alert(fileName.match(pattern));
-		
-		return fileName.match(pattern);
-	}
-
-	function getOriginalName(fileName){
-		alert(fileName);
-		//이미지파일이면 원본이름 안쓴다
-		if (checkImageType(fileName)) {
-			return;
-		}
-		
-		var idx = fileName.lastIndexOf("_")+1;
-		
-		alert(idx);
-		return fileName.substr(idx);
-	}
-
-	//파일이 이미지일경우
-	function getImageLink(fileName){
-		if (!checkImageType(fileName)) {
-			return;
-		}
-		//위치 폴더뽑기
-		var front = fileName.substr(0,12);
-		//파일이름뽑기
-		//_는 빼고
-		var end = fileName.substr(14);
-		
-		return front+end;	
-	}
-
-	function fileman(){
 	
-		
-		$("#pimage").on("click",function(){
-			event.preventDefault();
-			
-			var files = event.originalEvent.dataTransfer.files;
-			var file = files[0];
-			
-			var formData = new FormData();
-			
-			formData.append("file",file);//덧붙이다
-			
-			$.ajax({
-				url:'/uploadAjax25.dobby', //@restcontroller로 이 경로가
-				data: formData,
-				dataType:'text',
-				processData:false,
-				contentType:false,
-				type:'POST',
-				success : function(data){
-					
-					//  /2018/05/30/s-sdsdsd-ssd22q.jpg
-					alert(data);
-				
-					// input--> sdsdsd-ssd22q.jpg
-					$("#pimage").val(data.replace("s-",""));		
-					
-					var str ="";
-					
-					if(checkImageType(data)){
-						str ="<div>"
-						+ "<a href='displayFile.dobby?fileName="+getImageLink(data)+"'>"
-						+ "<img src='displayFile.dobby?fileName="+data+"' />"
-						+ getImageLink(data) 
-						+ "</a>"
-						+ "</div>";
-					}else{
-						str = "<div>"
-							+ "<a href='displayFile.dobby?fileName="+data+"'>"
-							+ getOriginalName(data) 
-							+ "</a>"
-							+ "</div>";
-					}
-					
-					$(".uploadedList").append(str);
-				}		
-				
-			});	
-			
-		});	
-
-		}
+	
+	
+	
+//	alert(" 시작 확인");
+	
 	
 </script>
 
+<script type="text/javascript">
+$(function() {
+    (function($) {
+
+$( document ).ready( function(e) {
+	alert("시작");
+	
+	var formObj = $("form[role='form']");
+	
+	$("a[id='save1']").on("click",function(e){
+		e.preventDefault();
+		console.log("등록<a> clicked");
+		var str ="";
+			
+			$(".uploadResult ul li").each(function(i, obj){
+				
+				var jobj = $(obj);
+				console.dir(jobj);
+				
+	str += "<input type='text' name='fileName' value='"+jobj.data("filename")+"'>";
+	str += "<input type='text' name='uuid' value='"+jobj.data("uuid")+"'>";
+	str += "<input type='text' name='uploadPath' value='"+jobj.data("path")+"'>";
+	str += "<input type='text' name='fileType' value='"+jobj.data("type")+"'>";
+			});
+			$(".bb2").html(str);
+			$.save2();
+//			formObj.append(str).submit();
+	});
+	
+}); //document ready끝
+
+$.save2 = function(){//#으로 id를 호출하여 jquery를 사용하였다.
+	
+	alert("두번째 시작	");
+	
+ 	if($("#psubject").val() == ""){//이처럼 텍스트에 들어온 값을 비교하려면 .val을 사용하여야 한다. #subject만 했을시 x
+	
+	$("#sid1").html("<b>제목을 입력해주세요</b>");
+	$("#sid1").show();
+	$("#sid1").hide(5000);//하이드를사용하여서 출력한 문구를 지웠는데 다시눌렀을때 출력이되지않아 show를 이용하였다.
+	} 
+ 	else if($("#SDIV").val() == ""){
+		$("#sid2").html("<b>종류를 정해주세요</b>");
+		$("#sid2").show();
+		$("#sid2").hide(5000);
+		}
+ 	else if($("#pmoney").val() == ""){
+	
+	$("#sid3").html("<b>금액을 입력해주세요</b>");
+	$("#sid3").show();
+	$("#sid3").hide(5000);
+	}
+	else if($("#pfee").val() == ""){
+		$("#sid3").html("<b>배송비를 입력해주세요</b>");
+		$("#sid3").show();
+		$("#sid3").hide(5000);
+		}
+	else if($("#pvol").val() == ""){
+		$("#sid3").html("<b>수량을 입력해주세요</b>");
+		$("#sid3").show();
+		$("#sid3").hide(5000);
+		}
+	else if($("#pcontent").val() == ""){
+	$("#sid4").html("<b>내용을 입력해주세요</b>");
+	$("#sid4").show();
+	$("#sid4").hide(5000);
+	}else if($("#pcontent").val() != ""){// else if를 한 이유는 textarea를 이용했을때 비교가 안되고 값이 null로 들어가
+		//db에 입력이 되어버려서 조건을 추가해서 막아놓았다.
+		
+			document.getElementById('frm55').submit();
+			
+			return;
+	}
+		};	
+
+
+var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+var maxSize = 5242880; //5MB
+
+function checkExtension(fileName, fileSize){
+	if(fileSize >= maxSize){
+			alert("파일 사이즈 초과.");
+		return false;
+	}
+	if(regex.test(fileName)){
+			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+		return false;
+	}
+	return true;
+}
+
+$("input[type='file']").change(function(e){
+	console.log("이거 작동되는거 맞니?");
+	var formData = new FormData();
+	
+	var inputFile = $("input[name='uploadFile']");
+	
+	var files =inputFile[0].files;
+console.log(files);
+	
+	for(var i =0; i <files.length; i++){
+		if(!checkExtension(files[i].name,files[i].size)){
+			return false;
+		}
+		console.log("포문빠져나오기");
+		formData.append("uploadFile",files[i]);
+	}
+		
+	$.ajax({
+		url: '/uploadAjaxAction.dobby',
+		processData: false,
+		contentType: false,
+		data: formData,
+		type: 'POST',
+		dataType:'json',
+		success: function(result){ 
+			console.log(result);
+			console.log("끝났니?");
+			showUploadResult(result); //업로드 결과 처리 함수
+			
+		}
+	}); // $.ajax 
+}); //input[type='file']
+	
+	function showUploadResult(result){
+	console.log("showUploadResult t;lwkr");
+		if(!result||result.length==0){return;}
+		var uploadUL = $(".uploadResult ul");
+		console.log(uploadUL);
+		var str="";
+		$(result).each(function(i, obj){
+//			console.log(obj);
+			 //image type
+			if(obj.image){
+	var fileCallPath = encodeURIComponent ( obj.uploadPath+"/s_"+obj.uuid+"_"+obj.fileName);
+	console.log(fileCallPath);	console.log("콜패스");		
+				str += "<li data-path='"+obj.uploadPath+"'";
+				str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'"
+				str += "><div>";
+				str	+= "<span> "+obj.fileName+"</span>";
+				str	+= "<button type='button' data-file=\'"+fileCallPath+"\' "
+				str	+= "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+				str	+= "<img src='/display.dobby?fileName="+fileCallPath+"'>";
+				str	+= "</div>";
+				str	+="</li>";
+			}else{
+			//이미지 파일만 받을꺼니까 이 부분은 미사용	
+				var fileCallPath = encodeURIComponent(obj.uploadPath+"/"+obj.uuid+"_"+obj.fileName);
+				var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+				str += "<li><div>";
+				str	+= "<span> "+obj.fileName+"</span>";
+				str	+= "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
+				str	+= "<img src='/resources/img/iconfile.png'></a>";
+				str	+= "</div>";
+				str	+="</li>";
+			} 
+		});
+		uploadUL.append(str);
+	}
+	
+$(".uploadResult").on("click","button",function(e){
+	console.log("delete file");
+	
+});
+
+    } (jQuery))
+})
+</script>
 
 <div class="container">
 
 	<div class="row">
 
 		<div class="col-lg-3 ">
-			<a href="/Product/ProductWrite.dobby">
-			<img class="rounded d-block mt-5" alt="판매하기" height="80" width="255"
-				src="/resources/img/btn_sub.jpg"></a>
 			<div class="list-group">
 				<div href="#" class="list-group-item menu-item mt-5">
 					<a href="#">마이페이지</a>
@@ -269,10 +308,12 @@
 		<!-- /.col-lg-3 -->
 
 		<div class="col-lg-9 my-5">
-			<h1>판매글 작성</h1>
+			<h1>판매글12 작성</h1>
 
 			<div class="row my-5">
-				<form class="" id="frm55" name="frm55" action="/Product/ProductSaleWriteAction.dobby" method="post">
+				<form role="form" class="" id="frm55" name="frm55"
+				 action="/Product/ProductSaleWriteAction.dobby" method="post" enctype="multipart/form-data">
+				  
 					<fieldset>
 
 						<div class="form-group">
@@ -281,7 +322,7 @@
 							<div class="col-md-8">
 								<label for="filter">상품명</label> 
 								<input id="psubject" name="psubject"
-									type="text" placeholder="상품명을 입력해주세요." class="form-control"
+									type="text" placeholder="상품명을 d입력해주세요." class="form-control"
 									size="120" value="">	<span id="sid1"></span>
 									
 									<input type="hidden" value="2" id="midx" name="midx">
@@ -349,17 +390,30 @@
 				<div class="form-group">
 					<span class="col-md-1 offset-md-2 text-xs-center"><i
 						class="fa fa-pencil-square-o bigicon"></i></span>
-					<div class="col-md-8">
+					<div class="col-md-8 uploadDiv">
 						<label for="filter">첨부파일 : </label> <input type="file" id="pimage"
-							name="pimage" multiple="multiple" />
+							name='uploadFile' multiple/>
 						<p style="text-align: right; margin-top: 20px;"></p>
 					</div>
+						<div class='uploadResult'>
+							<ul>
+						
+							</ul>
+						</div>
+						<div class='bigPictureWrapper'>
+							<div class='bigPicture'>
+							</div>
+						</div>
 				</div>
+				
 				<div class="form-group">
 					<div class="col-md-8">
 						<div class="col align-self-end">
 							<a class="float-right btn btn-outline-danger">취소</a> 
 							<a id="save1" class="float-right btn btn-outline-primary mr-3">등록</a>
+							<div class='bb2'>
+			</div>
+							
 						</div>
 					</div>
 				</div>
@@ -370,8 +424,8 @@
 	</div>
 <div class="uploadedList"></div>
 </div>
-<link rel="stylesheet" type="text/css"
-	href="/resources/css/all.min.css" />
+
+	
 
 <style>
 .header {

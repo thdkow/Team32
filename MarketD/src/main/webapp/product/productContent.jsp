@@ -17,6 +17,10 @@ $(function() {
 	$( document ).ready( function() {
 		var $ = jQuery;
 		alert("제이쿼리 시작 확인");
+		
+		$('.has').click(function(){//기존 입력창 안 보이게 하기/ 댓글 입력창도 나와서 구분이 안가서
+		    $('.hideme').hide();
+		  });// has end
 	
 	 $.boardCommentList(); //페이지 댓글 리스트 
 	 alert("boardCommentList 시작 확인");
@@ -221,9 +225,15 @@ function commentList(data){
 	}//reply끝	
 	
 	$(document).ready(function(){
-		  $('.has').click(function(){//기존 입력창 안 보이게 하기/ 댓글 입력창도 나와서 구분이 안가서
-		    $('.hideme').hide();
-		  });
+		alert("와와우우웅");
+		
+		  (function(){
+			  var bno = '<c:out value="${board.bno}"/>';
+			  
+			  	$getJSON("/board/getAttachList",{bno:bno}, function(arr){
+			  		console.log(arr);
+			  	});//end getJSON
+		  })();//end function
 		});
 	
    } (jQuery))

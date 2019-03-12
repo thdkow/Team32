@@ -13,12 +13,12 @@ import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.IOUtils;
-import org.eclipse.core.internal.runtime.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -30,8 +30,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,10 +45,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.team.marketd.util.MediaUtils;
 import com.team.marketd.util.UploadFileUtiles;
 import com.team.marketd.domain.AttachFileDTO;
+import com.team.marketd.domain.BoardAttachVo;
 import com.team.marketd.domain.PageMaker;
 import com.team.marketd.domain.PaymentSaleDTO;
 import com.team.marketd.domain.ProductVo;
 import com.team.marketd.domain.SearchCriteria;
+import com.team.marketd.service.BoardAttachService;
 import com.team.marketd.service.ProductService;
 
 import lombok.extern.log4j.Log4j;
@@ -59,13 +63,16 @@ public class ProductController {
 	@Autowired
 	ProductService ps;
 	
+	@Autowired
+	BoardAttachService bas;
+	
 	@RequestMapping(value = "/Product/{page}/ProductNewList.dobby", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public ArrayList<ProductVo> productNewList(SearchCriteria scri, Model model, PageMaker pm,
 			@PathVariable("page") int page) {// 최신 상품 리스트
 System.out.println("페이지"+page);
 		ArrayList<ProductVo> alist = ps.selectNewProductList(page);
-
+		
 		return alist;
 	}
 	
@@ -111,7 +118,8 @@ System.out.println("페이지"+page);
 								Model model) { // 상품 페이지
 
 		ProductVo pv = ps.selectProductOne(pidx); // 조회수는 나중에 추가 pidx 임시로 하드코딩
-
+		pv.setAttachList(bas.findBybno(pidx));
+		
 		model.addAttribute("pv", pv);
 
 		return "product/productContent";
@@ -124,12 +132,14 @@ System.out.println("페이지"+page);
 	}
 
 	@RequestMapping(value = "/Product/ProductSaleWriteAction.dobby")
-	public String productSaleWriteAction(@RequestParam("psubject") String psubject,
+	@ResponseBody
+	public void productSaleWriteAction(@RequestParam("psubject") String psubject,
 			@RequestParam("pcontent") String pcontent, @RequestParam("caidx") int caidx, @RequestParam("pvol") int pvol,
-			@RequestParam("pmoney") int pmoney, @RequestParam("pfee") int pfee, @RequestParam("midx") int midx) { 
+			@RequestParam("pmoney") int pmoney, @RequestParam("pfee") int pfee, @RequestParam("midx") int midx,
+			@ModelAttribute BoardAttachVo bav,HttpServletResponse response) { 
 				// 판매글																			
-																													
-
+System.out.println(bav.getUuid()+"uuid \n"); System.out.println(bav.getFileName()+"fn \n");																		
+System.out.println(bav.getUploadPath()+"up \n"); System.out.println(bav.getPidx()+"pidx \n");
 		String pip = null;
 
 		try {
@@ -138,9 +148,21 @@ System.out.println("페이지"+page);
 			e.printStackTrace();
 		}
 
-		ps.insertSaleProduct(midx, caidx, psubject, pcontent, pvol, pmoney, pfee, pip);
-
-		return "index";
+		int result = ps.insertSaleProduct(midx, caidx, psubject, pcontent, pvol, pmoney, pfee, pip);
+		
+		if(result >0) {
+			int pidx = bas.checkproduct(midx, caidx, psubject, pcontent, pvol, pmoney, pfee, pip);
+			 System.out.println(pidx+"pidx값");
+						 bav.setPidx(pidx);
+						 System.out.println(bav+"bav값");
+						bas.insert(bav);
+				 //index페이지를 가는게 아니라 writeAction.dobby에서 머물면서 리턴 값을 출력함 나머지는 다 날아감
+		}
+		 try {
+			response.sendRedirect("/index.jsp");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value = "/Product/ProductSaleWriteComplete.dobby")
@@ -339,6 +361,7 @@ System.out.println("페이지"+page);
 					e.printStackTrace();
 				}//end catch
 			}//end for
+			log.info("컨트롤빠져나갑니다");
 			return new ResponseEntity<> (list, HttpStatus.OK);
 		}//uploadAjaxPost끝
 		

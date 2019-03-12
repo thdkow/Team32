@@ -125,7 +125,8 @@ background: rgb(230,230,230);
 					type: 'POST',
 					dataType:'json',
 					success: function(result){ 
-					
+						console.log(result);
+						console.log("끝났니?");
 					}
 				}); // $.ajax 
 				 alert("uploadBtn 끝");
