@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import ="com.team.marketd.domain.MemberVo" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<c:set var="myContextPath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -51,7 +54,7 @@
 				<input class="form-control mr-sm-2 " type="search" id="keyword" name="keyword" value=""
 					placeholder="어떤 물건을 찾으시나요?" aria-label="Search" size="40">
 					
-					<input type="hidden" name="category" value="1000">
+					<input type="hidden" name="caidx" value="1000">
 					<input type="hidden" name="minPrice" value="0">
 					<input type="hidden" name="maxPrice" value="0">
 					
@@ -73,21 +76,33 @@
 						<li class="nav-item"><a class="nav-link" href="/Product/ProductSalesHistory.dobby?midx=2">고객센터</a></li>
 					</ul>
 				</div>
-								<% 
-				if(session.getAttribute("midx") ==null){
-					/* int	midx = (int)session.getAttribute("midx"); */	
-				%>
-				<div class="btn-group span3">
-					<button class="btn btn-secondary" onclick="location.href='login.dobby'">로그인</button>
-					<button class="btn btn-secondary" onclick="location.href='MemberJoin.dobby'">회원가입</button>
-				</div>
-				<%}%>
-				<%if(session.getAttribute("midx")!= null){ %>
-				<div class="btn-group span3">
-				<button class="btn btn-secondary" onclick="location.href='memberProfile.dobby'">내정보</button>
-					<button class="btn btn-secondary" onclick="location.href='logoutAction.dobby'">로그아웃</button>
-				</div>
-			<%} %>
+								<%
+				if (session.getAttribute("midx") == null) {
+					/* int	midx = (int)session.getAttribute("midx"); */
+			%>
+			<div class="btn-group span3">
+			
+				<button class="btn btn-secondary"
+					onclick="location.href='login2.dobby'">로그인</button>
+				<button class="btn btn-secondary"
+					onclick="location.href='MemberJoin.dobby'">회원가입</button>
+				&nbsp;&nbsp;<input type="checkbox" onclick="location.href='login.dobby'">자동 로그인</input>
+			</div>
+			<%
+				}
+			%>
+			<%
+				if (session.getAttribute("midx") != null) {
+			%>
+			<div class="btn-group span3">
+				<button class="btn btn-secondary"
+					onclick="location.href='memberProfile.dobby'">내정보</button>
+				<button class="btn btn-secondary"
+					onclick="location.href='logoutAction.dobby'">로그아웃</button>
+			</div>
+			<%
+				}
+			%>
 			</div>
 		</div>
 	</nav>

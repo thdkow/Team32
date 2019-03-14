@@ -22,7 +22,7 @@ public class PaymentSaleDTO {
 	private String pdelYn;
 		// Delivery
 	int didx;
-//	int oidx;
+		//	int oidx;
 	String drecipt;
 	String dtell;
 	String dzip;
@@ -44,5 +44,7 @@ public class PaymentSaleDTO {
 	String ofinal;
 	String ocancle;
 	String odelyn;
+	//Pay
+	String pacomplete;
 	
 }

@@ -8,13 +8,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 
 public class PageMaker {
-	//ÆäÀÌÁö¸¦ ¸¸µé¾îÁÖ´Â ÀÌ¸§±×´ë·ÎÀÇ ÆäÀÌÁöÀÌ´Ù.
-	private int totalCount;//Ç¥½ÃÇÏ¿© ÆäÀÌÁöÀÇ ´ã¾Æ¾ßÇÏ´Â °¹¼ö(ÇöÀç ¸Þ¼Òµå¸¦ ÇÏ³ª´õ¸¸µé¾î DBÀÇ delYnÀÌNÀÎ¸ðµç°ÍÀ» count·Î int·Î´ã¾Ò´Ù)
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ì¸ï¿½ï¿½×´ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½.
+	private int totalCount;//Ç¥ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¾ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµå¸¦ ï¿½Ï³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ delYnï¿½ï¿½Nï¿½Î¸ï¿½ï¿½ï¿½ï¿½ï¿½ countï¿½ï¿½ intï¿½Î´ï¿½Ò´ï¿½)
 	private int startPage;
 	private int endPage;
 	private boolean prev;
 	private boolean next;	
-	private int displayPageNum = 10;//<- 1 2 3 4 5 6 7 8 9 10 -> ÀÌ°Í
+	private int displayPageNum = 10;//<- 1 2 3 4 5 6 7 8 9 10 -> ï¿½Ì°ï¿½
 	private SearchCriteria scri;
 	/*private SearchCriteria scri;
 	
@@ -79,8 +79,7 @@ public class PageMaker {
 		System.out.println("cri.getPerPageNum()"+cri.getPerPageNum());
 		System.out.println("prev"+prev);*/
 		
-		endPage = (int) (Math.ceil(scri.getPage()/
-				(double)displayPageNum) * displayPageNum);
+		endPage = (int) (Math.ceil(scri.getPage()/(double)displayPageNum) * displayPageNum);
 		
 		startPage = (endPage - displayPageNum)+1;
 		
@@ -97,7 +96,7 @@ public class PageMaker {
 	
 	/*public String makeQuery(int page){
 		UriComponents uriComponents = 
-				UriComponentsBuilder         //Spring¿¡¼­ »ç¿ë(ComponentÅ¬·¡½º¿¡ ´ã¾Æ¼­ ÀÌ¿ë)
+				UriComponentsBuilder         //Springï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(ComponentÅ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼ï¿½ ï¿½Ì¿ï¿½)
 				.newInstance()
 				.queryParam("page", page)
 			//	.queryParam("perPageNum", cri.getPerPageNum())
@@ -105,7 +104,7 @@ public class PageMaker {
 				
 		return uriComponents.toUriString();
 	}*/
-	public String makeSearch(int page){     //get¹æ½ÄÀ¸·Î uriµÚÂÊ¿¡ ºÙ¿©¼­ ÁÖ··ÁÖ·· º¸³¾ÇÊ¿ä¾øÀÌ ¸Þ¼Òµå ÇÏ³ª·Î Ã³¸®¸¦ ÇÒ ¼öÀÖ´Ù.
+	public String makeSearch(int page){     //getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ uriï¿½ï¿½ï¿½Ê¿ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½Ö·ï¿½ï¿½Ö·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ö´ï¿½.
 		UriComponents uriComponents = 
 				UriComponentsBuilder
 				.newInstance()
@@ -119,23 +118,25 @@ public class PageMaker {
 	}
 	public String makePrev(){  
 		UriComponents uriComponents = 
-				UriComponentsBuilder //UriComponentsÅ¬·¡½º´Â Path³ª query¿¡ ÇØ´çÇÏ´Â ¹®ÀÚ¿­µéÀ» Ãß°¡ÇØ¼­ ¿øÇÏ´Â URI¸¦ »ý¼ºÇÒ ¶§ »ç¿ëÇÑ´Ù.
+				UriComponentsBuilder //UriComponentsÅ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Pathï¿½ï¿½ queryï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ URIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 				.newInstance()
 				.queryParam("page", getStartPage()-1)
-				.queryParam("scount", scri.getPerPageNum())
-				.queryParam("searchType", scri.getSearchType())
+				.queryParam("caidx", scri.getCategory())
+				.queryParam("minPrice", scri.getMinPrice())
+				.queryParam("maxPrice", scri.getMaxPrice())
 				.queryParam("keyword", encoding(scri.getKeyword()))
 				.build();
 				
 		return uriComponents.toUriString();
 	}
-	public String makeNext(){     //get¹æ½ÄÀ¸·Î uriµÚÂÊ¿¡ ºÙ¿©¼­ ÁÖ··ÁÖ·· º¸³¾ÇÊ¿ä¾øÀÌ ¸Þ¼Òµå ÇÏ³ª·Î Ã³¸®¸¦ ÇÒ ¼öÀÖ´Ù.
+	public String makeNext(){     //getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ uriï¿½ï¿½ï¿½Ê¿ï¿½ ï¿½Ù¿ï¿½ï¿½ï¿½ ï¿½Ö·ï¿½ï¿½Ö·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ö´ï¿½.
 		UriComponents uriComponents = 
 				UriComponentsBuilder
 				.newInstance()
 				.queryParam("page", getEndPage()+1)
-				.queryParam("scount", scri.getPerPageNum())
-				.queryParam("searchType", scri.getSearchType())
+				.queryParam("caidx", scri.getCategory())
+				.queryParam("minPrice", scri.getMinPrice())
+				.queryParam("maxPrice", scri.getMaxPrice())
 				.queryParam("keyword", encoding(scri.getKeyword()))
 				.build();
 				

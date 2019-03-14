@@ -173,7 +173,9 @@ $( document ).ready( function() {
 				<div class="row" id="tbr">
 				</div>
 				<!-- /.row -->
-
+<center>
+<button id='more' class="btn btn-outline-primary" >더보기</button>
+</center>
 			</div>
 			<!-- /.col-lg-9 -->
 
@@ -181,9 +183,7 @@ $( document ).ready( function() {
 		<!-- /.row -->
 		
 		<div class="form-group">
-<center>
-<button id='more' class="btn btn-outline-primary" >더보기</button>
-</center>	
+	
 <input id='nextPage' type='hidden' value='2' />
 <input id='moreTotalCount' type='hidden' value='12' />
 <input id='page' type='hidden' value='1' />

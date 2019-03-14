@@ -59,15 +59,21 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String checkAutoLogin() { //자동 로그인 선택
-		// TODO Auto-generated method stub
-		return null;
+	public MemberVo checkAutoLogin(String sessionKey) { //자동 로그인 검사
+		HashMap<String, Object> hm = new HashMap<String,Object>();
+		hm.put("mkey", sessionKey);
+		MemberService_Mapper msm = sqlSession.getMapper(MemberService_Mapper.class);
+		MemberVo mv = msm.checkAutoLogin(hm);
+		return mv;
 	}
 
 	@Override
-	public String keepLogin() {  //자동 로그인 지정
-		// TODO Auto-generated method stub
-		return null;
+	public void keepLogin(int midx,String sessionKey,String sessionLimit) {  //자동 로그인 지정
+		HashMap<String, Object> hm = new HashMap<String,Object>();
+		hm.put("midx", midx);
+		hm.put("mkey", sessionKey);
+		MemberService_Mapper msm = sqlSession.getMapper(MemberService_Mapper.class);
+		msm.keepLogin(hm);
 	}
 
 	@Override
@@ -188,6 +194,16 @@ public class MemberServiceImpl implements MemberService {
 		msm.updateGB(hm);
 		
 		msm.insertGB(hm);
+	}
+
+	@Override
+	public void dropCookie(int midx) {
+		HashMap<String,Object> hm = new HashMap<String,Object>();
+		hm.put("midx", midx);
+		MemberService_Mapper msm = sqlSession.getMapper(MemberService_Mapper.class);
+		
+		msm.dropCookie(hm);
+		
 	}
 
 

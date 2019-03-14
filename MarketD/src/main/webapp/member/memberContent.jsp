@@ -1,35 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp"%>
 <%@ page import ="com.team.marketd.domain.MemberVo" %>
 
-<%MemberVo mv = (MemberVo)request.getAttribute("mv"); %>
+<c:set var="mv" value="${mv}" />
+
 <div class="container">
 
 	<div class="row">
 
-		<div class="col-lg-3 ">
-			<img class="rounded d-block mt-5" alt="판매하기" height="80" width="255"
-				src="image/btn_sub.jpg">
-			<div class="list-group">
-				<div href="#" class="list-group-item menu-item mt-5">
-					<a href="#">마이페이지</a>
-				</div>
-				<div href="#" class="list-group-item menu-item">
-					<a href="#">장바구니</a>
-				</div>
-				<div href="#" class="list-group-item menu-item">
-					<a href="#">구매내역</a>
-				</div>
-				<div href="#" class="list-group-item menu-item">
-					<a href="#">판매내역</a>
-				</div>
-
-			</div>
-
-		</div>
-		<!-- /.col-lg-3 -->
-
+			<%@include file="../include/menuNavigation2.jsp"%>
 
 
 		<div class="col-lg-5 my-5">
@@ -40,7 +20,7 @@
 					<tbody>
 						<tr>
 							<th scope="row" class="text-center">아 이 디</th>
-							<td><%=mv.getMid() %></td>
+							<td>${mv.mid}</td>
 						</tr>
 						<tr>
 							<th scope="row" width="100px" class="text-center">비밀번호</th>
@@ -48,35 +28,35 @@
 						</tr>
 						<tr>
 							<th scope="row" class="text-center">이    름</th>
-							<td><%=mv.getMpwd() %></td>
+							<td>${mv.mpwd}</td>
 						</tr>
 						<tr>
 							<th scope="row" class="text-center">생년월일</th>
-							<td><%=mv.getMbirth() %></td>
+							<td>${mv.mbirth}</td>
 						</tr>
 						<tr>
 							<th scope="row" class="text-center">성    별</th>
-							<td><%=mv.getMsex() %></td>
+							<td>${mv.msex}</td>
 						</tr>
 						<tr>
 							<th scope="row" class="text-center">이 메 일</th>
-							<td><%=mv.getMmail() %></td>
+							<td>${mv.mmail}</td>
 						</tr>
 						<tr>
 							<th scope="row" class="text-center">휴대전화</th>
-							<td><%=mv.getMtell() %></td>
+							<td>${mv.mtell}</td>
 						</tr>
 						<tr>
 							<th scope="row" class="text-center">거래 계좌</th>
-							<td><%=mv.getMaccount() %></td>
+							<td>${mv.maccount}</td>
 						</tr>
 						<tr>
 							<th scope="row" class="text-center">카톡 ID</th>
-							<td><%=mv.getMkakao() %></td>
+							<td>${mv.mkakao}</td>
 						</tr>
 						<tr>
 							<th scope="row" class="text-center">인증 질문</th>
-							<td><%=mv.getMquestion() %></td>
+							<td>${mv.mquestion}</td>
 						</tr>
 					</tbody>
 				</table>	

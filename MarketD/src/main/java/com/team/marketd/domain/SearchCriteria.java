@@ -1,30 +1,30 @@
 package com.team.marketd.domain;
 
 public class SearchCriteria extends Criteria {
-	//Criteria¸¦ »ó¼Ó¹Þ¾Æ »ç¿ëÇÏ´Â °Ë»öÀÇ ±â´ÉÀÌÀÖ´Â Å¬·¹½º
-	private String searchType; //°Ë»öÀ¯Çü(Á¦¸ñ,ÀÌ¸§ µî)
-	private String keyword;    //°Ë»ö Å°¿öµå
-	private int ppagenum=15;  
-	private String category;   //
-	private String minPrice ;
-	private String maxPrice ;
+	//Criteriaï¿½ï¿½ ï¿½ï¿½Ó¹Þ¾ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
+	private String searchType; //ï¿½Ë»ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½,ï¿½Ì¸ï¿½ ï¿½ï¿½)
+	private String keyword;    //ï¿½Ë»ï¿½ Å°ï¿½ï¿½ï¿½ï¿½
+	private int ppagenum=10;  
+	private int category;   //
+	private int minPrice ;
+	private int maxPrice ;
 	
-	public String getCategory() {
+	public int getCategory() {
 		return category;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCategory(int caidx) {
+		this.category = caidx;
 	}
-	public String getMinPrice() {
+	public int getMinPrice() {
 		return minPrice;
 	}
-	public void setMinPrice(String minPrice) {
-		this.minPrice = minPrice;
+	public void setMinPrice(int minPrice2) {
+		this.minPrice = minPrice2;
 	}
-	public String getMaxPrice() {
+	public int getMaxPrice() {
 		return maxPrice;
 	}
-	public void setMaxPrice(String maxPrice) {
+	public void setMaxPrice(int maxPrice) {
 		this.maxPrice = maxPrice;
 	}
 	

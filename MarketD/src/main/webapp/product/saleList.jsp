@@ -6,27 +6,7 @@
 
 	<div class="row">
 
-		<div class="col-lg-3 ">
-			<img class="rounded d-block mt-5" alt="판매하기" height="80" width="255"
-				src="image/btn_sub.jpg">
-			<div class="list-group">
-				<div href="#" class="list-group-item menu-item mt-5">
-					<a href="#">마이페이지</a>
-				</div>
-				<div href="#" class="list-group-item menu-item">
-					<a href="#">장바구니</a>
-				</div>
-				<div href="#" class="list-group-item menu-item">
-					<a href="#">구매내역</a>
-				</div>
-				<div href="#" class="list-group-item menu-item">
-					<a href="#">판매내역</a>
-				</div>
-
-			</div>
-
-		</div>
-		<!-- /.col-lg-3 -->
+		<%@include file="../include/menuNavigation2.jsp"%>
 
 		<div class="col-lg-9 my-5">
 			<h1>판매내역</h1>

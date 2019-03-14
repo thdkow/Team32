@@ -41,11 +41,9 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public String insertComment(CommentVo cv) {
-		
-		 		resultcv = csm.insertComment(cv);
-		
-		 				return resultcv;
+	public int insertComment(CommentVo cv) {
+		 	int rs=	 csm.insertComment(cv);
+		 	return rs;			
 	}
 
 	@Override

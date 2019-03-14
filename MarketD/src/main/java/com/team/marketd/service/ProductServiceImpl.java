@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.team.marketd.domain.DeliveryVo;
+import com.team.marketd.domain.OrderVo;
 import com.team.marketd.domain.PaymentSaleDTO;
 import com.team.marketd.domain.ProductVo;
 import com.team.marketd.persistence.ProductService_Mapper;
@@ -139,27 +141,30 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public String selectOrderOne() { // �ֹ� ������
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
 	public void updatePaymentConfirmation(int oidx) { // ����Ȯ�� ������Ʈ
 		
 		psm.updateProductconfirmation(oidx);
 
 	}
 
+	@Transactional
 	@Override
-	public String updatePaymentCancle() { // �������
-		// TODO Auto-generated method stub
+	public String updatePaymentCancle(int pidx,int oidx,String oid) { // 구매취소
+		
+		psm.updateProductCancle(pidx);
+		System.out.println("상품");
+		psm.updateOrderCancle(pidx);
+		System.out.println("오더");
+		psm.updateDeliveryCancle(oidx);
+		System.out.println("배송");
+		psm.updatePaymentCancle(oid);
+		System.out.println("결제");
+		
 		return null;
 	}
 
 	@Override
-	public void deleteSalesHistory(int pidx) { // �Ǹ� �Խñ� ����
+	public void deleteSalesHistory(int pidx) { // 판매글 삭제
 		System.out.println("임플리 삭제입장");
 		psm.deleteSalesHistory(pidx);
 		System.out.println("임플리 삭제퇴장");
@@ -168,15 +173,12 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public int updateDelivery(int caidx,int dwaybill,int oidx) { // ����� ��ȣ ����
-		
-		System.out.println("��۹�ȣ ���� ���ø���Ʈ �Դϴ�.");
+
 		HashMap<String, Object> hm =new HashMap<String, Object>();
 				hm.put("caidx", caidx);
 				hm.put("dwaybill", dwaybill);
 				hm.put("oidx", oidx);
-				System.out.println("��۹�ȣ ���� ���ø���Ʈ �ؽ��� �����Դϴ�.");
 				int exec = psm.updateDelivery(hm);
-				System.out.println("��۹�ȣ ���� ���ø���Ʈ exec �۵��մϴ�.");
 		
 		return exec;
 	}
@@ -191,8 +193,15 @@ public class ProductServiceImpl implements ProductService {
 
 
 	@Override
-	public int selectHistoryTotal(int midx) {
-		int tcount = psm.selectHistoryTotal(midx);
+	public int selectHistoryTotal(int midx,String division) {
+		
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+		hm.put("midx", midx);
+		hm.put("division", division);
+		
+		int tcount = psm.selectHistoryTotal(hm);
+		
+		
 		return tcount;
 	}
 
@@ -200,15 +209,33 @@ public class ProductServiceImpl implements ProductService {
 
 	@Transactional
 	@Override
-	public String insertPay() {
+	public void insertPay(HashMap<String, Object> hm) {
 		
-			/*psm.insertOrder();
-			psm.insertPayment();
-			psm.insertDelivery();*/
+			int osaf = psm.insertOrder(hm);
+			OrderVo ov = psm.selectOrderOne(hm);
+			hm.put("oidx", ov.getOidx());
+			hm.put("oid", ov.getOid());
+			int dsaf = psm.insertDelivery(hm);
+			int pasaf = psm.insertPayment(hm);
+			int psaf = psm.updatePsale(hm);
+			int pssaf = psm.updatePayment(hm);
+
+
 		
-		
-			return null;
 		}
+
+
+
+
+	@Override
+	public DeliveryVo selectDelivery(int oidx) {
+		
+
+		DeliveryVo dv = psm.selectDelivery(oidx);
+		
+		
+		return dv;
+	}
 	
 	
 	}

@@ -1,40 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@include file="/include/header.jsp"%>
 
-<table  style="margin-left: auto; margin-right: auto;" >
-<tr>
-<td style=" height:100px;">
+<div class="container">
 
-</td>
-</tr>
-<tr>
-<td>
+	<div class="row">
 
-<table  style=" width: 1000px; border-top: 1px solid #7393b6; border-bottom: 1px solid #7393b6;  ">
+		<%@include file="../include/menuNavigation2.jsp"%>
 
-<tr>
-<td  style="text-align:right">
-<img src="/resources/img/dobby2.png" width="200" height="200">
-</td> 
-<td style="font-size:3em;">
-±¸¸Å°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù!
-</td>
-</tr>
-</table>
-
-</td>
-</tr>
-</table>
-
-  <center>
-<input type="button" onclic="ÆäÀÌÁö ÀÌµ¿" value="È®ÀÎ"/>
-  </center>
-</body>
-</html>
+		<div class="col-lg-9 my-5">
+				<table class="table my-5">
+					<tbody>
+						<tr>
+							<th><img
+									src="/resources/img/dobby2.png" height="150" width="150"
+									alt=""></th>
+							<td class="align-middle" style="font-size: 30px;">êµ¬ë§¤í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤.</td>
+						</tr>
+												<tr>
+						<td colspan="2" class="text-center"><button type="button" class="btn btn-outline-primary" 
+						onclick="location.href='/index.jsp'"  style="font-size: 20px;">í™•ì¸</button></td>
+						<tr>
+					</tbody>
+				</table>
+		</div>
+	</div>
+</div>
+<%@include file="/include/footer.jsp"%>

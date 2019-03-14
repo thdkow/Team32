@@ -3,6 +3,10 @@ package com.team.marketd.controller;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team.marketd.domain.DeliveryVo;
 import com.team.marketd.domain.PageMaker;
 import com.team.marketd.domain.PaymentSaleDTO;
 import com.team.marketd.domain.ProductVo;
@@ -39,11 +44,11 @@ public class ProductController {
 	}
 	
 
-	@RequestMapping(value = "/Product/{page}/{category}/{minPrice}/{maxPrice}/{keyword}/ProductListTotal.dobby", 
+	@RequestMapping(value = "/Product/{page}/{caidx}/{minPrice}/{maxPrice}/{keyword}/ProductListTotal.dobby", 
 			produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public int productListTotal(@PathVariable("page") int page,			//상품리스트 총갯수
-								@PathVariable("category") int caidx,
+								@PathVariable("caidx") int caidx,
 								@PathVariable("minPrice") int minPrice,
 								@PathVariable("maxPrice") int maxPrice,
 								@PathVariable("keyword") String keyword) {
@@ -54,7 +59,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/Product/ProductList.dobby")
-	public String productList(@ModelAttribute("category")int category,		//상품 검색 리스트 이동
+	public String productList(@ModelAttribute("caidx")int caidx,		//상품 검색 리스트 이동
 							@ModelAttribute("minPrice")int minPrice,
 							@ModelAttribute("maxPrice")int maxPrice,
 							@ModelAttribute("keyword")String keyword)
@@ -65,11 +70,11 @@ public class ProductController {
 		return "product/productList";
 	}
 
-	@RequestMapping(value = "/Product/{page}/{category}/{minPrice}/{maxPrice}/{keyword}/ProductSerchList.dobby", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
+	@RequestMapping(value = "/Product/{page}/{caidx}/{minPrice}/{maxPrice}/{keyword}/ProductSerchList.dobby", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	@ResponseBody
 	public ArrayList<ProductVo> productSerchList(SearchCriteria scri,		//상품 검색 리스트
 							@PathVariable("page") int page,
-							@PathVariable("category") int caidx,
+							@PathVariable("caidx") int caidx,
 							@PathVariable("minPrice") int minPrice,
 							@PathVariable("maxPrice") int maxPrice,
 							@PathVariable(value = "keyword", required=false) String keyword) { 
@@ -77,9 +82,12 @@ public class ProductController {
 		
 		if(keyword==null)keyword="";
 		if(keyword.equals("empty"))keyword="";
-		System.out.println("검색"+keyword+"성공");
+		
 				scri.setPage(page);
 				scri.setKeyword(keyword);
+				scri.setCategory(caidx);
+				scri.setMinPrice(minPrice);
+				scri.setMaxPrice(maxPrice);
 				ArrayList<ProductVo> alist = ps.selectProductList(page,caidx,minPrice,maxPrice,keyword);
 				
 		return alist;
@@ -106,8 +114,9 @@ public class ProductController {
 	@RequestMapping(value = "/Product/ProductSaleWriteAction.dobby")
 	public String productSaleWriteAction(@RequestParam("psubject") String psubject,		//판매글 저장
 			@RequestParam("pcontent") String pcontent, @RequestParam("caidx") int caidx, @RequestParam("pvol") int pvol,
-			@RequestParam("pmoney") int pmoney, @RequestParam("pfee") int pfee, @RequestParam("midx") int midx) { 
-
+			@RequestParam("pmoney") int pmoney, @RequestParam("pfee") int pfee,HttpSession session) { 
+		
+		int midx = (int) session.getAttribute("midx");
 		String pip = null;
 
 		try {
@@ -119,7 +128,7 @@ public class ProductController {
 		
 		ps.insertSaleProduct(midx, caidx, psubject, pcontent, pvol, pmoney, pfee, pip);
 
-		return "productSaleWriteComplete";
+		return "product/productSaleWriteComplete";
 	}
 
 	@RequestMapping(value = "/Product/ProductSaleWriteComplete.dobby")
@@ -134,19 +143,55 @@ public class ProductController {
 	}
 
 	@RequestMapping("product/productPayment.dobby")
-	public String productPayment(Model model) { // 결제페이지 이동
-		int a = 2;
-		ProductVo pv = ps.selectProductOne(a);
+	public String productPayment(Model model,@RequestParam("pidx")int pidx,
+								@RequestParam("ovol")int ovol) { // 결제페이지 이동
+		
+		ProductVo pv = ps.selectProductOne(pidx);
+		
+		pv.setOvol(ovol);
+		
 		model.addAttribute("pv",pv);
-		return "product/orderContent";
+		return "product/productPayment";
 	}
 	@RequestMapping("product/productPaymentAction.dobby")
-	public String productPaymentAction(@RequestParam("Recipient")String Recipient,@RequestParam("mkakao")String mkakao
-			,@RequestParam("phone")String phone,@RequestParam("address")String address,@RequestParam("address2")String address2,
-			@RequestParam("delivery")String delivery,@RequestParam("deposit")String deposit) { // 결제정보 저장
+	public String productPaymentAction(@RequestParam("drecipt")String drecipt,@RequestParam("dtell")String dtell,
+								    	@RequestParam("daddr")String daddr,@RequestParam("ddetails")String ddetails,
+										@RequestParam("dmemo")String dmemo,@RequestParam("paname")String paname,
+										@RequestParam("pidx")int pidx,@RequestParam("ovol")int ovol,
+										@RequestParam("omoney")int omoney,
+										HttpSession session) { // 결제정보 저장
 		
 		
-		return "product/orderComplete";
+		
+		HashMap<String, Object> hm =new HashMap<String, Object>();
+		
+		int midx = (int) session.getAttribute("midx");
+		String oid = UUID.randomUUID().toString().replace("-", "");
+		String oip = null;
+
+		try {
+			oip = InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+
+		hm.put("drecipt", drecipt);
+		hm.put("dtell", dtell);
+		hm.put("daddr", daddr);
+		hm.put("ddetails", ddetails);
+		hm.put("dmemo", dmemo);
+		hm.put("paname", paname);
+		hm.put("oid", oid);
+		hm.put("pidx", pidx);
+		hm.put("midx", midx);
+		hm.put("ovol", ovol);
+		hm.put("oip", oip);
+		hm.put("omoney", omoney);
+		
+		ps.insertPay(hm);
+		
+		
+		return "product/productPaymentComplete";
 	}
 
 	@RequestMapping(value = "/Product/ProductPaymentComplete.dobby")
@@ -156,14 +201,16 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/Product/ProductSalesHistory.dobby")
-	public String productSalesHistory(@RequestParam(value="midx")int midx,Model model, SearchCriteria scri,PageMaker pm,
+	public String productSalesHistory(HttpSession session,Model model, SearchCriteria scri,PageMaker pm,
 									@RequestParam(value="page",defaultValue="1")int page) { // 판매리스트 페이지 이동
 		
+		int midx = (int) session.getAttribute("midx");
+		String division = "판매";
 		
 		scri.setPage(page);
 		
 		ArrayList<PaymentSaleDTO> alist = ps.selectSalesHistoryList( midx, page);
-		int tcount = ps.selectHistoryTotal(midx);
+		int tcount = ps.selectHistoryTotal(midx,division);
 		
 		pm.setScri(scri);
 		pm.setTotalCount(tcount);
@@ -172,39 +219,57 @@ public class ProductController {
 		model.addAttribute("alist", alist);
 		model.addAttribute("pm", pm);
 		
-		
-		
 		return "product/productSalesHistory";
 	}
 	
-	@RequestMapping(value = "/Product/productDeleteSalesHistory.dobby")
+	@RequestMapping(value = "/Product/ProductDeleteSalesHistory.dobby")
 	public String productDeleteSalesHistory(@RequestParam("pidx") int pidx) { // 판매내역 삭제
 		
 		ps.deleteSalesHistory(pidx);
 		
-		return "redirect:/Product/ProductList.dobby";
+		return "redirect:/Product/ProductSalesHistory.dobby";
 	}
 
-	@RequestMapping(value = "/Product/productPaymentHistory.dobby")
-	public String productPaymentHistory(Model model,@RequestParam(value="midx",defaultValue="2")int midx,
+	@RequestMapping(value = "/Product/ProductPaymentHistory.dobby")
+	public String productPaymentHistory(Model model,HttpSession session,
 			SearchCriteria scri,PageMaker pm,@RequestParam(value="page",defaultValue="1")int page) {
+		
+		int midx = (int) session.getAttribute("midx");
+		
+		scri.setPage(page);
+		
 	ArrayList<PaymentSaleDTO> alist = ps.selectPaymentHistoryList(midx,page);//midx
 	
-				model.addAttribute("alist",alist);
+	String division = "구매";
+	
+	int tcount = ps.selectHistoryTotal(midx,division);
+				
+				pm.setScri(scri);
+				pm.setTotalCount(tcount);
+				
+				
+				model.addAttribute("alist", alist);
+				model.addAttribute("pm", pm);
 
-		return "product/productPayment";
+		return "product/productPaymentHistory";
 	}
+	
+	@RequestMapping(value = "/Product/ProductPaymentCancle.dobby")
+	public String productPaymentCancle(@RequestParam(value="pidx")int pidx,
+										@RequestParam(value="oidx")int oidx,
+										@RequestParam(value="oid")String oid) { // 구매취소
+		
+		ps.updatePaymentCancle( pidx, oidx, oid);
 
-	public String productPaymentCancle() { // 구매취소
-
-		return null;
+		return "redirect:/Product/ProductPaymentHistory.dobby";
 	}
+	
 	@RequestMapping(value = "/Product/ProductPaymentConfirmation.dobby")
-	public String productPaymentConfirmation(int oidx) { // 구매확정
+	public String productPaymentConfirmation(@RequestParam(value="oidx")int oidx) { // 구매확정
 		
 		ps.updatePaymentConfirmation(oidx);
 		
-		return "product/productPaymentHistory";
+		return "redirect:/Product/ProductPaymentHistory.dobby";
 	}
 
 	public String productOrderList() { // 주문요청 리스트 페이지 이동
@@ -218,8 +283,12 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/Product/ProductStartDelivery.dobby")
-	public String productStartDelivery() { // 배송시작 페이지 이동
-
+	public String productStartDelivery(@ModelAttribute("oidx")int oidx,Model model) { // 배송시작 페이지 이동
+		
+		DeliveryVo dv = ps.selectDelivery(oidx);
+		
+		model.addAttribute("dv", dv);
+		
 		return "product/startDelivery";
 	}
 
@@ -229,7 +298,7 @@ public class ProductController {
 		
 		ps.updateDelivery(caidx,dwaybill,oidx);
 		
-		return "redirect:/Product/ProductContent.dobby?pidx=28";//pidx하드코딩 바꿀것
+		return "redirect:/Product/ProductSalesHistory.dobby";//pidx하드코딩 바꿀것
 	}
 
 	public String productDateSerchList() { // 날자검색
@@ -243,16 +312,16 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/Product/ProductPlusShoppingCart.dobby")
-	public String productPlusShoppingCart(@RequestParam("pvol") int pvol) { // 쇼핑카트에 상품 추가
+	public String productPlusShoppingCart(@RequestParam("pidx") int pidx,HttpSession session
+										 ,@RequestParam("pvol") int pvol) { // 쇼핑카트에 상품 추가
 		
-		int midx = 2;// midx바꿀것
-		int pidx = 2;// pidx바꿀것
+		int midx = (int) session.getAttribute("midx");
 		
 		int exec = ps.insertShoppingCart(pidx,pvol,midx);
 		if(exec==0) {
-		return "redirect:/Product/ProductSaleWrite.dobby";
+		return "redirect:/Product/ProductContent.dobby?pidx="+pidx;
 		}
-		return "index";
+		return "redirect:/Product/ProductContent.dobby?pidx="+pidx;
 	}
 
 }

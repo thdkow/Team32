@@ -11,7 +11,7 @@ public interface CommentService {
 	
 	public int deleteCommentAction(CommentVo cv);
 	
-	public String insertComment(CommentVo cv);
+	public int insertComment(CommentVo cv);
 	
 	public void replycomment(int corigincidx,int cupdown);
 	

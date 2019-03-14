@@ -1,33 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
- <%@include file="../include/header.jsp"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="../include/header.jsp"%>
 <%@ page import ="com.team.marketd.domain.MemberVo" %>
-<%MemberVo mv = (MemberVo)request.getAttribute("mv"); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="mv" value="${mv}" />
+
+
 <div class="container">
 
 	<div class="row">
 
-		<div class="col-lg-3 ">
-			<img class="rounded d-block mt-5" alt="판매하기" height="80" width="255"
-				src="image/btn_sub.jpg">
-			<div class="list-group">
-				<div href="#" class="list-group-item menu-item mt-5">
-					<a href="#">마이페이지</a>
-				</div>
-				<div href="#" class="list-group-item menu-item">
-					<a href="#">장바구니</a>
-				</div>
-				<div href="#" class="list-group-item menu-item">
-					<a href="#">구매내역</a>
-				</div>
-				<div href="#" class="list-group-item menu-item">
-					<a href="#">판매내역</a>
-				</div>
-
-			</div>
-
-		</div>
-		<!-- /.col-lg-3 -->
+		<%@include file="../include/menuNavigation2.jsp"%>
 
 
 
@@ -36,15 +18,15 @@
 			<div class="row clearfix my-4">
 			<form action="memberUpdate.dobby" method="post">
 				<table class="table">
-					<input type="hidden" value="<%=mv.getMidx()%>" name="midx">
+					<input type="hidden" value="${mv.midx}" name="midx">
 					<tbody>
 						<tr>
 							<th scope="row">아 이 디</th>
-							<td><%=mv.getMid() %></td>
+							<td>${mv.mid}</td>
 						</tr>
 								<tr>
 							<th scope="row">이름</th>
-							<td><%=mv.getMname() %></td>
+							<td>${mv.mname}</td>
 						</tr>
 						<tr>
 							<th scope="row">비밀번호</th>

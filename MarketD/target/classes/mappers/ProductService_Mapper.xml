@@ -4,7 +4,7 @@
 <mapper namespace="com.team.marketd.persistence.ProductService_Mapper">
 
 <select id="selectProductListTotal" parameterType="HashMap" resultType="Integer">
-select count(*)as tcount from product32 where pdelYn='N'   
+select count(*)as tcount from product32 where pdelYn='N' and psaleYn='N' 
 <if test='caidx!="1000"'>and caidx = #{caidx} </if>
 
 <if test='keyword!=""'> and psubject like '%'||#{keyword}||'%' </if>
@@ -15,7 +15,7 @@ select count(*)as tcount from product32 where pdelYn='N'
 <select id="selectNewProductList" parameterType="Integer" resultType="pv" >
 
 select  rownum,pidx,psubject,mname,pmoney,pwridate from
- product32 a left outer join member32 b on a.midx = b.midx where pdelYn='N'
+ product32 a left outer join member32 b on a.midx = b.midx where pdelYn='N'  and psaleYn='N'
  <![CDATA[ and rownum<=(#{page}*12)]]>
 order by pidx desc
 
@@ -24,7 +24,7 @@ order by pidx desc
  <select id="selectProductSerchList" parameterType="HashMap" resultType="pv" >
 
 select  rownum,pidx,psubject,mname,pmoney,pwridate from
- product32 a left outer join member32 b on a.midx = b.midx where pdelYn='N'
+ product32 a left outer join member32 b on a.midx = b.midx where pdelYn='N' and psaleYn='N'
   <if test='caidx!="1000"'>and a.caidx = #{caidx} </if>
 
 <if test='keyword!=""'> and psubject like '%'||#{keyword}||'%' </if>
@@ -76,15 +76,24 @@ update delivery32 set caidx=#{caidx}, dwaybill = #{dwaybill} where oidx = #{oidx
 
  <select id="selectSalesHistoryList" parameterType="Integer" resultType="psdto" >
 
-select * from(select rownum as rnum,AA.* from(select * from product32 a full outer join order32 b on a.pidx = b.pidx full outer join delivery32 c on b.OIDx = c.oidx 
-where pdelYn='N' and a.midx=#{0}  order by a.pidx desc
- <![CDATA[)AA where rownum <=(#{1}-1)*15+15) where rnum >=(#{1}-1)*15+1]]>
+select * from(select rownum as rnum,AA.* from(select * from product32 a full outer join order32 b on a.pidx = b.pidx full outer join delivery32 c on b.OIDx = c.oidx
+full outer join pay32 d on b.oid = d.oid  where pdelYn='N' and a.midx=#{0}  order by a.pidx desc
+ <![CDATA[)AA where rownum <=(#{1}-1)*10+10) where rnum >=(#{1}-1)*10+1]]>
 
 </select>
 
- <select id="selectHistoryTotal" parameterType="Integer" resultType="Integer" >
+ <select id="selectHistoryTotal" parameterType="HashMap" resultType="Integer" >
+ 
+<if test='division == "구매"'>
+select count(*) from product32 A full outer join order32 B on A.pidx = B.pidx full outer join delivery32 C on b.OIDX = c.OIDX
+full outer join pay32 D on b.OID = d.OID where odelyn='N' and ocancle='N' and dcancle='N'  and B.midx=#{midx} 
+</if>
+
+<if test='division == "판매"'>
 select count(*) from product32 a full outer join order32 b on a.pidx = b.pidx full outer join delivery32 c on b.OIDx = c.oidx 
-where pdelYn='N' and a.midx=#{midx} 
+where pdelYn='N'  and a.midx=#{midx} 
+</if>
+
 </select>
 
 
@@ -97,11 +106,77 @@ update order32 set ofinal = 'Y' where oidx=#{oidx}
 
 <select id="selectPaymentHistoryList" parameterType="Integer" resultType="psdto" >
   
-select * from(select rownum as rnum,AA.* from(select * from product32 A full outer join order32 B on A.pidx = B.pidx full outer join delivery32 C on b.OIDX = c.OIDX 
-where odelyn='N' and B.midx=#{0}  order by A.pidx desc
- <![CDATA[)AA where rownum <=(#{1}-1)*15+15) where rnum >=(#{1}-1)*15+1]]>
+select * from(select rownum as rnum,AA.* from(select * from product32 A full outer join order32 B on A.pidx = B.pidx full outer join delivery32 C on b.OIDX = c.OIDX
+full outer join pay32 D on b.OID = d.OID where odelyn='N'and pacancle='N' and ocancle='N' and dcancle='N' and B.midx=#{0}  order by A.pidx desc
+ <![CDATA[)AA where rownum <=(#{1}-1)*10+10) where rnum >=(#{1}-1)*10+1]]>
  
 </select>
+
+<insert id="insertOrder" parameterType="HashMap">
+
+insert into order32(oidx,pidx,midx,oid,ovol,omoney,oip) values(order_seq.nextval,#{pidx},#{midx},#{oid},#{ovol},#{omoney},#{oip})
+
+</insert>
+
+<insert id="insertDelivery" parameterType="HashMap">
+
+insert into delivery32(didx,oidx,drecipt,dtell,daddr,ddetails,dmemo) values(delivery_seq.nextval,#{oidx},#{drecipt},#{dtell},#{daddr},#{ddetails},#{dmemo})
+
+</insert>
+
+<insert id="insertPayment" parameterType="HashMap">
+
+insert into pay32(paidx,oid,pamoney,paname) values(pay_seq.nextval,#{oid},#{omoney},#{paname})
+
+</insert>
+
+<select id="selectOrderOne" parameterType="HashMap" resultType="ov" >
+  
+  select * from order32 where pidx = #{pidx} and midx = #{midx}
+
+</select>
+
+<update id="updatePsale" parameterType="HashMap">
+
+update product32 set psaleYn = 'Y' where pidx=#{pidx}
+
+</update>
+
+<update id="updatePayment" parameterType="HashMap">
+
+update pay32 set pacomplete = 'Y' where oid=#{oid}
+
+</update>
+
+<select id="selectDelivery" parameterType="Integer" resultType="dv" >
+  
+  select * from delivery32 where dcancle = 'N' and oidx = #{oidx}
+
+</select>
+
+<update id="updateOrderCancle" parameterType="Integer">
+
+update order32 set ocancle='Y' where pidx=#{pidx}
+
+</update>
+
+<update id="updatePaymentCancle" parameterType="String">
+
+update pay32 set pacancle='Y' where oid = #{oid}
+
+</update>
+
+<update id="updateDeliveryCancle" parameterType="Integer">
+
+update delivery32 set dcancle='Y' where oidx = #{oidx}
+
+</update>
+
+<update id="updateProductCancle" parameterType="Integer">
+
+update product32 set psaleYn='N' where pidx=#{pidx}
+
+</update>
 
 
 

@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import ="com.team.marketd.domain.MemberVo" %>
 
-<%MemberVo mv = (MemberVo)request.getAttribute("mv"); %>
+<c:set var="mv" value="${mv}" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +28,7 @@
 						<h3 class="card-title text-center">아이디 찾기 결과</h3>
 						<form class="form-signin">
 							<div class="form-label-group">
-								<p class="text-center">아이디 :&nbsp;<%=mv.getMid() %></p>
+								<p class="text-center">아이디 :&nbsp;${mv.mid}</p>
 
 							</div>
 

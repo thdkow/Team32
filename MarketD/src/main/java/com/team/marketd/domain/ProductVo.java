@@ -15,6 +15,7 @@ public class ProductVo {
 	private String pcontent;
 	private String pimage;
 	private int pvol;
+	private int ovol;
 	private int pmoney;
 	private int pfee;
 	private String pip;

@@ -21,11 +21,13 @@ $( document ).ready( function() {
  	
  	 $('#btn2').click(function(){
  		 
-			var keyword = $("#keyword").val(); 
+			var keyword = $("#keyword").val();
+			var keyword2 = $("#keyword2").val(); 
 			var minPrice = $("#minPrice").val(); 
 			var maxPrice = $("#maxPrice").val(); 
 			
-			if(keyword==""){$("#keyword2").val('empty')}
+			if(keyword==""){$("#keyword").val('empty')}
+			if(keyword2==""){$("#keyword2").val('empty')}
 			if(minPrice==""){$("#minPrice").val('0')}
 			if(maxPrice==""){$("#maxPrice").val('0')}
 					 
@@ -38,7 +40,7 @@ $( document ).ready( function() {
 			 
 			$.ajax({
 				type : "GET",
-				url  : "/Product/"+npage+"/${category}/${minPrice}/${maxPrice}/${keyword}/ProductSerchList.dobby",
+				url  : "/Product/"+npage+"/${caidx}/${minPrice}/${maxPrice}/${keyword}/ProductSerchList.dobby",
 				datatype : "json",
 				cache : false,
 				error : function(){
@@ -67,7 +69,7 @@ $( document ).ready( function() {
 	 
 	$.ajax({
 		type : "GET",
-		url  : "/Product/"+page+"/${category}/${minPrice}/${maxPrice}/${keyword}/ProductListTotal.dobby",
+		url  : "/Product/"+page+"/${caidx}/${minPrice}/${maxPrice}/${keyword}/ProductListTotal.dobby",
 		//위의 url에 0을 사용함으로 전체를 로드한다.(쿼리문에서 if문을 사용하여 where조건을 걸렀다.)
 		datatype : "json",
 		cache : false,   
@@ -92,16 +94,16 @@ $( document ).ready( function() {
 	
 	 	$.ajax({
 			type : "GET",
-			url  : "/Product/"+page+"/${category}/${minPrice}/${maxPrice}/${keyword}/ProductSerchList.dobby",
+			url  : "/Product/"+page+"/${caidx}/${minPrice}/${maxPrice}/${keyword}/ProductSerchList.dobby",
 			datatype : "json",
 			cache : false,   
 			error : function(){
 				alert("리스트 error");
 			},
 			success : function(data){	
-				var cate = ${category};
+				var cate = ${caidx};
 				$.SerchList(data);
-				$('#category').val(cate);	
+				$('#caidx').val(cate);	
 				var oblength = Object.keys(data).length;
 				$('#moreTotalCount').val(oblength);	
 				$.moerCount();
@@ -157,7 +159,7 @@ $( document ).ready( function() {
 			 			aria-label="Search" size="10" value="">&nbsp;~&nbsp;&nbsp;
 				<input class="form-control mr-sm-2 " type="search" placeholder="최대값" id="maxPrice" name="maxPrice"
 						 aria-label="Search" size="10" value="">
-				<input type="hidden" id="category" name="category" value="1000" >
+				<input type="hidden" id="caidx" name="caidx" value="1000" >
 				<button class="btn btn-outline-success my-2 my-sm-0"  id='btn2'>검색</button>
 
 			</form>

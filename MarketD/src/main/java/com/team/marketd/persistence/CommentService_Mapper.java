@@ -10,7 +10,7 @@ public interface CommentService_Mapper {
 	
 	public int deleteCommentAction(CommentVo cv); //삭제
 	
-	public String insertComment(CommentVo cv); //댓글 입력
+	public int insertComment(CommentVo cv); //댓글 입력
 	
 	public void replycomment(int corigincidx,int cupdown); //답글 준비
 	

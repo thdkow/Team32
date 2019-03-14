@@ -3,32 +3,67 @@
 <%@include file="../include/header.jsp"%>
 <%@ page import ="com.team.marketd.domain.ProductVo" %>
 
-<%ProductVo pv = (ProductVo)request.getAttribute("pv"); %>
+<c:set var="pv" value="${pv}" />
+
+<script src="/resources/js/jquery.min.js"></script>
+<script src="/resources/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+
+			$(document).ready(function() {
+				
+				
+				$("#payment2").click(function(){//#으로 id를 호출하여 jquery를 사용하였다.
+					
+				 	if($("#drecipt").val() == ""){//이처럼 텍스트에 들어온 값을 비교하려면 .val을 사용하여야 한다. #subject만 했을시 x
+					
+					$("#sid1").html("<b>수령인을 입력해주세요</b>");
+					$("#focus").focus();
+					$("#sid1").show();
+					$("#sid1").hide(5000);//하이드를사용하여서 출력한 문구를 지웠는데 다시눌렀을때 출력이되지않아 show를 이용하였다.
+					} 
+				 	else if($("#dtell").val() == ""){
+						$("#sid2").html("<b>연락처를 입력해주세요</b>"); 
+						$("#focus").focus();
+						$("#sid2").show();
+						$("#sid2").hide(5000);
+						}
+				 	else if($("#daddr").val() == ""){
+					
+					$("#sid3").html("<b>주소를 입력해주세요</b>");
+					$("#focus").focus();
+					$("#sid3").show();
+					$("#sid3").hide(5000);
+					}
+					else if($("#ddetails").val() == ""){
+						$("#sid4").html("<b>상세주소를 입력해주세요</b>");
+						$("#focus").focus();
+						$("#sid4").show();
+						$("#sid4").hide(5000);
+						}
+					else if($("#paname").val() == ""){
+						$("#sid5").html("<b>입금자명을 입력해주세요</b>");
+						$("#focus").focus();
+						$("#sid5").show();
+						$("#sid5").hide(5000);
+						}else{
+							document.getElementById('frmpp').submit();
+						}
+						
+							
+							
+							return;
+					});	
+				
+				
+			});
+	
+</script>
+
 <div class="container">
 
 	<div class="row">
 
-		<div class="col-lg-3 ">
-			<img class="rounded d-block mt-5" alt="판매하기" height="80" width="255"
-				src="<%=request.getContextPath() %>/resources/img/btn_sub.jpg">
-			<div class="list-group">
-				<div href="#" class="list-group-item menu-item mt-5">
-					<a href="#">마이페이지</a>
-				</div>
-				<div href="#" class="list-group-item menu-item">
-					<a href="#">장바구니</a>
-				</div>
-				<div href="#" class="list-group-item menu-item">
-					<a href="#">구매내역</a>
-				</div>
-				<div href="#" class="list-group-item menu-item">
-					<a href="#">판매내역</a>
-				</div>
-
-			</div>
-
-		</div>
-		<!-- /.col-lg-3 -->
+		<%@include file="../include/menuNavigation2.jsp"%>
 
 		<div class="col-lg-9 my-5">
 			<h1>주문/결제</h1>
@@ -49,17 +84,22 @@
 							<th scope="row"><a href="#"> <img
 									src="http://placehold.it/700x400" height="100" width="100"
 									alt=""></a></th>
-							<td><a href="#"><%=pv.getPsubject() %></a> <br /> 수량 : <%=pv.getPvol() %> 개</td>
-							<td class="text-center"><a href="#"><%=pv.getMname() %>님</a></td>
-							<td class="text-center"><%=pv.getPmoney() %>원</td>
-							<td class="text-center"><%=pv.getPfee() %>원</td>
+							<td><a href="#">${pv.psubject}</a> <br /> 수량 : ${pv.ovol} 개</td>
+							<td class="text-center"><a href="#">${pv.mname}님</a></td>
+							<td class="text-center">${pv.pmoney*pv.ovol}원</td>
+							<td class="text-center">${pv.pfee}원</td>
 							<td class="text-center">0원</td>
 						</tr>
 					</tbody>
 				</table>
 				<h4>총 1개 상품</h4>
-				<form action="productPaymentAction.dobby" method="post">
-				<table class="table">
+				<form id="frmpp" action="productPaymentAction.dobby?pidx=${pv.pidx}" method="post">
+				
+				<input type="hidden"  name="omoney" value="${pv.pmoney*pv.ovol+pv.pfee}"> <!-- 가격 -->
+				
+				
+				
+				<table class="table" id="focus">
 					<thead>
 						<tr>
 							<th scope="col" class="text-center">상품가격</th>
@@ -73,16 +113,16 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td class="text-center"><%=pv.getPmoney() %>원</td>
+							<td class="text-center">${pv.pmoney*pv.ovol}원</td>
 							<td class="text-center"><img alt="+" height="25" width="25"
-								src="<%=request.getContextPath() %>/resources/img/plus.png"></td>
-							<td class="text-center"><%=pv.getPfee() %>원</td>
+								src="/resources/img/plus.png"></td>
+							<td class="text-center">${pv.pfee}원</td>
 							<td class="text-center"><img alt="-" height="25" width="25"
-								src="<%=request.getContextPath() %>/resources/img/minus.png"></td>
+								src="/resources/img/minus.png"></td>
 							<td class="text-center">0원</td>
 							<td class="text-center"><img alt="=" height="20" width="20"
-								src="<%=request.getContextPath() %>/resources/img/equal.png"></td>
-							<td class="text-center"><%=pv.getPmoney()+pv.getPfee() %>원</td>
+								src="/resources/img/equal.png"></td>
+							<td class="text-center">${pv.pmoney*pv.ovol+pv.pfee}원</td>
 						</tr>
 						<tr>
 							<td colspan="7">
@@ -91,37 +131,37 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="">수&nbsp;&nbsp;령&nbsp;&nbsp;인&nbsp;</span>
 									</div>
-									<input type="text" class="form-control" name="Recipient"placeholder="수령인">
-								</div>
-								<div class="input-group  col-md-4 my-4">
-									<div class="input-group-prepend">
-										<span class="input-group-text" id="">카&nbsp;&nbsp;톡&nbsp;&nbsp;ID&nbsp;</span>
-									</div>
-									<input type="text" class="form-control"name="mkakao" placeholder="카톡ID">
+									<input type="text" class="form-control" id="drecipt" name="drecipt"placeholder="수령인">
+									<span id="sid1"></span>
 								</div>
 								<div class="input-group  col-md-5 my-4">
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="">연&nbsp;&nbsp;락&nbsp;&nbsp;처&nbsp;</span>
 									</div>
-									<input type="text" class="form-control" name="phone" placeholder="연락처">
+									<input type="text" class="form-control" id="dtell" name="dtell" placeholder="연락처">
+									<span id="sid2"></span>
 								</div>
 								<div class="input-group  col-md-8 my-4">
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="">주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소&nbsp;</span>
 									</div>
-									<input type="text" class="form-control" name="address" placeholder="주소-지역정보">
+									<input type="text" class="form-control" id="daddr" name="daddr" placeholder="주소-지역정보">
+									<span id="sid3"></span>
 								</div>
 								<div class="input-group  col-md-8 my-4">
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="">상세&nbsp;주소&nbsp;</span>
 									</div>
-									<input type="text" class="form-control" name="address2" placeholder="주소-건물정보">
+									<input type="text" class="form-control" id="ddetails" name="ddetails" placeholder="주소-건물정보">
+									<span id="sid4"></span>
 								</div>
 								<div class="input-group  col-md-10 my-4">
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="">배송&nbsp;메모&nbsp;</span>
+										<span id="sid1"></span>
 									</div>
-									<input type="text" class="form-control" name="delivery" placeholder="배송메모">
+									<input type="text" class="form-control" name="dmemo" placeholder="배송메모">
+									
 								</div>
 							</td>
 						</tr>
@@ -133,7 +173,8 @@
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="">&nbsp;입금자명&nbsp;</span>
 									</div>
-									<input type="text" class="form-control" name="deposit" placeholder="입금자명">
+									<input type="text" class="form-control" id="paname" name="paname" placeholder="입금자명">
+									<span id="sid5"></span>
 								</div>
 								<div class="col-md-10 my-3">입금계좌:&nbsp;&nbsp;&nbsp;&nbsp;농협&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;301123456789&nbsp;&nbsp;&nbsp;&nbsp;Dobby</div>
 							</td>
@@ -152,11 +193,13 @@
 						<tr><td colspan="7"><input type="checkbox">&nbsp;약관동의</td>
 						</tr>
 						<tr>
-						<td colspan="2" class="text-center align-middle" style="font-size: 15px;">총 <%=pv.getPvol() %>개 상품</td>
-						<td colspan="5" class="text-right" style="font-size: 35px;"><%=pv.getPmoney()+pv.getPfee() %></td>
+						<td colspan="2" class="text-center align-middle" style="font-size: 15px;">총 ${pv.ovol}개 상품</td>
+						<td colspan="5" class="text-right" style="font-size: 35px;">${pv.pmoney*pv.ovol+pv.pfee}</td>
+						<input type="hidden" name="omoney" value="${pv.pmoney*pv.ovol+pv.pfee}"/>
+						<input type="hidden" name="ovol" value="${pv.ovol}"/>
 						</tr>
 						<tr>
-						<td colspan="7" class="text-center"><button type="submit" class="btn btn-outline-danger" style="font-size: 20px;">결제하기</button></td>
+						<td colspan="7" class="text-center"><button type="button" id="payment2" class="btn btn-outline-danger" style="font-size: 20px;">결제하기</button></td>
 						<tr>
 					</tbody>
 				</table>

@@ -7,6 +7,7 @@
 		<typeAlias alias="cv" type="com.team.marketd.domain.CommentVo"/>
 		<typeAlias alias="pv" type="com.team.marketd.domain.ProductVo"/>
 		<typeAlias alias="dv" type="com.team.marketd.domain.DeliveryVo"/>
+		<typeAlias alias="ov" type="com.team.marketd.domain.OrderVo"/>
 		<typeAlias alias="psdto" type="com.team.marketd.domain.PaymentSaleDTO"/>
 		
  	 </typeAliases> 

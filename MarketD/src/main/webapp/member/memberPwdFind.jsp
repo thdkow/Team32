@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import ="com.team.marketd.domain.MemberVo" %>
 
-<%MemberVo mv = (MemberVo)request.getAttribute("mv"); %>
+<c:set var="mv" value="${mv}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +52,7 @@
 						<form class="form-signin" action="PwdUpdateAction.dobby" method="post">
 							<p>새 비밀번호</p>
 							<div class="form-label-group">
-							<input type="hidden" name="midx" value="<%=mv.getMidx() %>">
+							<input type="hidden" name="midx" value="${mv.midx}">
 								<input type="password" name="newpwd" id="inputPwd" class="form-control"
 									placeholder="새 비밀번호" required autofocus>
 

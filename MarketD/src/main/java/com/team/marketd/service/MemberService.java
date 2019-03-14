@@ -10,36 +10,38 @@ import com.team.marketd.domain.MemberVo;
 public interface MemberService {
 
 
-	public int selectDoubleIdCheck(String id); // ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ßºï¿½È®ï¿½ï¿½
+	public int selectDoubleIdCheck(String id); // ¾ÆÀÌµð Áßº¹È®ÀÎ
 	
-	public MemberVo login(String id,String pwd); //ï¿½Î±ï¿½ï¿½ï¿½
+	public MemberVo login(String id,String pwd); //·Î±×ÀÎ
 	
-	public String checkAutoLogin();
+	public MemberVo checkAutoLogin(String sessionKey); // ÀÚµ¿ ·Î±×ÀÎ Ã¼Å©
 	
-	public String keepLogin();
+	public void keepLogin(int midx,String sessionKey,String sessionLimit);
 	
-	public MemberVo selectIdFind(String name,int birth,String question); //ï¿½ï¿½ï¿½Ìµï¿½Ã£ï¿½ï¿½
+	public MemberVo selectIdFind(String name,int birth,String question); //¾ÆÀÌµðÃ£±â
 	
-	public MemberVo selectPwdFind(String id,String name,String question); //ï¿½ï¿½Ð¹ï¿½È£Ã£ï¿½ï¿½
+	public MemberVo selectPwdFind(String id,String name,String question); //ºñ¹Ð¹øÈ£Ã£±â
 	
-	public int updatePwd(String npwd,int midx); //ï¿½ï¿½Ð¹ï¿½È£ ï¿½ï¿½ï¿½ï¿½
+	public int updatePwd(String npwd,int midx); //ºñ¹Ð¹øÈ£ º¯°æ
 	
-	public MemberVo selectProfile(int midx); //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	public MemberVo selectProfile(int midx); //È¸¿øÁ¤º¸ º¸±â
 	
-	public MemberVo checkPwd(int midx,String pwd); // È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï±ï¿½ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ Ã¼Å©
+	public MemberVo checkPwd(int midx,String pwd); // È¸¿øÁ¤º¸ ¼öÁ¤À¸·Î ÀÌµ¿ÇÏ±âÀü ºñ¹Ð¹øÈ£ Ã¼Å©
 	
-	public void updateProfile(int midx, String pwd,String phone, String email,int caidx,long account,String mkakao, String mquestion); //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public void updateProfile(int midx, String pwd,String phone, String email,int caidx,long account,String mkakao, String mquestion); //È¸¿øÁ¤º¸¼öÁ¤
 	
-	public void updateUpgrade(String mgrade,int midx); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public void updateUpgrade(String mgrade,int midx); //¸â¹öµî±Þ
 	
-	public void deleteProfile(int midx); //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public void deleteProfile(int midx); //È¸¿ø»èÁ¦
 	
 	public int insertProfile(String id, String pwd, String name, int birth, String sex, String mail, String phone,
-			int caidx, long maccount, String kakao, String mqeustion,String ip); //È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			int caidx, long maccount, String kakao, String mqeustion,String ip); //È¸¿ø°¡ÀÔ
 
 	public void updateGB(int midx, int chidx, String rflag);
 
 	public MemberVo checkGB1(int pidx);
+	
+	public void dropCookie(int midx);
 
 
 }

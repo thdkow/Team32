@@ -2,6 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.marketd.persistence.MemberService_Mapper">
+
+<!--checkAotoLogin / 자동로그인 체크-->
+<select id="checkAutoLogin" parameterType = "HashMap" resultType="mv">
+<![CDATA[select midx from member32 where mkey = #{mkey} and mLimit >= sysdate]]>
+</select>
+
+<!--keepLogin /  자동로그인 선택-->
+<update id="keepLogin" parameterType = "HashMap">
+update member32 set mKey = #{mkey}, mLimit = sysdate + 7 where midx=#{midx}
+</update>
+<!-- dropCookie / 쿠키만료일 변경하기 -->
+<update id="dropCookie" parameterType="HashMap">
+update member32 set mlimit= sysdate-7 where midx =#{midx}
+</update>
+
 <!-- 회원가입 -->
 <insert id="insertProfile" parameterType = "HashMap">
 insert into member32(midx, mid, mpwd, mname, msex, mbirth, mtell, mkakao, mmail, mquestion, caidx, maccount, mip)

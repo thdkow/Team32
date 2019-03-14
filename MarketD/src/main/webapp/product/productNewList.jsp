@@ -142,7 +142,7 @@ $( document ).ready( function() {
 	href="${myContextPath}/include/member.css" />
 
 	<form action="/Product/ProductList.dobby" method="post">
-	<select name="category">
+	<select name="caidx">
 			 <option value="1">남성의류</option>
 			 <option value="302">여성의류</option>
 			 <option value="303">아우터</option>
