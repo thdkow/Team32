@@ -26,34 +26,22 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	
 	 @Override
 		public boolean preHandle(HttpServletRequest request, HttpServletResponse response,Object handler) throws Exception{
-			System.out.println("Interceptor 실행?");
+		 System.out.println("interceptor 占썬끋占쏙옙?");
 		 HttpSession session = request.getSession();	
-		 System.out.println("session"+session);
-		 //로그인 하지않은 경우
 		 if(session.getAttribute("midx") == null){
-			 System.out.println("들어왔니?");
-			//이동할 주소를 담는다
-			 saveDest(request); // 원래 가려고했던 주소를 담아두고 자동로그인 성공시 이동
-			//본인 pc에 저장된 쿠키 정보를 꺼낸다
-			 Cookie useCookie = WebUtils.getCookie(request,"useCookie"); //WebUtils에서 getCookie로 loginCookie이름의 쿠키 매핑하여 변수저장
-			 			 System.out.println("너는");
-			 //저장된 쿠키에 자동 로그인정보가 있으면
+			 saveDest(request); 
+			 Cookie useCookie = WebUtils.getCookie(request,"useCookie");
 			if (useCookie  != null){ 
-				System.out.println("실행?");
-			//쿠키에 저장된 키정보와 같은 키가 DB에 있는지 체크해서 있으면 그 회원정보를 담는다 	
 			 MemberVo mv =  ms.checkAutoLogin(useCookie.getValue());
 			 if (mv != null) {
-				 System.out.println("실행2?");
-				 //자동로그인 기록이 존재하면 세션에 담고
 				 request.getSession().setAttribute("midx", mv.getMidx());	
 				
-				 Cookie useCookie2 = new Cookie("useCookie",useCookie.getValue());	//갱신 같은이름으로 만들어 전에것은 삭제 키값을 담아서만듬
+				 Cookie useCookie2 = new Cookie("useCookie",useCookie.getValue());
 				 
 				 useCookie2.setPath("/");
-				 useCookie2.setMaxAge(60*60*24*7);			//쿠키의 키값은 담아놓은데이터들이다. 7일의 기간동안 사용할 수 있게 처리하였다.
+				 useCookie2.setMaxAge(60*60*24*7);
 				 response.addCookie(useCookie2);
 				 
-				 // DB 테이블에도 날짜 갱신
 				 Calendar cal = Calendar.getInstance();
 				 cal.setTime(new Date());
 				 cal.add(Calendar.DATE, 7);
@@ -68,7 +56,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			 }
 			 
 			}else {			
-			 response.sendRedirect(request.getContextPath()+"/login.dobby");
+			 response.sendRedirect(request.getContextPath()+"/login2.dobby");
 			 return false;
 			}
 			 
@@ -92,7 +80,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		 if (req.getMethod().equals("GET")){
 			 req.getSession().setAttribute("dest", uri+query);
 			
-		//	 System.out.println("이동해야할 페이지url:"+uri+query);
 		 }		 
 	 }	
 }

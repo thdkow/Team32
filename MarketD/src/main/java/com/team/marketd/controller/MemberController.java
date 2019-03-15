@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.WebUtils;
 
 import com.team.marketd.domain.MemberVo;
 import com.team.marketd.service.MemberService;
@@ -86,18 +88,19 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "login.dobby")
-	public String memberLogin(HttpSession session) { // 로그인 페이지 이동 해결
-		// 컨트롤러에 들어오기전에 AuthInteceptor 이 실행되어 세션에 midx가 담긴다면 index.jsp로 페이지 이동 
-		if(session.getAttribute("midx") != null){
-			 return "index";
-		 }
+	public String memberLogin(HttpSession session, HttpServletRequest request) { 
+		if (session.getAttribute("midx") != null) {
+			return "index";
+		}
+
 		return "login/login";
 	}
-	
+
 	@RequestMapping(value = "login2.dobby")
 	public String memberLogin2(HttpSession session) {
-		return "login/login2";
+		return "login/login";
 	}
+
 	@RequestMapping(value = "index.dobby")
 	public String index() {
 		return "index";
@@ -115,7 +118,7 @@ public class MemberController {
 			return "login/login";
 
 		session.setAttribute("midx", mv.getMidx()); // session 만들기
-	
+
 		// 등급
 		int a = mv.getMgood() - mv.getMbad();
 		String mgrade = null;
@@ -132,24 +135,40 @@ public class MemberController {
 		}
 		System.out.println("현재 등급은:" + mgrade);
 		ms.updateUpgrade(mgrade, mv.getMidx());
-		/*model.addAttribute("mv", mv);*/
+		/* model.addAttribute("mv", mv); */
 		model.addAttribute("midx", mv.getMidx());
-		model.addAttribute("useCookie",useCookie);
-		return "index";
+		model.addAttribute("useCookie", useCookie);
+		return "redirect:index.jsp";
 	}
 
+	
 	@RequestMapping(value = "logoutAction.dobby")
-	public String memberLogoutAction(HttpSession session,HttpServletResponse response) { // 로그아웃 작동 해결
-		int midx = (int)session.getAttribute("midx");
+	public String memberLogoutAction(HttpSession session, HttpServletResponse response, HttpServletRequest request) { // 로그아웃 작동 해결
+		int midx = (int) session.getAttribute("midx");
 		ms.dropCookie(midx);
-		Cookie cookie = new Cookie("useCookie",null);
-
+		//세션삭제
+		session.removeAttribute("midx");
+		session.invalidate();
+		
+/*			Cookie cookie = new Cookie("useCookie", null);
 		cookie.setMaxAge(0);
-		session.removeAttribute("midx"); // 세션 삭제 메소드
-		response.addCookie(cookie);
+		response.addCookie(cookie);*/
+		//쿠키 삭제		
+		Cookie useCookie = WebUtils.getCookie(request, "useCookie"); 
+		if (useCookie != null) {
+			 useCookie.setPath("/");	//쿠키 사용범위 지정
+			 useCookie.setMaxAge(0);	 //쿠키 사용기간 지정		 
+			 response.addCookie(useCookie);
+		}
 		
-		session.removeAttribute("midx"); // 세션 삭제 메소드
-		
+		/*
+		 * Cookie[] cookies = request.getCookies(); if(cookies != null){ for(int i=0; i
+		 * < cookies.length; i++){
+		 * 
+		 * // 쿠키의 유효시간을 0으로 설정하여 만료시킨다 cookies[i].setMaxAge(0) ;
+		 * 
+		 * // 응답 헤더에 추가한다 response.addCookie(cookies[i]) ; } }
+		 */
 		return "redirect:index.jsp";
 	}
 
@@ -259,8 +278,8 @@ public class MemberController {
 	@RequestMapping("memberRecommend.dobby")
 	public String memberGBAction(HttpSession session, @RequestParam("rflag") String rflag,
 			@RequestParam("pidx") int pidx, @RequestParam("chidx") int chidx) { // 추천 작동
-		System.out.println("컨트롤러 접속"); 
-		System.out.println("rflag:" + rflag); //추천 good인지 bad인지
+		System.out.println("컨트롤러 접속");
+		System.out.println("rflag:" + rflag); // 추천 good인지 bad인지
 		System.out.println("pidx:" + pidx);
 		System.out.println("chidx:" + chidx);
 		MemberVo mv = ms.checkGB1(pidx);

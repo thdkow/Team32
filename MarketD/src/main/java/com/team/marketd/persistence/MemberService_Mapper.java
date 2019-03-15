@@ -7,39 +7,39 @@ import com.team.marketd.domain.MemberVo;
 public interface MemberService_Mapper {
 	
 
-	public int selectDoubleIdCheck(HashMap<String,Object>hm); //¾ÆÀÌµğ Áßº¹È®ÀÎ
+	public int selectDoubleIdCheck(HashMap<String,Object>hm); //ì•„ì´ë”” ì¤‘ë³µí™•ì¸
 	
-	public void dropCookie(HashMap<String,Object>hm);//ÄíÅ°»èÁ¦
+	public void dropCookie(HashMap<String,Object>hm);//ì¿ í‚¤ì‚­ì œ
 	
-	public int insertProfile(HashMap<String,Object>hm); //È¸¿ø°¡ÀÔ
+	public int insertProfile(HashMap<String,Object>hm); //íšŒì›ê°€ì…
 	
-	public MemberVo login(HashMap<String,Object>hm); //·Î±×ÀÎ
+	public MemberVo login(HashMap<String,Object>hm); //ë¡œê·¸ì¸
 	
-	public MemberVo checkAutoLogin(HashMap<String,Object>hm); //ÀÚµ¿·Î±×ÀÎ  Ã¼Å©
+	public MemberVo checkAutoLogin(HashMap<String,Object>hm); //ìë™ë¡œê·¸ì¸  ì²´í¬
 	
-	public void keepLogin(HashMap<String,Object>hm); //ÀÚµ¿·Î±×ÀÎ º¸°ü
+	public void keepLogin(HashMap<String,Object>hm); //ìë™ë¡œê·¸ì¸ ë³´ê´€
 	
-	public MemberVo selectIdFind(HashMap<String, Object>hm); //¾ÆÀÌµğÃ£±â
+	public MemberVo selectIdFind(HashMap<String, Object>hm); //ì•„ì´ë””ì°¾ê¸°
 	
-	public MemberVo selectPwdFind(HashMap<String,Object>hm); //ºñ¹Ğ¹øÈ£ Ã£±â
+	public MemberVo selectPwdFind(HashMap<String,Object>hm); //ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
 	
-	public int updatePwd(HashMap<String,Object>hm); //ºñ¹Ğ¹øÈ£ ¼öÁ¤
+	public int updatePwd(HashMap<String,Object>hm); //ë¹„ë°€ë²ˆí˜¸ ìˆ˜ì •
 	
-	public MemberVo selectProfile(HashMap<String,Object>hm); //È¸¿øÁ¤º¸ º¸±â
+	public MemberVo selectProfile(HashMap<String,Object>hm); //íšŒì›ì •ë³´ ë³´ê¸°
 	
-	public MemberVo checkPwd(HashMap<String,Object>hm); //¼öÁ¤Àü ºñ¹Ğ¹øÈ£ Ã¼Å©
+	public MemberVo checkPwd(HashMap<String,Object>hm); //ìˆ˜ì •ì „ ë¹„ë°€ë²ˆí˜¸ ì²´í¬
 	
-	public void updateProfile(HashMap<String,Object>hm); //È¸¿øÁ¤º¸ ¼öÁ¤
+	public void updateProfile(HashMap<String,Object>hm); //íšŒì›ì •ë³´ ìˆ˜ì •
 	
-	public void updateUpgrade(HashMap<String,Object>hm); //¸â¹ö µî±Ş¾÷
+	public void updateUpgrade(HashMap<String,Object>hm); //ë©¤ë²„ ë“±ê¸‰ì—…
 	
-	public void deleteProfile(HashMap<String,Object>hm); //È¸¿øÅ»Åğ
+	public void deleteProfile(HashMap<String,Object>hm); //íšŒì›íƒˆí‡´
 
-	public MemberVo checkGB1(HashMap<String, Object>hm); //Áßº¹ ÃßÃµ È®ÀÎ1
+	public MemberVo checkGB1(HashMap<String, Object>hm); //ì¤‘ë³µ ì¶”ì²œ í™•ì¸1
 	
-	public void insertGB(HashMap<String, Object>hm); // Áßº¹È®ÀÎ Å×ÀÌºí¿¡ Ãß°¡
+	public void insertGB(HashMap<String, Object>hm); // ì¤‘ë³µí™•ì¸ í…Œì´ë¸”ì— ì¶”ê°€
 	
-	public void updateGB(HashMap<String, Object>hm); // ¸â¸Ó ÃßÃ³´© ¾÷µ¥ÀÌµå
+	public void updateGB(HashMap<String, Object>hm); // ë©¤ë¨¸ ì¶”ì²˜ëˆ„ ì—…ë°ì´ë“œ
 
 	public int checkGB2(int midx, int chidx);
 	

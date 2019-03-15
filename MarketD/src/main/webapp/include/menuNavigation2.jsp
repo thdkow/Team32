@@ -11,7 +11,7 @@
 					<a href="/memberProfile.dobby">마이페이지</a>
 				</div>
 				<div  class="list-group-item menu-item">
-					<a href="#">장바구니</a>
+					<a href="/Cart/ShoppingCartList.dobby">장바구니</a>
 				</div>
 				<div class="list-group-item menu-item">
 					<a href="/Product/ProductPaymentHistory.dobby">구매내역</a>

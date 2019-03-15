@@ -10,32 +10,32 @@ import com.team.marketd.domain.MemberVo;
 public interface MemberService {
 
 
-	public int selectDoubleIdCheck(String id); // ¾ÆÀÌµğ Áßº¹È®ÀÎ
+	public int selectDoubleIdCheck(String id); // ì•„ì´ë”” ì¤‘ë³µí™•ì¸
 	
-	public MemberVo login(String id,String pwd); //·Î±×ÀÎ
+	public MemberVo login(String id,String pwd); //ë¡œê·¸ì¸
 	
-	public MemberVo checkAutoLogin(String sessionKey); // ÀÚµ¿ ·Î±×ÀÎ Ã¼Å©
+	public MemberVo checkAutoLogin(String sessionKey); // ìë™ ë¡œê·¸ì¸ ì²´í¬
 	
 	public void keepLogin(int midx,String sessionKey,String sessionLimit);
 	
-	public MemberVo selectIdFind(String name,int birth,String question); //¾ÆÀÌµğÃ£±â
+	public MemberVo selectIdFind(String name,int birth,String question); //ì•„ì´ë””ì°¾ê¸°
 	
-	public MemberVo selectPwdFind(String id,String name,String question); //ºñ¹Ğ¹øÈ£Ã£±â
+	public MemberVo selectPwdFind(String id,String name,String question); //ë¹„ë°€ë²ˆí˜¸ì°¾ê¸°
 	
-	public int updatePwd(String npwd,int midx); //ºñ¹Ğ¹øÈ£ º¯°æ
+	public int updatePwd(String npwd,int midx); //ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
 	
-	public MemberVo selectProfile(int midx); //È¸¿øÁ¤º¸ º¸±â
+	public MemberVo selectProfile(int midx); //íšŒì›ì •ë³´ ë³´ê¸°
 	
-	public MemberVo checkPwd(int midx,String pwd); // È¸¿øÁ¤º¸ ¼öÁ¤À¸·Î ÀÌµ¿ÇÏ±âÀü ºñ¹Ğ¹øÈ£ Ã¼Å©
+	public MemberVo checkPwd(int midx,String pwd); // íšŒì›ì •ë³´ ìˆ˜ì •ìœ¼ë¡œ ì´ë™í•˜ê¸°ì „ ë¹„ë°€ë²ˆí˜¸ ì²´í¬
 	
-	public void updateProfile(int midx, String pwd,String phone, String email,int caidx,long account,String mkakao, String mquestion); //È¸¿øÁ¤º¸¼öÁ¤
+	public void updateProfile(int midx, String pwd,String phone, String email,int caidx,long account,String mkakao, String mquestion); //íšŒì›ì •ë³´ìˆ˜ì •
 	
-	public void updateUpgrade(String mgrade,int midx); //¸â¹öµî±Ş
+	public void updateUpgrade(String mgrade,int midx); //ë©¤ë²„ë“±ê¸‰
 	
-	public void deleteProfile(int midx); //È¸¿ø»èÁ¦
+	public void deleteProfile(int midx); //íšŒì›ì‚­ì œ
 	
 	public int insertProfile(String id, String pwd, String name, int birth, String sex, String mail, String phone,
-			int caidx, long maccount, String kakao, String mqeustion,String ip); //È¸¿ø°¡ÀÔ
+			int caidx, long maccount, String kakao, String mqeustion,String ip); //íšŒì›ê°€ì…
 
 	public void updateGB(int midx, int chidx, String rflag);
 

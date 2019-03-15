@@ -6,8 +6,8 @@
 <c:set var="myContextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="alist" value="${requestScope.alist}"/>
 
- <script src="/resources/js/jquery.min.js"></script>
- <script src="/resources/js/jquery-3.2.1.min.js"></script>
+<script src="/resources/js/jquery.min.js"></script>
+<script src="/resources/js/jquery-3.2.1.min.js"></script>
  
 <script type="text/javascript">
 $(function(){
@@ -100,15 +100,24 @@ $( document ).ready( function() {
 	
 	 $(data).each(function(index){
 		 
-		 var writedate = this.pwridate.substr(0,10);
-		 
-			 str += "<div class='col-lg-4 col-md-6 mb-4'><div class='card h-100'>"
-			 	+ "<a href='/Product/ProductContent.dobby?pidx="+ this.pidx + "'><img src='"+this.pimage+"'height='145' width='253' alt=''></a>"
-				+ "<div class='card-body'><h4 class='card-title'>" 
-				+"<a href='/Product/ProductContent.dobby?pidx="+ this.pidx + "'>"+this.psubject+"</a></h4>"
-				+  "<h5>"+this.pmoney+"원</h5>"+  "<p class='card-text'>판매자 : "+this.mname+"</p><p class='card-text'>등록일 : "
-				+writedate+"</p></div></div></div>"
+		 var upload = this.uploadPath;
+			 
+			 var fileCallPath = upload+"/"+this.uuid+"_"+this.fileName;
+			 var writedate = this.pwridate.substr(0,10);
+			 		 
+			var image = "<img class='img-fluid'  width='200' height='155' src='/display.dobby?fileName="+fileCallPath+"'>"
+					
+				str += "<div class='col-lg-4 col-md-6 mb-4'><div class='card h-100'>"
+					+ "<a href='/Product/ProductContent.dobby?pidx="+ this.pidx + "'>"
+				 	+ "<ul data-path='"+this.uploadPath+"' data-uuid='"+this.uuid+"' "
+				 	+ "data-filename='"+this.fileName+"' data-type='"+this.fileType+"'><div>"
+					+ image+ "</ul></a>"
+					+ "<div class='card-body'><h4 class='card-title'>" 
+					+"<a href='/Product/ProductContent.dobby?pidx="+ this.pidx + "'>"+this.psubject+"</a></h4>"
+					+  "<h5>"+this.pmoney+"원</h5>"+  "<p class='card-text'>판매자 : "+this.mname+"</p><p class='card-text'>등록일 : "
+					+writedate+"</p></div></div></div>";
 				
+				 
 
 				
 		 });
@@ -124,7 +133,6 @@ $( document ).ready( function() {
 
 
 </script>
-
 
 	<!-- Page Content -->
 	<div class="container">

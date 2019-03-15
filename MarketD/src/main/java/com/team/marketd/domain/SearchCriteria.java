@@ -4,6 +4,8 @@ public class SearchCriteria extends Criteria {
 	//Criteria�� ��ӹ޾� ����ϴ� �˻��� ������ִ� Ŭ����
 	private String searchType; //�˻�����(����,�̸� ��)
 	private String keyword;    //�˻� Ű����
+	private String startdate ;
+	private String lastdate ;
 	private int ppagenum=10;  
 	private int category;   //
 	private int minPrice ;
@@ -14,6 +16,18 @@ public class SearchCriteria extends Criteria {
 	}
 	public void setCategory(int caidx) {
 		this.category = caidx;
+	}
+	public String getStartdate() {
+		return startdate;
+	}
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
+	public String getLastdate() {
+		return lastdate;
+	}
+	public void setlastdate(String lastdate) {
+		this.lastdate = lastdate;
 	}
 	public int getMinPrice() {
 		return minPrice;

@@ -60,9 +60,9 @@
 							</div>
 
 							<div class="custom-control custom-checkbox mb-3">
-								<input type="checkbox" class="custom-control-input"
-									id="customCheck1"> <label class="custom-control-label"
-									for="customCheck1">자동로그인</label>
+									<input type="checkbox" class="custom-control-input"
+									id="customCheck1" value="on"name="useCookie" > <label class="custom-control-label"
+									for="customCheck1">자동 로그인</label>
 							</div>
 							<button
 								class="btn btn-lg btn-outline-success btn-block text-uppercase"

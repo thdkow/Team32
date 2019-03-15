@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.marketd.persistence.ShoppingCartService_Mapper">
+
+<select id="selectShoppingCartList" parameterType="Integer" resultType="scv">
+	
+ select * from shoppingCart32 A left outer join product32 B on A.pidx = B.pidx 
+ left outer join member32 C on B.midx = C.midx where A.midx = #{midx}
+
+</select>
+
+<delete id="deleteShoppingCartProduct" parameterType="HashMap">
+
+delete from shoppingCart32 where
+<if test='division == "one"'>
+ sidx=#{sidx}
+</if>
+<if test='division == "all"'>
+ midx=#{midx}
+</if>
+</delete>
+	
+</mapper>

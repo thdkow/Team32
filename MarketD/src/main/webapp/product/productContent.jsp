@@ -4,7 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.util.ArrayList"%>
 
+<c:set var="cv" value="${cv}" />
 <c:set var="pv" value="${pv}" />
+<c:set var="pv2" value="${pv2}" />
 <c:set var="myContextPath" value="${pageContext.request.contextPath}" />
 
 
@@ -338,6 +340,12 @@ function fnovol(ovol) {
 	
 </script>
 
+<c:choose>
+	<c:when test="${pv2.fileType eq true}">
+		<c:set var="fileCallPath" value="${pv2.uploadPath }/${pv2.uuid }_${pv2.fileName}"></c:set>
+	</c:when>
+</c:choose>
+
 <!-- Page Content -->
 <div class="container">
 
@@ -348,26 +356,10 @@ function fnovol(ovol) {
 		<div class="col-lg-9 my-5">
 			<div class="row">
 				<div class="col-md-6">
-					<img class="img-fluid" alt="eCommerce Detail"
-						src="http://www.prepbootstrap.com/Content/images/template/productslider/product_004.jpg" />
-					<br />
-					<div class="row">
-						<div class="col-md-3 col-sm-3 col-xs-6">
-							<img class="img-fluid" alt="eCommerce Detail"
-								src="http://www.prepbootstrap.com/Content/images/template/productslider/product_005.jpg" />
-						</div>
-						<div class="col-md-3 col-sm-3 col-xs-6">
-							<img class="img-fluid" alt="eCommerce Detail"
-								src="http://www.prepbootstrap.com/Content/images/template/productslider/product_005.jpg" />
-						</div>
-						<div class="col-md-3 col-sm-3 col-xs-6">
-							<img class="img-fluid" alt="eCommerce Detail"
-								src="http://www.prepbootstrap.com/Content/images/template/productslider/product_005.jpg" />
-						</div>
-						<div class="col-md-3 col-sm-3 col-6">
-							<img class="img-fluid" alt="eCommerce Detail"
-								src="http://www.prepbootstrap.com/Content/images/template/productslider/product_005.jpg" />
-						</div>
+				<ul data-path='${pv2.uploadPath }' data-uuid='${pv2.uuid }' data-filename='${pv2.fileName}' data-type='${pv2.fileType }'><div>
+					<img class="img-fluid" alt="eCommerce Detail" src='/display.dobby?fileName=${fileCallPath}'>
+				</ul>	
+				<br />
 					</div>
 				</div>
 				<div class="col-md-6">

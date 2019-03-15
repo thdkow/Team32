@@ -22,9 +22,8 @@ public interface ProductService_Mapper {
 	public int insertDelivery(HashMap<String, Object> hm);
 	public int updatePsale(HashMap<String, Object> hm);
 	public int updatePayment(HashMap<String, Object> hm);
-	public String deletePayment();
-	public ArrayList<PaymentSaleDTO> selectSalesHistoryList(int midx,int page);
-	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(int midx,int page);
+	public ArrayList<PaymentSaleDTO> selectSalesHistoryList(HashMap<String, Object> hm);
+	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(HashMap<String, Object> hm);
 	public OrderVo selectOrderOne(HashMap<String, Object> hm);
 	public DeliveryVo selectDelivery(int oidx);
 	public String selectProductSimilarList();

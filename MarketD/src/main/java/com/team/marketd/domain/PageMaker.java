@@ -109,8 +109,11 @@ public class PageMaker {
 				UriComponentsBuilder
 				.newInstance()
 				.queryParam("page", page)
-				.queryParam("scount", scri.getPerPageNum())
-				.queryParam("searchType", scri.getSearchType())
+				.queryParam("caidx", scri.getCategory())
+				.queryParam("startdate", scri.getStartdate())
+				.queryParam("lastdate", scri.getLastdate())
+				.queryParam("minPrice", scri.getMinPrice())
+				.queryParam("maxPrice", scri.getMaxPrice())
 				.queryParam("keyword", encoding(scri.getKeyword()))
 				.build();
 				
@@ -122,6 +125,8 @@ public class PageMaker {
 				.newInstance()
 				.queryParam("page", getStartPage()-1)
 				.queryParam("caidx", scri.getCategory())
+				.queryParam("startdate", scri.getStartdate())
+				.queryParam("lastdate", scri.getLastdate())
 				.queryParam("minPrice", scri.getMinPrice())
 				.queryParam("maxPrice", scri.getMaxPrice())
 				.queryParam("keyword", encoding(scri.getKeyword()))
@@ -135,6 +140,8 @@ public class PageMaker {
 				.newInstance()
 				.queryParam("page", getEndPage()+1)
 				.queryParam("caidx", scri.getCategory())
+				.queryParam("startdate", scri.getStartdate())
+				.queryParam("lastdate", scri.getLastdate())
 				.queryParam("minPrice", scri.getMinPrice())
 				.queryParam("maxPrice", scri.getMaxPrice())
 				.queryParam("keyword", encoding(scri.getKeyword()))

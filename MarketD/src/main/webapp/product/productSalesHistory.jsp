@@ -7,8 +7,23 @@
 <c:set var="alist" value="${requestScope.alist}"/>
 <c:set var="pm" value="${requestScope.pm}"/>
 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		
+		<script type="text/javascript" src="/resources/js/calendar.js"></script><!-- 달력 -->
+		<link rel="stylesheet" href="/resources/css/style.css" />
 
 <%@include file="/include/header.jsp"%>
+
+
+<title>판매내역</title>
+</head>
+<body>
+
 
 <div class="container">
 
@@ -18,11 +33,12 @@
 				
 		<div class="col-lg-9 my-5">
 			<h1>판매내역</h1>
-			<form class="form-inline my-3 justify-content-center">
-			 	<input class="form-control mr-sm-2" type="search" placeholder="시작일" 
+			<form class="form-inline my-3 justify-content-center" action="/Product/ProductSalesHistory.dobby" method="post">
+			 	<input class="form-control mr-sm-2" id="date-picker" name="startdate" type="text" placeholder="시작일" 
 			 			aria-label="Search" size="20">&nbsp;~&nbsp;&nbsp;
-				<input class="form-control mr-sm-2 " type="search" placeholder="마지막일"
+				<input class="form-control mr-sm-2" id="date-picker2" name="lastdate" type="text" placeholder="마지막일"
 						 aria-label="Search" size="20">
+
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
 			<div class="row clearfix">
@@ -156,5 +172,7 @@
 </div>
 
 
+</body>
+</html>
 
 <%@include file="/include/footer.jsp"%>

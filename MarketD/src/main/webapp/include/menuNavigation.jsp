@@ -10,7 +10,7 @@
 					<a href="#">▼ 사용자페이지</a>
 					<ul>
 						<li><a href="/memberProfile.dobby">마이페이지</a></li>
-						<li><a href="#">장바구니</a></li>
+						<li><a href="/Cart/ShoppingCartList.dobby">장바구니</a></li>
 						<li><a href="/Product/ProductPaymentHistory.dobby">구매내역</a></li>
 						<li><a href="/Product/ProductSalesHistory.dobby">판매내역</a></li>
 					</ul>

@@ -30,7 +30,7 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 		filter.setEncoding("UTF-8");
 		return new Filter[] {filter};
 	}
-	@Override//���쇱��濡��� 以�鍮�
+	@Override//업로드 설정
 	protected void customizeRegistration(ServletRegistration.Dynamic registration) {
 		
 		registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");

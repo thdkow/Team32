@@ -61,7 +61,7 @@
 					</tbody>
 				</table>	
 				<div class="col align-self-end"> 
-				<button type="submit" class="float-right btn btn-outline-primary">수정</button>
+				<button type="submit" class="float-right btn btn-outline-primary">확인</button>
 			</div>		
 			</form>
 							

@@ -45,9 +45,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public ArrayList<ProductVo> selectNewProductList(int page) { // �ֽ� ��ǰ ����Ʈ ����Ʈ
+	public ArrayList<ProductVo> selectNewProductList(int page) { // 신규 상품 리스트
 		
 		ArrayList<ProductVo> alist = psm.selectNewProductList(page);
+		for(int i=0;i<alist.size();i++) {
+		String upload = alist.get(i).getUploadPath();
+		if(upload != null) {
+		String upload2=upload.replaceAll("\\\\", "/");
+		alist.get(i).setUploadPath(upload2);}
+		}
 		
 		
 		return alist;
@@ -69,7 +75,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ProductVo selectProductOne(int pidx) { // ��ǰ ������ ����Ʈ
+	public ProductVo selectProductOne(int pidx) { // 상품 정보불러오기
 		
 		ProductVo pv = psm.selectProductOne(pidx);
 		
@@ -108,34 +114,31 @@ public class ProductServiceImpl implements ProductService {
 		return 0;
 	}
 
-
-
 	@Override
-	public String updatePayment() { // �����Ϸ� ������Ʈ
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String deletePayment() { // �Ⱓ 2�� ���� ���� �̰����� �������� ����
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<PaymentSaleDTO> selectSalesHistoryList(int midx,int page) {
+	public ArrayList<PaymentSaleDTO> selectSalesHistoryList(int midx,int page,String startdate,String lastdate) {
 		
-		ArrayList<PaymentSaleDTO> alist=psm.selectSalesHistoryList(midx,page);
-		System.out.println("���ø���Ʈ ������ :"+alist);
+		HashMap<String, Object> hm =new HashMap<String, Object>();
+		hm.put("midx", midx);
+		hm.put("page", page);
+		hm.put("startdate", startdate);
+		hm.put("lastdate", lastdate);
 		
-		return alist; // �Ǹų��� ����Ʈ
+		ArrayList<PaymentSaleDTO> alist=psm.selectSalesHistoryList(hm);
+		
+		return alist; 
 		
 	}
 
 	@Override
-	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(int midx,int page) { // 占쏙옙占신놂옙占쏙옙 占쏙옙占쏙옙트
+	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(int midx,int page,String startdate,String lastdate) { 
+
+		HashMap<String, Object> hm =new HashMap<String, Object>();
+		hm.put("midx", midx);
+		hm.put("page", page);
+		hm.put("startdate", startdate);
+		hm.put("lastdate", lastdate);
 		
-		ArrayList<PaymentSaleDTO> exec = psm.selectPaymentHistoryList(midx,page);
+		ArrayList<PaymentSaleDTO> exec = psm.selectPaymentHistoryList(hm);
 		
 		return exec;
 	}
@@ -193,11 +196,13 @@ public class ProductServiceImpl implements ProductService {
 
 
 	@Override
-	public int selectHistoryTotal(int midx,String division) {
+	public int selectHistoryTotal(int midx,String division,String startdate,String lastdate) {
 		
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 		hm.put("midx", midx);
 		hm.put("division", division);
+		hm.put("startdate", startdate);
+		hm.put("lastdate", lastdate);
 		
 		int tcount = psm.selectHistoryTotal(hm);
 		

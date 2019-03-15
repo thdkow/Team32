@@ -13,13 +13,11 @@ public interface ProductService {
 	public ProductVo selectProductOne(int pidx);
 	public int insertSaleProduct(int midx,int caidx,String psubject,String pcontent,int pvol,int pmoney,int pfee,String pip);
 	public int selectProductListTotal(int page,int caidx,int minPrice,int maxPrice,String keyword);
-	public int selectHistoryTotal(int midx,String division);
+	public int selectHistoryTotal(int midx,String division, String startdate, String lastdate);
 	public int insertShoppingCart(int pidx,int pvol,int midx);
 	public void insertPay(HashMap<String, Object> hm);
-	public String updatePayment();
-	public String deletePayment();
-	public ArrayList<PaymentSaleDTO> selectSalesHistoryList(int midx,int page);
-	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(int midx,int page);
+	public ArrayList<PaymentSaleDTO> selectSalesHistoryList(int midx,int page, String startdate, String lastdate);
+	public ArrayList<PaymentSaleDTO> selectPaymentHistoryList(int midx,int page, String startdate, String lastdate);
 	public DeliveryVo selectDelivery(int oidx);
 	public void updatePaymentConfirmation(int oidx);
 	public String updatePaymentCancle(int pidx,int oidx,String oid);

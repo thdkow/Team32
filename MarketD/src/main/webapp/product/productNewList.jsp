@@ -11,8 +11,8 @@
 <head>
 <meta charset="UTF-8">
 
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/resources/js/jquery.min.js"></script>
+<script src="/resources/js/jquery-3.2.1.min.js"></script>
  
 <script type="text/javascript">
 
@@ -171,3 +171,5 @@ $( document ).ready( function() {
 
 </body>
 </html>
+
+<%@include file="/include/footer.jsp"%>

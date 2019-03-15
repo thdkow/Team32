@@ -9,6 +9,7 @@
 		<typeAlias alias="dv" type="com.team.marketd.domain.DeliveryVo"/>
 		<typeAlias alias="ov" type="com.team.marketd.domain.OrderVo"/>
 		<typeAlias alias="psdto" type="com.team.marketd.domain.PaymentSaleDTO"/>
+		<typeAlias alias="scv" type="com.team.marketd.domain.ShoppingCartVo"/>
 		
  	 </typeAliases> 
  </configuration>

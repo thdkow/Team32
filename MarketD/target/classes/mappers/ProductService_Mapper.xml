@@ -12,12 +12,14 @@ select count(*)as tcount from product32 where pdelYn='N' and psaleYn='N'
 <![CDATA[>= #{minPrice} and  pmoney <= #{maxPrice}]]> </if>
 </select>
 
-<select id="selectNewProductList" parameterType="Integer" resultType="pv" >
+<select id="selectNewProductList" parameterType="Integer" resultType="pv" > <!-- 페이징 row처리 -->
 
-select  rownum,pidx,psubject,mname,pmoney,pwridate from
- product32 a left outer join member32 b on a.midx = b.midx where pdelYn='N'  and psaleYn='N'
- <![CDATA[ and rownum<=(#{page}*12)]]>
-order by pidx desc
+select * from (select rownum as rnum,AA.* from(
+select a.pidx,psubject,mname,pmoney,pwridate,uuid,uploadPath,fileName,fileType from
+ product32 a left outer join member32 b on a.midx = b.midx
+ left outer join boardattach32 c on a.pidx = c.pidx
+ where pdelYn='N'  and psaleYn='N' order by a.pidx desc)AA)where <![CDATA[  rownum<=(#{page}*12)]]>
+
 
  </select>
  
@@ -74,11 +76,12 @@ update delivery32 set caidx=#{caidx}, dwaybill = #{dwaybill} where oidx = #{oidx
 
 </update>
 
- <select id="selectSalesHistoryList" parameterType="Integer" resultType="psdto" >
+ <select id="selectSalesHistoryList" parameterType="HashMap" resultType="psdto" >
 
 select * from(select rownum as rnum,AA.* from(select * from product32 a full outer join order32 b on a.pidx = b.pidx full outer join delivery32 c on b.OIDx = c.oidx
-full outer join pay32 d on b.oid = d.oid  where pdelYn='N' and a.midx=#{0}  order by a.pidx desc
- <![CDATA[)AA where rownum <=(#{1}-1)*10+10) where rnum >=(#{1}-1)*10+1]]>
+full outer join pay32 d on b.oid = d.oid  where pdelYn='N' and a.midx=#{midx}
+ <if test='startdate!="1"'> <![CDATA[ and pwridate>=#{startdate} and pwridate<=#{lastdate}]]></if>
+  <![CDATA[  order by a.pidx desc)AA where rownum <=(#{page}-1)*10+10) where rnum >=(#{page}-1)*10+1]]>
 
 </select>
 
@@ -87,11 +90,13 @@ full outer join pay32 d on b.oid = d.oid  where pdelYn='N' and a.midx=#{0}  orde
 <if test='division == "구매"'>
 select count(*) from product32 A full outer join order32 B on A.pidx = B.pidx full outer join delivery32 C on b.OIDX = c.OIDX
 full outer join pay32 D on b.OID = d.OID where odelyn='N' and ocancle='N' and dcancle='N'  and B.midx=#{midx} 
+<if test='startdate!="1"'> <![CDATA[ and pwridate>=#{startdate} and pwridate<=#{lastdate}]]></if>
 </if>
 
 <if test='division == "판매"'>
 select count(*) from product32 a full outer join order32 b on a.pidx = b.pidx full outer join delivery32 c on b.OIDx = c.oidx 
 where pdelYn='N'  and a.midx=#{midx} 
+<if test='startdate!="1"'> <![CDATA[ and pwridate>=#{startdate} and pwridate<=#{lastdate}]]></if>
 </if>
 
 </select>
@@ -104,11 +109,13 @@ update order32 set ofinal = 'Y' where oidx=#{oidx}
 </update>
 
 
-<select id="selectPaymentHistoryList" parameterType="Integer" resultType="psdto" >
+<select id="selectPaymentHistoryList" parameterType="HashMap" resultType="psdto" >
   
-select * from(select rownum as rnum,AA.* from(select * from product32 A full outer join order32 B on A.pidx = B.pidx full outer join delivery32 C on b.OIDX = c.OIDX
-full outer join pay32 D on b.OID = d.OID where odelyn='N'and pacancle='N' and ocancle='N' and dcancle='N' and B.midx=#{0}  order by A.pidx desc
- <![CDATA[)AA where rownum <=(#{1}-1)*10+10) where rnum >=(#{1}-1)*10+1]]>
+  select * from(select rownum as rnum,AA.* from(select * from product32 A full outer join order32 B on A.pidx = B.pidx full outer join delivery32 C on b.OIDX = c.OIDX
+full outer join pay32 D on b.OID = d.OID where odelyn='N'and pacancle='N' and ocancle='N' and dcancle='N' and B.midx=#{midx}
+ <if test='startdate!="1"'> <![CDATA[ and obuydate>=#{startdate} and obuydate<=#{lastdate}]]></if>
+  <![CDATA[  order by a.pidx desc)AA where rownum <=(#{page}-1)*10+10) where rnum >=(#{page}-1)*10+1]]>
+  
  
 </select>
 

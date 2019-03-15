@@ -171,6 +171,9 @@ $( document ).ready( function() {
 			<!-- /.row -->
 			
 			
+<center>
+<button id='more' class="btn btn-outline-primary">더보기</button>
+</center>	
 
 		</div>
 		<!-- /.col-lg-9 -->
@@ -183,9 +186,6 @@ $( document ).ready( function() {
 
 &nbsp;
 <div class="form-group">
-<center>
-<button id='more' class="btn btn-outline-primary">더보기</button>
-</center>	
 <input id='nextPage' type='hidden' value='2' />
 <input id='moreTotalCount' type='hidden' value='' />
 <input id='page' type='hidden' value='1' />

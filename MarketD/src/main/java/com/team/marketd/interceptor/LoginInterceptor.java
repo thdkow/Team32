@@ -24,34 +24,26 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response,Object handler,ModelAndView modelAndView) throws Exception{
-	 Object midx = modelAndView.getModel().get("midx"); // objectÅ¸ÀÔÀº null°ú ºñ±³¸¦ ÇÒ ¼ö ÀÖ´Ù
+	 Object midx = modelAndView.getModel().get("midx"); // objectíƒ€å ì™ì˜™å ì™ì˜™ nullå ì™ì˜™ å ìŸêµëªŒì˜™ å ì™ì˜™ å ì™ì˜™ å ìŒëŒì˜™
 	 System.out.println("midx:?"+midx);
 	 
-	 System.out.println("¿©±â±îÁö ½ÇÇà");
-	 //¿©±â¼­ ¿¡·¯
-	 int midxx = (int)midx;	//keepLogin¿¡¼­ intÅ¸ÀÔÀ» ¸ÂÃçÁÖ±âÀ§ÇØ °­Á¦Çüº¯È¯À» »ç¿ë
+	 System.out.println("å ì™ì˜™å ì™ì˜™å ì™ì˜™å ï¿½ å ì™ì˜™å ì™ì˜™");
+	 //å ì™ì˜™å ì©ì„œ å ì™ì˜™å ì™ì˜™
+	 int midxx = (int)midx;	//keepLoginå ì™ì˜™å ì™ì˜™ intíƒ€å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ìŒê¹ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™å ì™ì˜™í™˜å ì™ì˜™ å ì™ì˜™å ï¿½
 
-	 System.out.println("midxx:"+midxx);
-	 //modelAndView.getModelMap().get()Àº °´Ã¼ ²¨³¾¶§
+	 //modelAndView.getModelMap().get()å ì™ì˜™ å ì™ì˜™ì²´ å ì™ì˜™å ì™ì˜™å ì™ì˜™
 	 
 	 if(midx != null){
-		 System.out.println("midx != null ¾Æ´Ï¸é ½ÇÇàµÇ´Â if¹®");
-		 //ÄÁÆ®·Ñ·¯¿¡¼­ ´ãÀº ¸ğµ¨°ª ²¨³»¼­ ¼¼¼Ç¿¡ ´ã±â
-
-		//¼¼¼Ç¿¡ midx´ãÀ½(·Î±×ÀÎ)
 		 
-		 if(request.getParameter("useCookie")!=null) {		//ÀÌ if¹® Ã³¸®¸¦ ÇÏÁö¾Ê´Â´Ù¸é ÀÚµ¿·Î±×ÀÎ Ã¼Å©¹Ú½º¸¦ Ç®¾úÀ»½Ã¿¡ nullÀÌµé¾î¿Í ¿¡·¯°¡³²
-		System.out.println("useCookie != null ¾Æ´Ï¸é ½ÇÇàµÇ´Â if¹®");
-			 if (request.getParameter("useCookie").equals("on") ) {		//null¿¡ .equals¸¦ ÇÒ ¼ö ¾ø´Ù.
-			 	System.out.println("½ÇÇà2?");
-			 Cookie useCookie = new Cookie("useCookie",request.getSession().getId());	//
+		 if(request.getParameter("useCookie")!=null) {		
+			 if (request.getParameter("useCookie").equals("on") ) {		
+			 	System.out.println("å ì™ì˜™å ì™ì˜™2?");
+			 Cookie useCookie = new Cookie("useCookie",request.getSession().getId());	
 			 System.out.println("cookie:"+useCookie.getValue());
 			 useCookie.setPath("/");
-			 //7ÀÏµ¿¾È Å¬¶óÀÌ¾ğÆ® ÄíÅ°º¸°üÇÑ´Ù
 			 useCookie.setMaxAge(60*60*24*7);				 
 			 response.addCookie(useCookie);	
 			 
-			// DB Å×ÀÌºí¿¡µµ ³¯Â¥ °»½Å
 			 Calendar cal = Calendar.getInstance();
 			 cal.setTime(new Date());
 			 cal.add(Calendar.DATE, 7);

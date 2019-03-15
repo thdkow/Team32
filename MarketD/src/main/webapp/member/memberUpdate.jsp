@@ -105,7 +105,7 @@
 				</table>
 				<div class="col align-self-end">
 				<button class="float-right btn btn-outline-danger" onclick="location.href='index.jsp'">취소</button>
-				<button type="submit" class="float-right btn btn-outline-primary mr-3">등록</button>
+				<button type="submit" class="float-right btn btn-outline-primary mr-3">수정</button>
 			</div>
 				</form>
 						
