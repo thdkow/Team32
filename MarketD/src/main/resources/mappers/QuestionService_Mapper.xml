@@ -1,8 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.myin.noxml.persistence.CommentService_Mapper">
+<mapper namespace="com.team.marketd.persistence.QuestionService_Mapper">
 
+	<!-- 문의사항 목록 -->
+	<select id="selectQuestion" parameterType="Integer" resultType="qv" >
+		 select * from (select rownum as rnum,AA.* from(
+				select *  from question32  a left outer join member32 b on
+				 a.midx = b.midx left outer join category32 c on a.caidx = c.caidx
+            where qdelyn='N' order by qidx desc)AA
+		  <![CDATA[  where rownum <=(#{page}-1)*10+10) where rnum >=(#{page}-1)*10+1]]>
+		 
+ 	</select>
+ 	
+ 	<!-- 문의사항 페이징용 토탈 -->
+	<select id="selectQuestionTotal" resultType="Integer">
+		select count(*) from question32 where qdelyn='N'
+	</select>
+	
+	<!-- 문의사항 작성 -->
+	<insert id="insertQuestion" parameterType = "HashMap">
+			insert into question32(qidx, midx, qsubject, qcontent,qwridate,caidx)
+				values(question_seq.nextval, #{midx}, #{qsubject}, #{qcontent},sysdate,#{caidx})
+	</insert>
+	
+	<!-- 문의사항 목록 -->
+	<select id="selectQuestionOne" parameterType="Integer" resultType="qv" >
+
+		select *  from question32  a left outer join member32 b
+		 on a.midx = b.midx left outer join category32 c on a.caidx = c.caidx where qidx = #{qidx}
+		 
+ 	</select>
+ 	
+ 	<update id="QuestionReply" parameterType="HashMap">
+ 	
+ 	update question32 set qresubject=#{qresubject}, qrecontent=#{qrecontent},
+ 						qrewridate=sysdate, qstate='Y' where qidx =#{qidx}
+ 	
+ 	</update>
+ 	
+ 	 	<update id="updateQuestion" parameterType="Integer">
+ 	
+ 	update question32 set qupdate=sysdate, qdelyn='Y' where qidx =#{qidx}
+ 	
+ 	</update>
 	
 	
 </mapper>

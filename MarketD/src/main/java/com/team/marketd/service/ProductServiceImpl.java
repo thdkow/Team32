@@ -83,7 +83,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int insertSaleProduct(int midx,int caidx,String psubject,String pcontent,int pvol,int pmoney,int pfee,String pip) { // ��ǰ �Ǹű� �ۼ�
+	public int insertSaleProduct(int midx,int caidx,String psubject,String pcontent,int pmoney,int pfee,String pip) { // ��ǰ �Ǹű� �ۼ�
 		HashMap<String,Object> hm = new HashMap<String,Object>();
 		
 		
@@ -91,7 +91,6 @@ public class ProductServiceImpl implements ProductService {
 		hm.put("caidx", caidx);
 		hm.put("psubject", psubject);
 		hm.put("pcontent", pcontent);
-		hm.put("pvol", pvol);
 		hm.put("pmoney", pmoney);
 		hm.put("pfee", pfee);
 		hm.put("pip", pip);
@@ -102,12 +101,12 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public int insertShoppingCart(int pidx,int pvol,int midx) { // ��ٱ��Ͽ� �߰�
+	public int insertShoppingCart(int pidx,int midx) { // ��ٱ��Ͽ� �߰�
 		
 		int exe = psm.checkShoppingCart(pidx, midx);
 		
 		if(exe==0) {
-		int exec = psm.insertShoppingCart(pidx,pvol,midx);
+		int exec = psm.insertShoppingCart(pidx,midx);
 		
 		return exec;
 		}

@@ -121,7 +121,7 @@ full outer join pay32 D on b.OID = d.OID where odelyn='N'and pacancle='N' and oc
 
 <insert id="insertOrder" parameterType="HashMap">
 
-insert into order32(oidx,pidx,midx,oid,ovol,omoney,oip) values(order_seq.nextval,#{pidx},#{midx},#{oid},#{ovol},#{omoney},#{oip})
+insert into order32(oidx,pidx,midx,oid,omoney,oip) values(order_seq.nextval,#{pidx},#{midx},#{oid},#{omoney},#{oip})
 
 </insert>
 

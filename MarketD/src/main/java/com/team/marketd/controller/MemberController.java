@@ -119,23 +119,6 @@ public class MemberController {
 
 		session.setAttribute("midx", mv.getMidx()); // session 만들기
 
-		// 등급
-		int a = mv.getMgood() - mv.getMbad();
-		String mgrade = null;
-		if (5 <= a && a < 10) { // 추천과 비추천의 합이 5보다 크거나 같고 10보다 작다면 Silver등급
-			mgrade = "S";
-		} else if (10 <= a && a < 15) { // 추천과 비추천의 합이 10보다 크거나 같고 15보다 작다면 Gold 등급
-			mgrade = "G";
-		} else if (15 <= a && a < 20) { // 추천과 비추천의 합이 15보다 크거나 같고 20보다 작다면 platinum 등급
-			mgrade = "P";
-		} else if (20 <= a) { // 추천과 비추천의 합이 20과 같거나 크다면 Diamond 등급
-			mgrade = "D";
-		} else if (mgrade == null && a < 5) {
-			mgrade = "B";
-		}
-		System.out.println("현재 등급은:" + mgrade);
-		ms.updateUpgrade(mgrade, mv.getMidx());
-		/* model.addAttribute("mv", mv); */
 		model.addAttribute("midx", mv.getMidx());
 		model.addAttribute("useCookie", useCookie);
 		return "redirect:index.jsp";
@@ -226,7 +209,7 @@ public class MemberController {
 		return "login/login";
 	}
 
-	@RequestMapping("memberProfile.dobby")
+	@RequestMapping("/Needlogin/memberProfile.dobby")
 	public String memberProfile(HttpSession session, Model model) { // 회원정보 보기 페이지 이동
 		int midx = (int) session.getAttribute("midx");
 		MemberVo mv = ms.selectProfile(midx);
@@ -274,22 +257,6 @@ public class MemberController {
 	 * 
 	 * return null; }
 	 */
-
-	@RequestMapping("memberRecommend.dobby")
-	public String memberGBAction(HttpSession session, @RequestParam("rflag") String rflag,
-			@RequestParam("pidx") int pidx, @RequestParam("chidx") int chidx) { // 추천 작동
-		System.out.println("컨트롤러 접속");
-		System.out.println("rflag:" + rflag); // 추천 good인지 bad인지
-		System.out.println("pidx:" + pidx);
-		System.out.println("chidx:" + chidx);
-		MemberVo mv = ms.checkGB1(pidx);
-		System.out.println("여기까지실행?");
-		System.out.println("checkGB1:" + ms.checkGB1(pidx));
-		// 여기까지 실행
-		System.out.println("추천할 회원번호는?" + mv.getMidx());
-		ms.updateGB(mv.getMidx(), chidx, rflag);
-		return "redirect:index.jsp";
-	}
 
 	public String memberAutoLogin() { // 자동로그인
 

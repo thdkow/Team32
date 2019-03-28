@@ -10,6 +10,8 @@
 		<typeAlias alias="ov" type="com.team.marketd.domain.OrderVo"/>
 		<typeAlias alias="psdto" type="com.team.marketd.domain.PaymentSaleDTO"/>
 		<typeAlias alias="scv" type="com.team.marketd.domain.ShoppingCartVo"/>
+		<typeAlias alias="nv" type="com.team.marketd.domain.NoticeVo"/>
+		<typeAlias alias="qv" type="com.team.marketd.domain.QuestionVo"/>
 		
  	 </typeAliases> 
  </configuration>

@@ -337,7 +337,7 @@ $.save2 = function(){//#으로 id를 호출하여 jquery를 사용하였다.
 						class="fa fa-pencil-square-o bigicon"></i></span>
 					<div class="col-md-8 uploadDiv">
 						<label for="filter">첨부파일 : </label> <input type="file" id="pimage"
-							name='uploadFile' multiple/>
+							name='uploadFile'/>
 						<p style="text-align: right; margin-top: 20px;"></p>
 					</div>
 				</div>

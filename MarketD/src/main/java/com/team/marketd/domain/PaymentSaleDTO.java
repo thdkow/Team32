@@ -10,11 +10,8 @@ public class PaymentSaleDTO {
 	private int midx;
 	private String psubject;
 	private String mname;
-	private int phit;
 	private String pwridate;
 	private String pcontent;
-	private String pimage;
-	private int pvol;
 	private int pmoney;
 	private int pfee;
 	private String pip;
@@ -25,7 +22,6 @@ public class PaymentSaleDTO {
 		//	int oidx;
 	String drecipt;
 	String dtell;
-	String dzip;
 	String daddr;
 	String ddetails;
 	String dmemo;
@@ -38,7 +34,6 @@ public class PaymentSaleDTO {
 //	int midx;
 	String oid;
 	String obuydate;
-	int ovol;
 	int omoney;
 	String oip;
 	String ofinal;

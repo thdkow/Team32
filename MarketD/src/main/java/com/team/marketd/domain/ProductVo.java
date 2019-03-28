@@ -12,12 +12,9 @@ public class ProductVo {
 	private int midx;
 	private String psubject;
 	private String mname;
-	private int phit;
 	private String pwridate;
 	private String pcontent;
 	private String pimage;
-	private int pvol;
-	private int ovol;
 	private int pmoney;
 	private int pfee;
 	private String pip;

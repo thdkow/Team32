@@ -70,8 +70,8 @@
 
 				<div class="collapse navbar-collapse span9" id="navbarResponsive">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="#">공지사항</a></li>
-						<li class="nav-item"><a class="nav-link" href="/Product/ProductSalesHistory.dobby?midx=2">고객센터</a></li>
+						<li class="nav-item"><a class="nav-link" href="/Notice/NoticeList.dobby">공지사항</a></li>
+						<li class="nav-item"><a class="nav-link" href="/Question/OftenList.dobby">고객센터</a></li>
 					</ul>
 				</div>
 			<%
@@ -80,10 +80,10 @@
 			%>
 			<div class="btn-group span3">
 					<button class="btn btn-secondary"
-					onclick="location.href='login.dobby'">로그인</button>
+					onclick="location.href='/login.dobby'">로그인</button>
 <!--<button class="btn btn-secondary" onclick="location.href='login2.dobby'">로그인</button> -->
 				<button class="btn btn-secondary"
-					onclick="location.href='MemberJoin.dobby'">회원가입</button>
+					onclick="location.href='/MemberJoin.dobby'">회원가입</button>
 				<!--  &nbsp;&nbsp;<input type="checkbox" onclick="location.href='login.dobby'">자동 로그인</input>  -->
 			</div>
 			<%
@@ -94,9 +94,9 @@
 			%>
 			<div class="btn-group span3">
 				<button class="btn btn-secondary"
-					onclick="location.href='memberProfile.dobby'">내정보</button>
+					onclick="location.href='/memberProfile.dobby'">내정보</button>
 				<button class="btn btn-secondary"
-					onclick="location.href='logoutAction.dobby'">로그아웃</button>
+					onclick="location.href='/logoutAction.dobby'">로그아웃</button>
 			</div>
 			<%
 				}

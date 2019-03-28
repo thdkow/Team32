@@ -130,7 +130,7 @@
 				
 				
 				<div class="col align-self-end">
-					<a class="float-right btn btn-outline-success" href="/Product/ProductWrite.dobby">판매글 작성</a>
+					<a class="float-right btn btn-outline-success" href="/Needlogin/Product/ProductWrite.dobby">판매글 작성</a>
 				</div>
 			</div>
 			<div class="row my-2 justify-content-center ">

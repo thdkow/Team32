@@ -14,11 +14,6 @@
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
-function fnovol(ovol) {
-
- $('#ovol').val(ovol); //여기부터
- 
-};
 
 
 	$(function() {
@@ -33,7 +28,7 @@ function fnovol(ovol) {
 								$.productSimilarList();
 
 						$('#save').click(function() {
-								alert("시작");
+								
 
 						var pidx = ${pv.pidx};
 													var cwriter = $("#cwriter")
@@ -42,7 +37,7 @@ function fnovol(ovol) {
 													var midx = $("#midx").val();
 													$.ajax({
 														type : "POST",
-														url : "/product/commentWriteAction.dobby",
+														url : "/Needlogin/product/commentWriteAction.dobby",
 														headers : {
 															"Content-Type" : "application/json",
 																	"X-HTTP-Method-Override" : "POST"
@@ -376,23 +371,13 @@ function fnovol(ovol) {
 					<p class="text-xs-right">배송비 : ${pv.pfee}원</p>
 					<br />
 					
-				<form action="/product/productPayment.dobby?pidx=${pv.pidx}" method="post">
+				<form action="/Needlogin/Product/ProductPayment.dobby?pidx=${pv.pidx}" method="post">
 					
 					<div class="col-md-8" style="margin:center;">
-						<p>남은수량 : ${pv.pvol}개</p>
-						<label for="filter">수량 </label> 
-						<select class="form-control" id="ovol2" onchange="fnovol(this.value);"">
-							<option value="1" selected="selected">1개</option>
-							<option value="2">2개</option>
-							<option value="3">3개</option>
-							<option value="4">4개</option>
-							<option value="5">5개</option>
-						</select>
 					</div>
-					<br /> <br />
 					<!-- <Center> -->
 						<button type="button" class="btn btn-outline-primary" 
-						onclick="location.href='/Product/ProductPlusShoppingCart.dobby?pidx=${pv.pidx}&pvol=${pv.pvol}'"
+						onclick="location.href='/Needlogin/Product/ProductPlusShoppingCart.dobby?pidx=${pv.pidx}'"
 							style="width: 150px;">
 							<i class="fa fa-shopping-cart">장바구니 추가</i> 
 						</button>
@@ -401,12 +386,12 @@ function fnovol(ovol) {
 							<i class="fa fa-shopping-cart">구매하기</i> 
 						</button>
 					<!-- </Center> -->
-					<input type="hidden" name="ovol" id="ovol" value="1"/>
+						</form>
 				</div>
 			</div>
 		</div>
 		
-		</form>
+
 
 		<div class="col-lg-9 offset-md-3">
 			<div class="card ">

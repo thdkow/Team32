@@ -1,41 +1,65 @@
 package com.team.marketd.service;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+import com.team.marketd.domain.NoticeVo;
+import com.team.marketd.persistence.NoticeService_Mapper;
+
+@Service("NoticeServiceImpl")
 public class NoticeServiceImpl implements NoticeService {
 
+	NoticeService_Mapper nsm;
+	
+	@Autowired
+	NoticeServiceImpl(SqlSession session) {
+		this.nsm = session.getMapper(NoticeService_Mapper.class);
+	}
+	
+	NoticeVo resultNv = null;
+	int nv = 0;
+	
 	@Override
-	public String selectNoticeList() { // °øÁö»çÇ× ¸®½ºÆ®
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<NoticeVo> selectNoticeList(int page) { // ê³µì§€ì‚¬í•­ ë¦¬ìŠ¤íŠ¸
+		ArrayList<NoticeVo> nv = nsm.selectNoticeList(page);
+		return nv;
 	}
 
 	@Override
-	public String selectNoticeOne() { //°øÁö»çÇ× ÄÜÅÙÃ÷
-		// TODO Auto-generated method stub
-		return null;
+	public NoticeVo selectNoticeOne(int nidx) { //ê³µì§€ì‚¬í•­ ì½˜í…ì¸ 
+		resultNv = nsm.selectNoticeOne(nidx);
+		return resultNv;
 	}
 
 	@Override
-	public String insertNotice() { //°øÁö»çÇ× ÀÛ¼º
-		// TODO Auto-generated method stub
-		return null;
+	public int insertNotice(int midx, String nsubject, String ncontent) { //ê³µì§€ì‚¬í•­ ì…ë ¥
+		HashMap<String, Object> hm = new HashMap<String, Object>();
+								hm.put("midx", midx);
+								hm.put("nsubject", nsubject);
+								hm.put("ncontent", ncontent);
+				
+				nv = nsm.insertNotice(hm);
+		return nv;
 	}
 
 	@Override
-	public String deleteNotice() { //°øÁö»çÇ× »èÁ¦
-		// TODO Auto-generated method stub
-		return null;
+	public int deleteNotice(int nidx) { //ê³µì§€ì‚¬í•­ ì‚­ì œ
+		nv = nsm.deleteNotice(nidx);
+		return nv;
 	}
 
 	@Override
-	public String updateNotice() { //°øÁö»çÇ× ¼öÁ¤
-		// TODO Auto-generated method stub
-		return null;
+	public int selectNoticeTotal() { //ê³µì§€ì‚¬í•­ í˜ì´ì§•ìš© í† íƒˆ
+		
+		int tcount = nsm.selectNoticeTotal();
+		
+		return tcount;
 	}
-
 	
 }
 

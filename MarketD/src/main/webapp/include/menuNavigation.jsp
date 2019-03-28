@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 			<div class="col-lg-3 ">
-				<a href="/Product/ProductWrite.dobby">
+				<a href="/Needlogin/Product/ProductWrite.dobby">
 				<img class="rounded d-block mt-5" alt="판매하기" height="80" width="255"
 					src="/resources/img/btn_sub.jpg"></a>
 				<div class="list-group">
@@ -9,10 +9,10 @@
 					
 					<a href="#">▼ 사용자페이지</a>
 					<ul>
-						<li><a href="/memberProfile.dobby">마이페이지</a></li>
-						<li><a href="/Cart/ShoppingCartList.dobby">장바구니</a></li>
-						<li><a href="/Product/ProductPaymentHistory.dobby">구매내역</a></li>
-						<li><a href="/Product/ProductSalesHistory.dobby">판매내역</a></li>
+						<li><a href="/Needlogin/memberProfile.dobby">마이페이지</a></li>
+						<li><a href="/Needlogin/Cart/ShoppingCartList.dobby">장바구니</a></li>
+						<li><a href="/Needlogin/Product/ProductPaymentHistory.dobby">구매내역</a></li>
+						<li><a href="/Needlogin/Product/ProductSalesHistory.dobby">판매내역</a></li>
 					</ul>
 					</div>
 					<div href="#" class="list-group-item menu-item mt-5">

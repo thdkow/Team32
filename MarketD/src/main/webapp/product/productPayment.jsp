@@ -93,7 +93,7 @@
 					</tbody>
 				</table>
 				<h4>총 1개 상품</h4>
-				<form id="frmpp" action="productPaymentAction.dobby?pidx=${pv.pidx}" method="post">
+				<form id="frmpp" action="/Product/ProductPaymentAction.dobby?pidx=${pv.pidx}" method="post">
 				
 				<input type="hidden"  name="omoney" value="${pv.pmoney*pv.ovol+pv.pfee}"> <!-- 가격 -->
 				

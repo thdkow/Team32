@@ -169,32 +169,7 @@ public class MemberServiceImpl implements MemberService {
 		msm.deleteProfile(hm);
 	}
 
-	@Override
-	public MemberVo checkGB1(int pidx) {
-		HashMap<String, Object> hm = new HashMap<String,Object>();
-		hm.put("pidx", pidx);
-		MemberService_Mapper msm = sqlSession.getMapper(MemberService_Mapper.class);
-		MemberVo mv = msm.checkGB1(hm);
-		return mv;
-	}
-	@Transactional
-	@Override
-	public void updateGB(int midx,int chidx, String rflag) {
-		HashMap<String, Object> hm = new HashMap<String,Object>();
-		hm.put("midx", midx);
-		hm.put("chidx", chidx);
-		hm.put("rflag", rflag);
-		System.out.println("rflag"+rflag);
-		
-		MemberService_Mapper msm = sqlSession.getMapper(MemberService_Mapper.class);
-		
-		
-		int exec = msm.checkGB2( midx, chidx);
-		System.out.println("2차 중복확인"+exec);
-		msm.updateGB(hm);
-		
-		msm.insertGB(hm);
-	}
+
 
 	@Override
 	public void dropCookie(int midx) {

@@ -8,8 +8,8 @@ public class ShoppingCartVo {
 	private int sidx;
 	private int midx;
 	private int pidx;
-	private int svol;
 	private String sdate;
+	private int svol;
 	
 	private int pmoney;
 	private int pfee;

@@ -51,13 +51,12 @@ public class BoardAttachServiceImpl implements BoardAttachService {
 	}
 
 	@Override
-	public int checkproduct(int midx,int caidx,String psubject,String pcontent,int pvol,int pmoney,int pfee,String pip) {
+	public int checkproduct(int midx,int caidx,String psubject,String pcontent,int pmoney,int pfee,String pip) {
 		HashMap<String, Object> hm =new HashMap<String, Object>();
 						hm.put("midx", midx);
 						hm.put("caidx", caidx);
 						hm.put("psubject", psubject);
 						hm.put("pcontent", pcontent);
-						hm.put("pvol", pvol);
 						hm.put("pmoney", pmoney);
 						hm.put("pfee", pfee);
 						hm.put("pip", pip);
