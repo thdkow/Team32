@@ -6,8 +6,6 @@
 	<c:set var="myContextPath" value="${pageContext.request.contextPath}" />
 	
 <c:set var="alist" value="${requestScope.alist}"/>
-
-
 	
 <script src="${myContextPath}/resources/js/jquery.min.js"></script>
 <script src="${myContextPath}/resources/js/jquery-3.2.1.min.js"></script>
@@ -122,13 +120,14 @@ $( document ).ready( function() {
 			 var writedate = this.pwridate.substr(0,10);
 			 
 			 		
-				str += "<div class='col-md-4 col-sm-6 portfolio-item'>"
+				str +="<div class='col-md-4 col-sm-6 portfolio-item'>"
+				+"<a href='${myContextPath}/Product/ProductContent.dobby?pidx="+ this.pidx + "'>"
 				+"<div class='portfolio-hover'><div class='portfolio-hover-content'>"
 				+"</div>"
-				+"</div><img class='img-fluid' src='"+fileCallPath+"' alt=''>"
+				+"</div><img class='img-fluid3' src='"+fileCallPath+"' alt=''>"
 				+"<div class='portfolio-caption'><h4>" 
-				+"<a href='${myContextPath}/Product/ProductContent.dobby?pidx="+ this.pidx + "'>"+this.psubject+"</a></h4>"
-				+  "<p class='text-muted'>가격 : "+this.pmoney+"원</p></div></div>";
+				+this.psubject+"</h4>"
+				+  "<p class='text-muted'>가격 : "+this.pmoney+"원</p></div></a></div>";
 				
 		 });
 				

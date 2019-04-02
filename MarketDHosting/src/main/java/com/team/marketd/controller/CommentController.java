@@ -38,7 +38,7 @@ public class CommentController {
 	@GetMapping(value = "/product/{pidx}/{page}/commentlist.dobby"// ��湲� 由ъ�ㅽ�� �대��(Ajax)
 			, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ArrayList<CommentVo> commentList(Model model, @PathVariable("pidx") int pidx,
-			@PathVariable("page") int page) {
+											@PathVariable("page") int page) {
 
 		System.out.println("page" + page);
 

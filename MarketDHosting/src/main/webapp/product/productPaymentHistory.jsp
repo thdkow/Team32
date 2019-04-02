@@ -64,11 +64,11 @@
 					
 					<c:forEach items="${alist}" var="alist2" varStatus="status" >
 					
-					<c:set var="fileCallPath" value="/${alist2.uploadPath}/${alist2.uuid}_${alist2.fileName}"/>
+					<c:set var="fileCallPath" value="http://thdkow.cafe24.com/upload/${alist2.uploadPath}/${alist2.uuid}_${alist2.fileName}"/>
 					
 						<tr>
 					<th scope="row"><a href="${myContextPath}/Product/ProductContent.dobby?pidx=${alist2.pidx}"> 
-					<img src="${myContextPath}/display.dobby?fileName=${fileCallPath}" height="140" width="140" alt="">
+					<img src="${fileCallPath}" height="140" width="140" alt="">
 					</a></th>
 					<td><a href="${myContextPath}/Product/ProductContent.dobby?pidx=${alist2.pidx}">${alist2.psubject}</a> <br /> <a
 								href="#">주문번호:&nbsp;${alist2.oid}</a>

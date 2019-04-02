@@ -55,7 +55,7 @@ height: 25px;
 
 		<div class="col-lg-8 my-5">
 			<div class="row clearfix my-4">
-			<form action="${myContextPath}/memberUpdate.dobby" method="post">
+			<form name="form1">
 				<table class="table">
 					<input type="hidden" value="${mv.midx}" name="midx">
 					<tbody>
@@ -144,18 +144,103 @@ height: 25px;
 					</tbody>
 				</table>
 				<div class="col align-self-end">
-				<a class="float-right btn btn-outline-danger" onclick="location.href='index2.jsp'">취소</a>
-				<button type="submit" class="float-right btn btn-outline-primary mr-3">수정</button>
-				
+				<a class="float-right btn btn-outline-danger" onclick="location.href='index.jsp'">취소</a>
+				<button type="button" class="float-right btn btn-outline-primary mr-3" onclick="check();">수정</button>
 			</div>
-				</form>
-						
+				</form>		
 			</div>
 			<!-- End your code here -->
 		</div>
 	</div> <!-- row -->
 </div>
-
+<script>
+function check() {
+	var frm = document.form1;
+	var midx = frm.midx.value;
+	var pwd = frm.pwd.value;
+	var pwd2 = frm.pwd2.value;
+	var mmail1 = frm.mmail1.value;
+	var mmail2 = frm.mmail2.value;
+	var phone1 = frm.phone1.value;
+	var phone2 = frm.phone2.value;
+	var phone3 = frm.phone3.value;
+	var caidx = frm.caidx.value;
+	var maccount = frm.maccount.value;
+	var mkakao = frm.mkakao.value;
+/* 	var question = frm.question.value;
+	alert(question);
+	var mquestion = frm.mquestion.value; 
+	alert(mquestion);
+	 */
+ 	if (pwd == "") {
+		alert("비밀번호를 입력하세요");
+		frm.pwd.focus();
+		return;
+	}else if (pwd2 == "") {
+		alert("비밀번호 확인을 입력하세요");
+		frm.pwd2.focus();
+		return;
+	}else if (pwd != pwd2) {
+		alert("비밀번호가 일치하지않습니다.");
+		frm.pwd.value = "";
+		frm.pwd2.value = "";
+		frm.pwd.focus();
+		return;
+	}else if ( mmail1 ==""){
+		alert("본인의 이메일을 입력해주세요.");
+		frm.mmail1.focus();
+		return;
+	}else if (mmail2 == ""){
+		alert("본인의 이메일을 선택해주세요.");
+		frm.mmail2.focus();
+		return;
+	}else if (phone1 ==""){
+		alert("휴대폰 번호 앞자리를 선택해주세요.");
+		frm.phone1.focus();
+		return;
+	}else if(phone2 == ""){
+		alert("휴대폰 번호 가운데 4자리를 입력해주세요.");
+		frm.phone2.focus();
+		return;
+	}else if(isNaN(phone2) == true){
+		alert("휴대폰 번호는 숫자만 입력해주세요.");
+		frm.phone2 = "";
+		frm.phone2.focus();
+		return;
+	}else if(phone3 == ""){
+		alert("휴대폰 번호 마지막 4자리를 입력해주세요.");
+		frm.phone3.focus();
+		return;
+	}else if(isNaN(phone3) == true){
+		alert("휴대폰 번호는 숫자만 입력해주세요.");
+		frm.phone3 = "";
+		frm.phone3.focus();
+		return;
+	}else if(caidx == ""){
+		alert("거래계좌를 선택해주세요.");
+		frm.cadix.focus();
+		return;
+	}else if(maccount == ""){
+		alert("계좌번호를 입력해주세요.");
+		frm.maccount.focus();
+		return;
+	}else if(isNaN(maccount) == true){
+		alert("계좌번호는 숫자만 입력해주세요.");
+		frm.maccount = "";
+		frm.maccount.focus();
+		return;
+	}else if(mkakao == ""){
+		alert("카카오톡 아이디를 입력해주세요.")
+		frm.mkakao.focus();
+		return;
+	}
+ 	
+	frm.action = "${myContextPath}/memberUpdate.dobby";
+	frm.method = "post"; // post 방식으로 데이터 전달 post:  파라미터에 노출이안됨 get: 파라미터에 노출됨
+	frm.submit();
+	return;
+}
+</script>
 <script>
 	$('#selectEmail').change(function() {
 		$("#selectEmail option:selected").each(function() {
@@ -168,5 +253,5 @@ height: 25px;
 			}
 		});
 	});
-	
+	</script>
 	<c:import url="/include/indexFooter.jsp" />

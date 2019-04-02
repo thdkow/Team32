@@ -40,6 +40,27 @@ input[type="password"]{
  border: none;
  }
 </style>
+<script>
+function check() {
+	var frm = document.form1;
+	var pwd = frm.pwd.value;
+	var pwd2 = frm.pwd2.value; 
+	if (pwd == "") {
+		alert("비밀번호를 입력하세요.");
+		frm.pwd.focus();
+		return;	
+	}else if(pwd != pwd2){
+		alert("비밀번호가 맞지 않습니다.")
+		frm.pwd.focus();
+		return;	
+	}
+		frm.action = "${myContextPath}/memberCheck.dobby";
+		frm.method = "post"; // post 방식으로 데이터 전달 post:  파라미터에 노출이안됨 get: 파라미터에 노출됨
+		frm.submit();
+		return;
+	}
+	
+</script>
 <div class="container">
 	<div class="row">
 	
@@ -55,7 +76,7 @@ input[type="password"]{
 	
 		<div class="col-lg-8 my-5">
 			<div class="col-lg-8 my-4">
-			<form action="${myContextPath}/memberCheck.dobby" method="post">
+			<form name="form1">
 				<table class="table">
 					<tbody>
 						<tr>
@@ -64,11 +85,14 @@ input[type="password"]{
 						</tr>
 						<tr>
 							<th scope="row" width="100px" class="text-center td2">비밀번호</th>
-							<td><input type="password" name="pwd" size="13"></td>
+							<td>
+							<input type="password" name="pwd" size="13">
+							<input type="hidden" name="pwd2" value="${mv.mpwd }">
+							</td>
 						</tr>
 						<tr>
 							<th scope="row" class="text-center td2">이    름</th>
-							<td>${mv.mpwd}</td>
+							<td>${mv.mname}</td>
 						</tr>
 						<tr>
 							<th scope="row" class="text-center td2">생년월일</th>
@@ -102,8 +126,7 @@ input[type="password"]{
 				</table>	
 				<div class="col align-self-end"> 
 				
-				<button type="submit" class="float-right btn btn-outline-primary">수정</button>
-				
+				<button type="button" class="float-right btn btn-outline-primary" onclick="check();">수정 </button>
 				</div>		
 			</form>
 							

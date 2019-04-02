@@ -36,7 +36,7 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 		registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
 		
 		MultipartConfigElement multipartConfig = new MultipartConfigElement(
-				"ftp://thdkow.cafe24.com/tomcat/webapps/upload/",20971520,41943040,20971520);
+				"C://upload/",20971520,41943040,20971520);
 		
 		registration.setMultipartConfig(multipartConfig);
 	}

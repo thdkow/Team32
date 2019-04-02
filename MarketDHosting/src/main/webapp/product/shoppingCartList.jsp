@@ -50,11 +50,11 @@
 						<c:forEach items="${alist}" var="alist2" varStatus="status" >
 						<c:set var= "totalpfee" value="${totalpfee + alist2.pfee}"/>
 						<c:set var= "totalpmoney" value="${totalpmoney + alist2.pmoney}"/>
-						<c:set var="fileCallPath" value="/${alist2.uploadPath }/${alist2.uuid }_${alist2.fileName}"/>
+						<c:set var="fileCallPath" value="http://thdkow.cafe24.com/upload/${alist2.uploadPath }/${alist2.uuid }_${alist2.fileName}"/>
 							<tr>
 								<td scope="row">
 								<a href="${myContextPath}/Product/ProductContent.dobby?pidx=${alist2.pidx}"> 
-								<img src="${myContextPath}/display.dobby?fileName=${fileCallPath}"
+								<img src="${fileCallPath}"
 								height="140" width="140" alt=""></a></td>
 								<td ><a href="${myContextPath}/Product/ProductContent.dobby?pidx=${alist2.pidx}">
 								
@@ -78,7 +78,7 @@
 					</table>
 				</div>
 				<!-- /.row -->
-				<h4>총 1개 상품${fileCallPath}</h4>
+				<h4>총  ${fn:length(alist)}개 상품</h4>
 				<table class="table">
 					<thead>
 						<tr>

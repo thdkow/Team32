@@ -447,7 +447,19 @@ hr {
 
 .img-fluid {
 	max-width: 100%;
-	height: auto
+	max-height: auto;
+}
+
+.img-fluid2 {
+	max-width: 100%;
+	max-height: 350px;
+	min-height: 350px;
+}
+.img-fluid3 {
+	max-width: 280px;
+	min-width: 280px;
+	max-height: 250px;
+	min-height: 250px;
 }
 
 .img-thumbnail {
@@ -4238,6 +4250,10 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 	padding-left: 0;
 	margin-bottom: 0;
 	list-style: none
+}
+
+.navwi100 {
+	width:100%;
 }
 
 .navbar-nav .nav-link {
@@ -8169,6 +8185,10 @@ supports ((position:-webkit-sticky ) or (position:sticky )){ .
 
 .ml-auto, .mx-auto {
 	margin-left: auto !important
+}
+
+.ml-5 {
+	margin-left: 5% !important
 }
 
 @media ( min-width :576px) {

@@ -27,10 +27,10 @@
 		SELECT * FROM QUESTION32 A LEFT OUTER JOIN MEMBER32 B ON A.MIDX = B.MIDX
 		LEFT OUTER JOIN CATEGORY32 C ON A.CAIDX = C.CAIDX WHERE QIDX = #{qidx}
  	</select>
- 	
+ 	<!-- 답변 저장 -->
  	<update id="QuestionReply" parameterType="HashMap">
  	
- 	 UPDATE QUESTION32 SET QRESUBJECT=#{qsubject},QRECONTENT=#{qrecontent},QREWRIDATE=NOW(),
+ 	 UPDATE QUESTION32 SET QRESUBJECT=#{qresubject},QRECONTENT=#{qrecontent},QREWRIDATE=NOW(),
  	 QSTATE='Y' WHERE QIDX = #{qidx}
  	
  	</update>

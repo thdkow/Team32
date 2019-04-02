@@ -297,12 +297,12 @@
 				$(data).each(function(index) {
 
 									var writedate = this.pwridate.substr(0, 10);
-									var fileCallPath = "/"+this.uploadPath+"/"+this.uuid+"_"+this.fileName;
+									var fileCallPath = "http://thdkow.cafe24.com/upload/"+this.uploadPath+"/"+this.uuid+"_"+this.fileName;
 
 									str += "<div class='col-lg-4 col-md-6 mb-4'><div class='card h-auto'>"
 											+ "<a href='${myContextPath}/Product/ProductContent.dobby?pidx="
 											+ this.pidx
-											+ "'><img src='${myContextPath}/display.dobby?fileName="+fileCallPath+"'height='145' width='253' alt=''></a>"
+											+ "'><img src='"+fileCallPath+"'height='145' width='253' alt=''></a>"
 											+ "<div class='card-body'><h4 class='card-title'>"
 											+ "<a href='${myContextPath}/Product/ProductContent.dobby?pidx="
 											+ this.pidx + "'>" + this.psubject + "</a></h4>" + "<h5>" + this.pmoney
@@ -322,7 +322,7 @@
 	
 </script>
 
-		<c:set var="fileCallPath" value="/${pv.uploadPath }/${pv.uuid }_${pv.fileName}"></c:set>
+		<c:set var="fileCallPath" value="http://thdkow.cafe24.com/upload/${pv.uploadPath }/${pv.uuid }_${pv.fileName}"></c:set>
 
 <!-- Page Content -->
 <div class="container">
@@ -344,8 +344,8 @@
 		<div class="col-lg-9 my-5">
 			<div class="row" style="text-align: center;">
 				<div class="col-md-6">
-				<img class="img-fluid" style="position:absoulte;width:100%;"
-				 src='${myContextPath}/display.dobby?fileName=${fileCallPath}'>
+				<img class="img-fluid2" style="position:absoulte;width:100%;"
+				 src='${fileCallPath}'>
 				
 				<br />
 					</div>

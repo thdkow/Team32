@@ -68,12 +68,12 @@
 					
 			<c:forEach items="${alist}" var="alist2" varStatus="status" >
 			
-			<c:set var="fileCallPath" value="/${alist2.uploadPath }/${alist2.uuid }_${alist2.fileName}"/>
+			<c:set var="fileCallPath" value="http://thdkow.cafe24.com/upload/${alist2.uploadPath }/${alist2.uuid }_${alist2.fileName}"/>
 			
 			<tr>
 			<th scope="row">
 			<a href="${myContextPath}/Product/ProductContent.dobby?pidx=${alist2.pidx}"> 
-			<img src="${myContextPath}/display.dobby?fileName=${fileCallPath}" height="140" width="140"alt=""></a></th>
+			<img src="${fileCallPath}" height="140" width="140"alt=""></a></th>
 			<td><a href="${myContextPath}/Product/ProductContent.dobby?pidx=${alist2.pidx}">${alist2.psubject}</a> 
 			<br /> 주문번호:&nbsp;${alist2.oid}&nbsp;&nbsp;
 			<br /><br />
@@ -108,7 +108,7 @@
   				  </c:when>
     		  		<c:when test="${alist2.didx ne 0 and alist2.dwaybill ne 0 and alist2.ofinal eq 'N'}">
   				  
-  				  <button type="button" class="btn btn-warning my-2" style="font-size:0.7em">배송중</button>
+  				  <button type="button" class="btn btn-warning my-2" style="font-size:0.7em">&nbsp;배송&nbsp; 중&nbsp;</button>
   				  
   				  </c:when>
   				  <c:when test="${alist2.didx ne 0 and alist2.dwaybill eq 0}">

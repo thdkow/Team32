@@ -29,7 +29,7 @@ public class CommentServiceImpl implements CommentService {
 		
 		HashMap<String, Object> hm = new HashMap<String, Object>();
 								hm.put("pidx", pidx);
-								hm.put("page", (page-1)*10);
+								hm.put("page", (page-1)*5);
 		ArrayList<CommentVo> cv = csm.selectCommentList(hm);
 						return cv;
 	}

@@ -107,6 +107,9 @@ img::-moz-selection {
 #mainNav {
 	background-color: #212529
 }
+#mainNav2 {
+	background-color: #212529
+}
 
 #mainNav .navbar-toggler {
 	font-size: 12px;
@@ -134,7 +137,7 @@ img::-moz-selection {
 	color: #fec503
 }
 
-#mainNav .navbar-nav .nav-item .nav-link {
+#mainNav .navbar-nav .nav-item .nav-item2 .nav-link {
 	font-size: 90%;
 	font-weight: 400;
 	padding: .75em 0;
@@ -144,6 +147,7 @@ img::-moz-selection {
 		Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji',
 		'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'
 }
+
 #mainNav .nav-link2 {
 	font-size: 90%;
 	font-weight: 400;
@@ -155,7 +159,7 @@ img::-moz-selection {
 		'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'
 }
 
-#mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover
+#mainNav .navbar-nav .nav-item .nav-item2 .nav-link.active, #mainNav .navbar-nav .nav-link:hover
 	{
 	color: #fed136
 }
@@ -171,17 +175,39 @@ img::-moz-selection {
 		-webkit-transition: padding-top .3s, padding-bottom .3s;
 		transition: padding-top .3s, padding-bottom .3s;
 		border: none;
-		background-color: transparent
+		background-color: transparent;
+		
+	}
+	#mainNav2 {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		-webkit-transition: padding-top .3s, padding-bottom .3s;
+		transition: padding-top .3s, padding-bottom .3s;
+		border: none;
+		background-color: #212529;
+		
 	}
 	#mainNav .navbar-brand {
 		font-size: 1.75em;
 		-webkit-transition: all .3s;
 		transition: all .3s
 	}
-	#mainNav .navbar-nav .nav-item .nav-link {
+	#mainNav2 .navbar-brand {
+		font-size: 1.75em;
+		-webkit-transition: all .3s;
+		transition: all .3s
+	}
+	
+	#mainNav .navbar-nav .nav-item .nav-item2 .nav-link {
+		padding: 1.1em 1em !important
+	}
+	#mainNav2 .navbar-nav .nav-item .nav-item2 .nav-link {
 		padding: 1.1em 1em !important
 	}
 	#mainNav .nav-link2 {
+		padding: 1.1em 1em !important
+	}
+	#mainNav2 .nav-link2 {
 		padding: 1.1em 1em !important
 	}
 	#mainNav.navbar-shrink {
@@ -189,7 +215,16 @@ img::-moz-selection {
 		padding-bottom: 0;
 		background-color: #212529
 	}
+	#mainNav2.navbar-shrink {
+		padding-top: 0;
+		padding-bottom: 0;
+		background-color: #212529
+	}
 	#mainNav.navbar-shrink .navbar-brand {
+		font-size: 1.25em;
+		padding: 12px 0
+	}
+	#mainNav2.navbar-shrink .navbar-brand {
 		font-size: 1.25em;
 		padding: 12px 0
 	}
@@ -413,7 +448,7 @@ header.masthead2 .intro-text2 {
 
 .portfolio-modal .modal-content {
 	padding: 100px 0;
-	text-align: center
+	text-align: center;
 }
 
 .portfolio-modal .modal-content h2 {

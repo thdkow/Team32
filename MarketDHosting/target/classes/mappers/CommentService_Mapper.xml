@@ -6,7 +6,7 @@
 	<select id="selectCommentList" parameterType="HashMap" resultType="cv"><!--댓글 리스트 SQL 실행 3은 보여줄 코멘트 수-->
 	
 		select cidx,midx,pidx,cwriter,ccontent,cwridate,corigincidx,cleftright,cupdown,cip,cdelip,cdelyn from
-        (select* from COMMENT32 where cdelyn='N' and pidx= 2 order by corigincidx desc,cupdown )a 
+        (select* from COMMENT32 where cdelyn='N' and pidx= #{pidx} order by corigincidx desc,cupdown )a 
 			<if test="page!=0">
 			limit #{page},5
 			</if>

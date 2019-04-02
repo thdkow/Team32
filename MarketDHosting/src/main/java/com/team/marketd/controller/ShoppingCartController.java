@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +45,14 @@ public class ShoppingCartController {
 	}
 	
 	@RequestMapping(value = "/Cart/shoppingCartDeleteProduct.dobby")
-	public String shoppingCartDeleteProduct(int sidx) { //장바구니 상품 삭제
+	public String shoppingCartDeleteProduct(int sidx,HttpServletRequest request) { //장바구니 상품 삭제
 		
 		int midx = 0;
 		String division="one";
 		
 		scs.deleteShoppingCartProduct(sidx,midx,division);
 		
-		return "redirect:/Cart/ShoppingCartList.dobby";
+		return "redirect:/Needlogin/Cart/ShoppingCartList.dobby";
 	}
 	
 	@RequestMapping(value = "/Cart/shoppingCartBatchPayment.dobby")

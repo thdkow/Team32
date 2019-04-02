@@ -1,6 +1,6 @@
 .picker-container {
 position: absolute;
-z-index: 99;
+z-index: 9999;
 
 }
 
@@ -13,6 +13,7 @@ width: 216px;
 box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 border-collapse: collapse;
 border-spacing: 0;
+z-index: 9999;
 }
 
 .cal a {

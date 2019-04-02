@@ -389,7 +389,7 @@ public class ProductController {
 		System.out.println("upload ajax post...........");
 
 		List<AttachFileDTO> list = new ArrayList<>();
-		String uploadFolder = "ftp://thdkow.cafe24.com/tomcat/webapps/upload/";
+		String uploadFolder = "C://upload/";
 
 		String uploadFolderPath = getFolder();
 //Make folder ------

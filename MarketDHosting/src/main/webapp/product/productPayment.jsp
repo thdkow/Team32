@@ -7,20 +7,13 @@
 	<c:set var="myContextPath" value="${pageContext.request.contextPath}" />
 	
 <c:set var="pv" value="${pv}" />
+<c:set var="fileCallPath" value="http://thdkow.cafe24.com/upload/${pv.uploadPath}/${pv.uuid}_${pv.fileName}"/>
 
 <script src="${myContextPath}/resources/js/jquery.min.js"></script>
 <script src="${myContextPath}/resources/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-
-			$(document).ready(function() {
-				
 				
 				$(document).ready(function() {
-					$("#panel1").slideToggle(0);
-
-					$("#flip1").click(function() {
-						$("#panel1").slideToggle("700");
-					});
 				
 				
 				$("#payment2").click(function(){//#으로 id를 호출하여 jquery를 사용하였다.
@@ -66,7 +59,7 @@
 					});	
 				
 				
-			});
+			}); 
 	
 </script>
 
@@ -100,7 +93,7 @@
 					<tbody>
 						<tr>
 							<th scope="row"><a href="#"> <img
-									src="http://placehold.it/700x400" height="100" width="100"
+									src="${fileCallPath}" height="100" width="100"
 									alt=""></a></th>
 							<td><a href="#">${pv.psubject}</a></td>
 							<td class="text-center"><a href="#">${pv.mname}님</a></td>

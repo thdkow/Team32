@@ -45,13 +45,14 @@ select  * from
  
 <!--  selectProductOne / 상품 콘텐츠 셀렉트 -->
 <select id="selectProductOne" parameterType="Integer" resultType="pv">
-  select * from PRODUCT32 A inner join MEMBER32 B on A.midx = B.midx where A.pdelYn='N' and pidx=#{pidx}
+  select * from PRODUCT32 A left outer join MEMBER32 B on A.midx = B.midx
+  left outer join BOARDATTACH32 C on A.pidx = C.pidx where A.pdelYn='N' and A.pidx=#{pidx}
 </select>
 
 
 
 <insert id="insertSaleProduct" parameterType="HashMap">
-
+	
   insert into PRODUCT32(caidx,midx,psubject,pcontent,pmoney,pfee,pip)
 values(#{caidx},#{midx},#{psubject},#{pcontent},#{pmoney},#{pfee},#{pip})
 
@@ -128,7 +129,7 @@ and pacancle='N' and ocancle='N' and dcancle='N' and b.midx=#{midx}
 
 <insert id="insertOrder" parameterType="HashMap">
 
-  insert into order32(pidx,midx,oid,omoney,oip) values(#{pidx},#{midx},#{oid},#{omoney},#{oip})
+  insert into ORDER32(pidx,midx,oid,omoney,oip) values(#{pidx},#{midx},#{oid},#{omoney},#{oip})
 </insert>
 
 <insert id="insertDelivery" parameterType="HashMap">

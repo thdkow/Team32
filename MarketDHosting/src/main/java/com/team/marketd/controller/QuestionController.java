@@ -94,7 +94,6 @@ public class QuestionController {
 									@RequestParam("qresubject")String qresubject,
 									@RequestParam("qrecontent")String qrecontent) { // 답변 저장
 		
-		System.out.println("ㄴ메안ㅁ5"+qidx);
 		
 		qs.QuestionReply(qidx,qresubject,qrecontent);
 		

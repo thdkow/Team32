@@ -8,11 +8,10 @@
 
 .wrap {
 	width: 100%;
-	margin: 0 0 auto;
 	background-color: #212529;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 25%;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	z-index: 9999;
 }
 
 .mul {
@@ -22,20 +21,20 @@
 
 
 /* @group core nav menu */
-#nav { margin: 0; padding: 0; list-style: none; height: 50px; padding-left: 15px; padding-right: 15px; background: #212529; }
+#nav { margin: auto; list-style: none; height: 50px; padding-left: 2px; padding-right: 1px; background: #212529; text-align: center;}
 
-#nav li { float: left; display: block; background: none; position: relative; z-index: 999; margin: 0 1px; }
+#nav li { float: left; display: block; background: none; position: relative; margin: 0 1px; }
 
-#nav li a { display: block; padding: 0; font-weight: 700; line-height: 50px; text-decoration: none; color: #ffffff; padding: 0px 12px; }
-#nav li a:hover, #nav li a.hover { color: #fec503; }
+#nav li a { display: block; padding: 0; font-weight: 700; line-height: 50px; text-decoration: none; color: #ffffff; padding: 0px 5px; }
+#nav li a:hover, #nav li a.hover { color: #fec503;  z-index: 999;}
 
 /* @group subnav */
 #nav ul { position: absolute; left:0px; display: none; margin: 0; padding: 10px; list-style: none;}	
 #nav ul li { width:180px; float: left;  text-align: left; }
-#nav ul li:hover {}
+#nav ul li:hover { z-index: 999;}
 
-#nav ul a { height: 20px; line-height: 20px; padding: 5px;  color: #ffffff; font-weight: normal; }
-#nav ul a:hover { color: #fec503; }
+#nav ul a { height: 20px; line-height: 20px; padding: 2px;  color: #ffffff; font-weight: normal; }
+#nav ul a:hover { color: #fec503; z-index: 999; }
 
 * html #nav ul { width: 125px;
  height: 35px; margin: 0 0 0 1px; }
@@ -66,7 +65,7 @@ html[xmlns] .clearfix { display: block; }
 	<script src="${myContextPath}/resources/js/jquery-3.2.1.min.js"></script>
 
  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav"">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="${myContextPath}/index2.jsp">DobbyMarket</a>
       
@@ -131,10 +130,21 @@ html[xmlns] .clearfix { display: block; }
       </div>
     </div>
     
-    <!-- Navigation -->
-      	<div class="wrap">
-	<ul id="nav">
-		<li class="menu-li"><a class="a" href="#">가구</a>
+		
+		
+		
+		<!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark" id="mainNav2">
+    <div class="container">
+    
+      
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav navwi100 text-uppercase ml-5" style="width=100%;">
+          
+          
+          <div class="wrap">
+			<ul id="nav">
+			<li class="menu-li"><a class="a" href="#">가구</a>
 			<ul class="mul">
 				<li><a href="${myContextPath}/Product/ProductList.dobby?caidx=321&minPrice=0&maxPrice=0&keyword=empty">
 				DIY</a></li>
@@ -247,7 +257,7 @@ html[xmlns] .clearfix { display: block; }
 				태블릿</a></li>
 			</ul>
 		</li>
-		<li class="menu-li"><a class="a" href="#">생활가전</a>
+          <li class="menu-li"><a class="a" href="#">생활가전</a>
 			<ul class="mul">
 				<li><a href="${myContextPath}/Product/ProductList.dobby?caidx=461&minPrice=0&maxPrice=0&keyword=empty">
 				대형가전</a></li>
@@ -259,15 +269,25 @@ html[xmlns] .clearfix { display: block; }
 				생활가전</a></li>
 				<li><a href="${myContextPath}/Product/ProductList.dobby?caidx=465&minPrice=0&maxPrice=0&keyword=empty">
 				미용가전</a></li>
-			</ul>
-		</li>
-		<li class="menu-li"><a class="a" href="${myContextPath}/Needlogin/Product/ProductWrite.dobby">판매하기</a></li>
+				</ul></li>
+				<li class="menu-li"><a class="a" href="${myContextPath}/Needlogin/Product/ProductWrite.dobby">판매하기</a></li>
 		<li class="menu-li" style="margin-left:5%;"><a class="a" href="${myContextPath}/Notice/NoticeList.dobby">공지사항</a></li>
 		<li class="menu-li"><a class="a" href="${myContextPath}/Question/OftenList.dobby">FAQ</a></li>
 		<li class="menu-li"><a class="a" href="${myContextPath}/Question/QuestionList.dobby">1:1문의하기</a></li>
-	</ul>
+		
+			</ul></div>
+		</li>
+            
+            
+          </li>
+        </ul>
       </div>
-   
+    </div>
+  </nav>
+		
+		
+		
+		
 		
 		
 <script type="text/javascript">

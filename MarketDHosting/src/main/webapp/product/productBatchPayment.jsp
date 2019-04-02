@@ -1,4 +1,4 @@
-v<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import ="com.team.marketd.domain.ProductVo" %>
@@ -109,10 +109,10 @@ v<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 						
 						<c:set var= "totalpfee" value="${totalpfee + alist2.pfee}"/>
 						<c:set var= "totalpmoney" value="${totalpmoney + alist2.pmoney}"/>
-						
+						<c:set var= "fileCallPath" value="http://thdkow.cafe24.com/upload/${alist2.uploadPath}/${alist2.uuid}_${alist2.fileName}"/>
 						
 						<tr><th scope="row"><a href="#"> 
-						<img src="http://placehold.it/700x400" height="100" width="100"alt=""></a></th>
+						<img src="${fileCallPath}" height="100" width="100"alt=""></a></th>
 							<td><a href="#">${alist2.psubject}</a></td>
 							<td class="text-center"><a href="#">${alist2.mname}님</a></td>
 							<td class="text-center">${alist2.pmoney}원</td>

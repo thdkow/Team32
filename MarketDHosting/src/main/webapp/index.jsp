@@ -120,13 +120,14 @@ $( document ).ready( function() {
 		 var fileCallPath = "http://thdkow.cafe24.com/upload"+"/"+upload+"/"+this.uuid+"_"+this.fileName;
 			 var writedate = this.pwridate.substr(0,10);
 			 		
-				str += "<div class='col-md-4 col-sm-6 portfolio-item'>"
-				+"<div class='portfolio-hover'><div class='portfolio-hover-content'>"
-				+"</div>"
-				+"</div><img class='img-fluid' src='"+fileCallPath+"' alt=''>"
-				+"<div class='portfolio-caption'><h4>" 
-				+"<a href='${myContextPath}/Product/ProductContent.dobby?pidx="+ this.pidx + "'>"+this.psubject+"</a></h4>"
-				+  "<p class='text-muted'>가격 : "+this.pmoney+"원</p></div></div>";
+			 str +="<div class='col-md-4 col-sm-6 portfolio-item'>"
+					+"<a href='${myContextPath}/Product/ProductContent.dobby?pidx="+ this.pidx + "'>"
+					+"<div class='portfolio-hover'><div class='portfolio-hover-content'>"
+					+"</div>"
+					+"</div><img class='img-fluid3' src='"+fileCallPath+"' alt=''>"
+					+"<div class='portfolio-caption'><h4>" 
+					+this.psubject+"</h4>"
+					+  "<p class='text-muted'>가격 : "+this.pmoney+"원</p></div></a></div>";
 				
 		 });
 				
@@ -158,8 +159,8 @@ $( document ).ready( function() {
  
      /* Modal Content/Box */
      .modal-content {
-         background-color: #fefefe;
-         margin: 15% auto; /* 15% from the top and centered */
+         background-color: #f2fdf6;
+         margin: 5%; /* 15% from the top and centered */
          padding: 20px;
          border: 1px solid #888;
          width: 50%; /* Could be more or less, depending on screen size */                          
@@ -174,29 +175,40 @@ $( document ).ready( function() {
 
    <!-- Modal content -->
    <div class="modal-content">
-             <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 18pt;">한국마이스터교육원</span></b></span></p>
+   
+  			 <span style="cursor:pointer; text-align: right; padding-bottom: 10px;padding-top: -20px;" onClick="location='http://thdkow.cafe24.com/MarketDHosting/index2.jsp'">
+  			 
+             <span  style="font-size: 13pt;" > x </span>
+        	 </span>
+   
+             <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 18pt;">중고거래 사이트 - MarketD</span></b></span></p>
              <!-- <p style="text-align: center; line-height: 1.5;"><br /></p> -->
-             <p style="text-align: center; line-height: 1.5;"><span style=" color: rgb(255, 0, 0); font-size: 14pt;">TeamDobby</span></p>
+             
+             <p style="text-align: left; line-height: 1.5;"><span style="color: #ff83ad; font-size: 14pt;">사이트 소개 </span></p>
+             <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;">도비마켓은 가성비를 중시하는 20~30대의 합리적 소비행태등을 배경으로 국내 최대 중고거래 플랫폼인 
+             '중고나라' 같은 접근이 용이하면서 누구나 쉽게 거래를 할 수 있는 온라인 거래 사이트를 목표로 만들었습니다.</span></p>
+             
+             <p style="text-align: left; line-height: 1.5;"><span style=" color: #ff83ad; font-size: 14pt;">TeamDobby</span></p>
              <p style="text-align: left; line-height: 1.5;"><b><span style=" font-size: 14pt;">팀장:송재한</span></b></p>
             <p style="text-align: left; line-height: 1.5;"><b><span style=" font-size: 14pt;">팀원:강현준,이덕현</span></b></p>
              <!-- <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"></span></p> -->
-             <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;">작업기간:19.02.10~03.28</span></p>
-             <p style="text-align: center; line-height: 1.5;"><span style="color: rgb(255, 0, 0); font-size: 14pt;">사이트 소개 </span></p>
-             <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;">도비마켓은 가성비를 중시하는 20~30대의 합리적 소비행태등을 배경으로 국내 최대 중고거래 플랫폼인 '중고나라' 같은 접근이 용이하면서 누구나 쉽게 거래를 할 수 있는 온라인 거래 사이트를 목표로 만들었습니다.</span></p>
+             
+             <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;">작업기간:19.02.10~03.28</span>
+             <span style="font-size: 14pt;"></span></p>
+             
+
+             
              <!-- <p style="text-align: center; line-height: 1.5;"><br /></p> -->
-             <p style="text-align: center; line-height: 1.5;"><span style="color: rgb(255, 0, 0); font-size: 14pt;">사용된 기술 </span></p>
-             <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"> SpringFrameWork, Java, MyBatis, Maven, MultiPartFile </span></p>
-             <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"> HTML5, CSS, JavaScript, jQuery, ajax, BootStrap </span></p>
-             <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"> Oracle, MySql</span></p>
-             <p style="text-align: center; line-height: 1.5;"><span style="color: rgb(255, 0, 0); font-size: 14pt;">관리자 아이디</span></p>
+             <p style="text-align: left; line-height: 1.5;"><span style="color: #ff83ad; font-size: 14pt;">사용된 기술 </span></p>
+             <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;">  BackEnd : Java, SpringFrameWork, MyBatis </span></p>
+             <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;"> FrontEnd : JavaScript, jQuery </span></p>
+             <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;">     DBMS : Oracle, MySql</span></p>
+           
+             <p style="text-align: left; line-height: 1.5;"><span style="color: #ff83ad; font-size: 14pt;">관리자 아이디</span></p>
             <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;">아이디:admin</span></p>
             <p style="text-align: left; line-height: 1.5;"><span style="font-size: 14pt;">비밀번호:1</span></p>
              <p><br /></p>
-         <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="location='http://thdkow.cafe24.com/MarketDHosting/index2.jsp'">
-             <span class="pop_bt" style="font-size: 13pt;" >
-                  닫기
-             </span>
-         </div>
+         
    </div>
    <script type="text/javascript">
    
